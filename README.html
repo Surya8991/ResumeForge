@@ -184,23 +184,36 @@
   <ul>
     <li><strong>20 ATS-Friendly Templates</strong> &mdash; Classic, Modern, Minimalist, Professional, Executive, Creative, Compact, Tech, Elegant, Bold, Academic, Corporate, Nordic, Gradient, Timeline, Sidebar, Infographic, Federal, Startup, Monochrome</li>
     <li><strong>Live Preview</strong> &mdash; Real-time rendering as you type with zoom controls (default 80%)</li>
-    <li><strong>9+ Resume Sections</strong> &mdash; Personal Info, Summary, Experience, Education, Skills, Projects, Certifications, Languages + unlimited Custom Sections</li>
+    <li><strong>9+ Resume Sections</strong> &mdash; Personal Info, Summary, Experience, Education, Skills, Projects, Certifications, Languages, Cover Letter + unlimited Custom Sections</li>
     <li><strong>Photo/Avatar Upload</strong> &mdash; Optional profile photo with circular display on templates (max 2MB)</li>
     <li><strong>Cover Letter Builder</strong> &mdash; Write or AI-generate cover letters with job title and company context</li>
     <li><strong>Custom Sections</strong> &mdash; Add unlimited sections (Volunteer Work, Publications, Awards, etc.)</li>
     <li><strong>Drag-and-Drop Section Reordering</strong> &mdash; Reorder how sections appear on your resume</li>
+    <li><strong>Drag-and-Drop Entry Reordering</strong> &mdash; Reorder individual entries within Experience, Education, and Projects</li>
     <li><strong>Rich Text Toolbar</strong> &mdash; Bold, italic, bullet points, and dividers in text fields (Ctrl+B/I)</li>
     <li><strong>Guided Onboarding Tour</strong> &mdash; 11-step interactive popup guide for new users</li>
     <li><strong>Form Validation</strong> &mdash; Required field indicators, email/phone/URL validation with error messages</li>
-    <li><strong>Sample Resume</strong> &mdash; Pre-loaded sample data so new users see a working example immediately</li>
-    <li><strong>Step-by-Step Wizard</strong> &mdash; Previous/Next navigation between sections with progress dots</li>
+    <li><strong>Sample Resume</strong> &mdash; Pre-loaded sample data (Sarah Mitchell, Product Manager) so new users see a working example immediately</li>
+    <li><strong>Clickable Contact Links</strong> &mdash; All templates render mailto, tel, and https links as clickable</li>
+    <li><strong>HelpTip Tooltips</strong> &mdash; (?) tooltips on all major sections for contextual guidance</li>
+    <li><strong>Step-by-Step Wizard</strong> &mdash; Previous/Next navigation with dropdown section navigator and progress dots</li>
+    <li><strong>Smart Matching</strong> &mdash; Suggests relevant job keywords when a job title is entered</li>
+    <li><strong>Print CSS Optimized</strong> &mdash; color-adjust, page-break rules for clean PDF output</li>
     <li><strong>Keyboard Shortcuts</strong> &mdash; Ctrl+P for PDF export, Ctrl+S for backup save</li>
     <li><strong>Auto-Save</strong> &mdash; Data persists in localStorage automatically</li>
     <li><strong>Dark/Light Mode</strong> &mdash; Theme toggle for comfortable editing</li>
   </ul>
 
-  <h3>Customization</h3>
+  <h3>Multiple Resume Profiles</h3>
   <ul>
+    <li><strong>Save Up to 10 Profiles</strong> &mdash; Keep separate resumes for different job targets</li>
+    <li><strong>Load, Rename, Delete</strong> &mdash; Manage profiles from the header menu</li>
+    <li><strong>Per-Profile Settings</strong> &mdash; Each profile stores resume data, selected template, and accent color</li>
+  </ul>
+
+  <h3>Template &amp; Customization</h3>
+  <ul>
+    <li><strong>Template Preview Modal</strong> &mdash; Click the eye icon on any template to see a full-size preview before selecting</li>
     <li><strong>Typography</strong> &mdash; 12 Google Fonts (Inter, Roboto, Open Sans, Lato, Merriweather, Playfair Display, etc.)</li>
     <li><strong>Font Size &amp; Line Height</strong> &mdash; Adjustable with sliders</li>
     <li><strong>Section Spacing &amp; Page Margins</strong> &mdash; Fine-tune layout density</li>
@@ -210,7 +223,7 @@
 
   <h3>Import &amp; Export</h3>
   <ul>
-    <li><strong>Import from DOCX, TXT, HTML, MD</strong> &mdash; Upload an existing resume and auto-fill the form</li>
+    <li><strong>Import from PDF, DOCX, TXT, HTML, MD</strong> &mdash; Upload an existing resume and auto-fill the form</li>
     <li><strong>AI-Powered Parsing</strong> &mdash; Uses Groq AI (Llama 3.3 70B) for accurate resume parsing with heuristic fallback</li>
     <li><strong>Export as PDF</strong> &mdash; Browser print for pixel-perfect output (best for ATS)</li>
     <li><strong>Export as DOCX</strong> &mdash; Microsoft Word format</li>
@@ -244,7 +257,7 @@
       <div><strong>Framework:</strong> Next.js 16 (App Router, Turbopack)</div>
       <div><strong>Styling:</strong> Tailwind CSS + shadcn/ui</div>
       <div><strong>State:</strong> Zustand with localStorage persistence</div>
-      <div><strong>DOCX Import:</strong> mammoth (client-side)</div>
+      <div><strong>Resume Import:</strong> mammoth (DOCX), pdfjs-dist (PDF)</div>
       <div><strong>Drag &amp; Drop:</strong> @dnd-kit/core + sortable</div>
       <div><strong>PDF Export:</strong> react-to-print</div>
       <div><strong>DOCX Export:</strong> docx + file-saver</div>
@@ -284,11 +297,12 @@ npm run dev</code></pre>
     <li><strong>Follow the onboarding tour</strong> &mdash; First-time users see an 11-step guided popup (restart from Help menu)</li>
     <li><strong>Edit the sample resume</strong> &mdash; Replace the pre-loaded sample data with your own details</li>
     <li><strong>Upload a photo</strong> &mdash; Add an optional profile photo in Personal Info</li>
-    <li><strong>Choose a template</strong> &mdash; Click "Style" to browse 20 designs with live previews</li>
+    <li><strong>Choose a template</strong> &mdash; Click "Style" to browse 20 designs; use the eye icon to preview full-size before selecting</li>
+    <li><strong>Manage profiles</strong> &mdash; Save up to 10 resume profiles from the header menu; load, rename, or delete as needed</li>
     <li><strong>Customize appearance</strong> &mdash; Adjust font, colors, spacing, and margins</li>
     <li><strong>Add custom sections</strong> &mdash; Click "Add Section" for Volunteer Work, Publications, etc.</li>
-    <li><strong>Reorder sections</strong> &mdash; Click "Reorder Sections" at the bottom of any form</li>
-    <li><strong>Import existing resume</strong> &mdash; Click "Import Resume" to upload DOCX, TXT, HTML, or MD</li>
+    <li><strong>Reorder sections &amp; entries</strong> &mdash; Click "Reorder Sections" at the bottom of any form; drag entries within Experience, Education, and Projects</li>
+    <li><strong>Import existing resume</strong> &mdash; Click "Import Resume" to upload PDF, DOCX, TXT, HTML, or MD</li>
     <li><strong>Write a cover letter</strong> &mdash; Use the Cover Letter tab with optional AI generation</li>
     <li><strong>Check ATS score</strong> &mdash; Click "ATS" to analyze compatibility and match job descriptions</li>
     <li><strong>Use AI suggestions</strong> &mdash; Click "AI" to get AI-powered content improvements</li>
@@ -332,6 +346,7 @@ resumeforge/<br>
 &#9500;&#9472;&#9472; components/<br>
 &#9474;&nbsp;&nbsp;&nbsp;&#9500;&#9472;&#9472; ui/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># shadcn/ui components + RichTextarea</span><br>
 &#9474;&nbsp;&nbsp;&nbsp;&#9500;&#9472;&#9472; forms/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># 9 form components + CustomSectionForm</span><br>
+&#9474;&nbsp;&nbsp;&nbsp;&#9500;&#9472;&#9472; ResumeProfileManager.tsx&nbsp;&nbsp;&nbsp;<span class="comment"># Multiple resume profiles (save/load/rename/delete)</span><br>
 &#9474;&nbsp;&nbsp;&nbsp;&#9500;&#9472;&#9472; templates/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># 20 resume templates + TemplateWrapper</span><br>
 &#9474;&nbsp;&nbsp;&nbsp;&#9500;&#9472;&#9472; preview/ResumePreview.tsx&nbsp;&nbsp;<span class="comment"># Live preview with style overrides</span><br>
 &#9474;&nbsp;&nbsp;&nbsp;&#9500;&#9472;&#9472; ats/<br>
@@ -346,7 +361,7 @@ resumeforge/<br>
 &#9500;&#9472;&#9472; store/useResumeStore.ts&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Zustand store with persistence</span><br>
 &#9500;&#9472;&#9472; types/resume.ts&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># TypeScript types, 20 template configs</span><br>
 &#9492;&#9472;&#9472; lib/<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&#9500;&#9472;&#9472; importResume.ts&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># DOCX/TXT/HTML/MD import + AI parsing</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&#9500;&#9472;&#9472; importResume.ts&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># PDF/DOCX/TXT/HTML/MD import + AI parsing</span><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&#9500;&#9472;&#9472; exportDocx.ts&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># DOCX generation</span><br>
 &nbsp;&nbsp;&nbsp;&nbsp;&#9492;&#9472;&#9472; exportHtml.ts&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># HTML generation with XSS sanitization</span>
   </div>
@@ -427,6 +442,17 @@ localStorage.clear(); location.reload();</code></pre>
   <p>Or click the <strong>Reset</strong> button in the app header to clear resume data only.</p>
 
   <h2>Changelog</h2>
+  <h3>v1.3.0</h3>
+  <ul>
+    <li>PDF import support (pdfjs-dist for client-side PDF text extraction)</li>
+    <li>Multiple resume profiles: save up to 10 profiles, load, rename, and delete</li>
+    <li>Template preview modal: click the eye icon to preview a full-size template before selecting</li>
+    <li>Drag-and-drop entry reordering within Experience, Education, and Projects sections</li>
+    <li>Print CSS optimized with color-adjust and page-break rules for clean PDF output</li>
+    <li>Clickable contact links (mailto, tel, https) in all 20 templates</li>
+    <li>HelpTip tooltips on all major sections</li>
+    <li>Smart Matching suggestions when a job title is entered</li>
+  </ul>
   <h3>v1.2.0</h3>
   <ul>
     <li>Modernized Help Dialog UI with Card-based sections, gradient header, and section icons</li>
@@ -462,7 +488,7 @@ localStorage.clear(); location.reload();</code></pre>
     <li>Custom sections with drag-and-drop reordering</li>
     <li>Rich text toolbar (bold, italic, bullets, dividers)</li>
     <li>Step-by-step wizard navigation with progress dots</li>
-    <li>Multi-format import (DOCX, TXT, HTML, MD) with AI parsing</li>
+    <li>Multi-format import (PDF, DOCX, TXT, HTML, MD) with AI parsing</li>
     <li>Multi-format export (PDF, DOCX, HTML)</li>
     <li>12 Google Fonts with lazy loading</li>
     <li>Typography, spacing, and color customization</li>

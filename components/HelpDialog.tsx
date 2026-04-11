@@ -88,15 +88,16 @@ export default function HelpDialog() {
               <ol className="list-decimal list-inside space-y-1.5 text-muted-foreground">
                 <li><strong className="text-foreground">Edit the sample resume</strong> — Replace the pre-loaded sample with your own details, or click Reset to start blank.</li>
                 <li><strong className="text-foreground">Upload a photo</strong> — Add an optional profile photo in Personal Info (max 2MB).</li>
-                <li><strong className="text-foreground">Choose a template</strong> — Click &quot;Style&quot; to browse 20 ATS-friendly designs with live previews.</li>
+                <li><strong className="text-foreground">Choose a template</strong> — Click &quot;Style&quot; to browse 20 ATS-friendly designs. Use the eye icon to preview full-size before selecting.</li>
                 <li><strong className="text-foreground">Customize appearance</strong> — Adjust font, accent color, font size, line spacing, and margins.</li>
                 <li><strong className="text-foreground">Add custom sections</strong> — Click &quot;Add Section&quot; for Volunteer Work, Publications, Awards, etc.</li>
-                <li><strong className="text-foreground">Reorder sections</strong> — Click &quot;Reorder Sections&quot; at the bottom of any form to drag-and-drop.</li>
+                <li><strong className="text-foreground">Reorder sections &amp; entries</strong> — Click &quot;Reorder Sections&quot; at the bottom of any form. You can also drag-and-drop individual entries within Experience, Education, and Projects.</li>
                 <li><strong className="text-foreground">Write a cover letter</strong> — Use the Cover Letter tab with optional AI generation.</li>
                 <li><strong className="text-foreground">Check ATS score</strong> — Click &quot;ATS&quot; to analyze compatibility, readability, formatting, and match keywords from a job description. Expand &quot;Enhanced Analysis&quot; for readability scoring, resume length check, date consistency, and active voice detection. Use &quot;Smart Matching&quot; for industry-specific keywords and multi-JD comparison.</li>
                 <li><strong className="text-foreground">Use AI suggestions</strong> — Click &quot;AI&quot; to generate summaries, bullet points, and skills (bring your own free Groq API key).</li>
-                <li><strong className="text-foreground">Import existing resume</strong> — Upload a DOCX, TXT, HTML, or MD file to auto-fill the form.</li>
-                <li><strong className="text-foreground">Navigate sections</strong> — Use Previous/Next buttons at the bottom, or click any progress dot at the top.</li>
+                <li><strong className="text-foreground">Import existing resume</strong> — Upload a PDF, DOCX, TXT, HTML, or MD file to auto-fill the form.</li>
+                <li><strong className="text-foreground">Navigate sections</strong> — Use Previous/Next buttons at the bottom, the dropdown navigator, or click any progress dot at the top.</li>
+                <li><strong className="text-foreground">Manage profiles</strong> — Save up to 10 resume profiles from the header menu. Load, rename, or delete profiles to target different jobs.</li>
                 <li><strong className="text-foreground">Download</strong> — Export as PDF (best for ATS), DOCX, HTML, or JSON.</li>
               </ol>
             </CardContent>
@@ -171,7 +172,7 @@ export default function HelpDialog() {
                 <h3 className="font-semibold text-base">Import & Export</h3>
               </div>
               <div className="space-y-1.5 text-muted-foreground text-xs">
-                <div><strong className="text-foreground">Import:</strong> DOCX, TXT, HTML, MD. AI-powered parsing available with your own Groq API key (free).</div>
+                <div><strong className="text-foreground">Import:</strong> PDF, DOCX, TXT, HTML, MD. AI-powered parsing available with your own Groq API key (free).</div>
                 <div><strong className="text-foreground">PDF Export:</strong> Best for ATS. Uses browser print for pixel-perfect output.</div>
                 <div><strong className="text-foreground">DOCX Export:</strong> Microsoft Word format. Use when employers require .docx.</div>
                 <div><strong className="text-foreground">HTML Export:</strong> Web-ready format. Can be hosted online as a resume page.</div>
@@ -271,7 +272,7 @@ export default function HelpDialog() {
                 <div><strong className="text-foreground">Where is my data stored?</strong> Locally in your browser (localStorage). Nothing is sent to any server.</div>
                 <div><strong className="text-foreground">How do I transfer my resume to another device?</strong> Export as JSON, then import the JSON file on the other device.</div>
                 <div><strong className="text-foreground">Why is the preview blank?</strong> Fill in at least your name and one section. The preview updates in real-time.</div>
-                <div><strong className="text-foreground">Can I have multiple resumes?</strong> Export each version as JSON. Import the one you want to edit.</div>
+                <div><strong className="text-foreground">Can I have multiple resumes?</strong> Yes! Use the Resume Profiles feature in the header menu to save up to 10 separate profiles. Each stores its own data, template, and accent color.</div>
                 <div><strong className="text-foreground">How do I navigate between sections?</strong> Use the Previous/Next buttons at the bottom of each form, or click any progress dot at the top.</div>
                 <div><strong className="text-foreground">Is this free?</strong> Yes, completely free. AI features require your own Groq API key (also free at console.groq.com).</div>
               </div>

@@ -15,24 +15,35 @@ A fully client-side, professional resume builder with 20 ATS-optimized templates
 ### Resume Building
 - **20 ATS-Friendly Templates** - Classic, Modern, Minimalist, Professional, Executive, Creative, Compact, Tech, Elegant, Bold, Academic, Corporate, Nordic, Gradient, Timeline, Sidebar, Infographic, Federal, Startup, Monochrome
 - **Live Preview** - Real-time rendering as you type with zoom controls (default 80%)
-- **9+ Resume Sections** - Personal Info, Summary, Experience, Education, Skills, Projects, Certifications, Languages + unlimited Custom Sections
+- **9+ Resume Sections** - Personal Info, Summary, Experience, Education, Skills, Projects, Certifications, Languages, Cover Letter + unlimited Custom Sections
 - **Photo/Avatar Upload** - Optional profile photo with circular display on templates (max 2MB)
 - **Cover Letter Builder** - Write or AI-generate cover letters with job title and company context
 - **Custom Sections** - Add unlimited sections (Volunteer Work, Publications, Awards, etc.)
 - **Drag-and-Drop Section Reordering** - Reorder how sections appear on your resume
+- **Drag-and-Drop Entry Reordering** - Reorder individual entries within Experience, Education, and Projects
 - **Rich Text Toolbar** - Bold, italic, bullet points, and dividers in text fields (Ctrl+B/I)
 - **Guided Onboarding Tour** - 11-step interactive popup guide for new users with tips and navigation
 - **Form Validation** - Required field indicators, email/phone/URL validation with error messages
-- **Sample Resume** - Pre-loaded sample data so new users see a working example immediately
+- **Sample Resume** - Pre-loaded sample data (Sarah Mitchell, Product Manager) so new users see a working example immediately
+- **Clickable Contact Links** - All templates render mailto, tel, and https links as clickable
+- **HelpTip Tooltips** - (?) tooltips on all major sections for contextual guidance
 - **Error Boundary** - Graceful error recovery with reset option
-- **Step-by-Step Wizard** - Previous/Next navigation between sections with step counter and progress dots
+- **Step-by-Step Wizard** - Previous/Next navigation between sections with dropdown section navigator and progress dots
 - **Keyboard Shortcuts** - Ctrl+P for PDF export, Ctrl+S for backup save
 - **Page Estimate** - Shows estimated page count in preview toolbar
 - **Auto-Save** - Data persists in localStorage automatically
 - **Dark/Light Mode** - Theme toggle for comfortable editing
+- **Smart Matching** - Suggests relevant job keywords when a job title is entered
+- **Print CSS Optimized** - color-adjust, page-break rules for clean PDF output
 - **PWA Ready** - Web app manifest for installable experience
 
-### Customization
+### Multiple Resume Profiles
+- **Save Up to 10 Profiles** - Keep separate resumes for different job targets
+- **Load, Rename, Delete** - Manage profiles from the header menu
+- **Per-Profile Settings** - Each profile stores resume data, selected template, and accent color
+
+### Template & Customization
+- **Template Preview Modal** - Click the eye icon on any template to see a full-size preview before selecting
 - **Typography** - 12 Google Fonts (Inter, Roboto, Open Sans, Lato, Merriweather, Playfair Display, etc.)
 - **Font Size & Line Height** - Adjustable with sliders
 - **Section Spacing & Page Margins** - Fine-tune layout density
@@ -40,7 +51,7 @@ A fully client-side, professional resume builder with 20 ATS-optimized templates
 - **10+ Accent Colors** - Plus custom color picker with hex input
 
 ### Import & Export
-- **Import from DOCX, TXT, HTML, MD** - Upload an existing resume and auto-fill the form
+- **Import from PDF, DOCX, TXT, HTML, MD** - Upload an existing resume and auto-fill the form
 - **AI-Powered Parsing** - Uses Groq AI (Llama 3.3 70B) for accurate resume parsing with heuristic fallback
 - **Export as PDF** - Browser print for pixel-perfect output (best for ATS)
 - **Export as DOCX** - Microsoft Word format
@@ -77,7 +88,7 @@ A fully client-side, professional resume builder with 20 ATS-optimized templates
 - **Framework:** Next.js 16 (App Router, Turbopack)
 - **Styling:** Tailwind CSS + shadcn/ui components
 - **State Management:** Zustand with localStorage persistence
-- **DOCX Import:** mammoth (client-side text extraction)
+- **Resume Import:** mammoth (DOCX), pdfjs-dist (PDF) — client-side text extraction
 - **Drag & Drop:** @dnd-kit/core + @dnd-kit/sortable
 - **PDF Export:** react-to-print (browser print)
 - **DOCX Export:** docx + file-saver
@@ -122,15 +133,16 @@ This generates a static export in the `out/` folder, ready for deployment to any
 1. **Follow the onboarding tour** - First-time users see an 11-step guided popup (restart from Help menu)
 2. **Edit the sample resume** - Replace the pre-loaded sample data with your own details
 3. **Upload a photo** - Add an optional profile photo in Personal Info
-4. **Choose a template** - Click "Style" to browse 20 designs with live previews
-5. **Customize appearance** - Adjust font, colors, spacing, and margins
+4. **Choose a template** - Click "Style" to browse 20 designs; use the eye icon to preview full-size before selecting
+5. **Manage profiles** - Save up to 10 resume profiles from the header menu; load, rename, or delete as needed
+6. **Customize appearance** - Adjust font, colors, spacing, and margins
 6. **Add custom sections** - Click "Add Section" for Volunteer Work, Publications, etc.
-7. **Reorder sections** - Click "Reorder Sections" at the bottom of any form
-8. **Import existing resume** - Click "Import Resume" to upload DOCX, TXT, HTML, or MD
-9. **Write a cover letter** - Use the Cover Letter tab with optional AI generation
-10. **Check ATS score** - Click "ATS" to analyze compatibility and match job descriptions
-11. **Use AI suggestions** - Click "AI" to get AI-powered content improvements
-12. **Download** - Export as PDF, DOCX, or HTML
+8. **Reorder sections & entries** - Click "Reorder Sections" at the bottom of any form; drag entries within Experience, Education, and Projects
+9. **Import existing resume** - Click "Import Resume" to upload PDF, DOCX, TXT, HTML, or MD
+10. **Write a cover letter** - Use the Cover Letter tab with optional AI generation
+11. **Check ATS score** - Click "ATS" to analyze compatibility and match job descriptions
+12. **Use AI suggestions** - Click "AI" to get AI-powered content improvements
+13. **Download** - Export as PDF, DOCX, or HTML
 
 ### AI Features (Bring Your Own Key)
 
@@ -172,6 +184,7 @@ resumeforge/
 ├── components/
 │   ├── ui/                         # shadcn/ui components + RichTextarea
 │   ├── forms/                      # 9 form components + CustomSectionForm + CoverLetterForm
+│   ├── ResumeProfileManager.tsx    # Multiple resume profiles (save/load/rename/delete)
 │   ├── templates/                  # 20 resume templates + TemplateWrapper + index
 │   ├── preview/ResumePreview.tsx   # Live preview with style overrides
 │   ├── ats/
@@ -186,7 +199,7 @@ resumeforge/
 ├── store/useResumeStore.ts         # Zustand store with persistence
 ├── types/resume.ts                 # TypeScript types, 20 template configs, sample data
 └── lib/
-    ├── importResume.ts             # DOCX/TXT/HTML/MD import + AI parsing
+    ├── importResume.ts             # PDF/DOCX/TXT/HTML/MD import + AI parsing
     ├── exportDocx.ts               # DOCX generation
     └── exportHtml.ts               # HTML generation with XSS sanitization
 ```
@@ -241,6 +254,16 @@ Found a bug or have a suggestion? [Open an issue](https://github.com/Surya8991/r
 
 ## Changelog
 
+### v1.3.0
+- PDF import support (pdfjs-dist for client-side PDF text extraction)
+- Multiple resume profiles: save up to 10 profiles, load, rename, and delete
+- Template preview modal: click the eye icon to preview a full-size template before selecting
+- Drag-and-drop entry reordering within Experience, Education, and Projects sections
+- Print CSS optimized with color-adjust and page-break rules for clean PDF output
+- Clickable contact links (mailto, tel, https) in all 20 templates
+- HelpTip tooltips on all major sections
+- Smart Matching suggestions when a job title is entered
+
 ### v1.2.0
 - Modernized Help Dialog UI with Card-based sections, gradient header, and section icons
 - Modernized Onboarding Guide with gradient progress bar, step badges, and improved tip styling
@@ -273,7 +296,7 @@ Found a bug or have a suggestion? [Open an issue](https://github.com/Surya8991/r
 - Custom sections with drag-and-drop reordering
 - Rich text toolbar (bold, italic, bullets, dividers)
 - Step-by-step wizard navigation (Previous/Next with progress dots)
-- Multi-format import (DOCX, TXT, HTML, MD) with AI parsing
+- Multi-format import (PDF, DOCX, TXT, HTML, MD) with AI parsing
 - Multi-format export (PDF, DOCX, HTML)
 - 12 Google Fonts with lazy loading
 - Typography, spacing, and color customization
@@ -285,21 +308,6 @@ Found a bug or have a suggestion? [Open an issue](https://github.com/Surya8991/r
 - Dark/light mode
 - Error boundary with recovery
 - Static export for GitHub Pages / Vercel / Netlify deployment
-
-### v1.1.0
-- Enhanced ATS panel with 12 new analysis tools:
-  - Keyword Density with occurrence counts
-  - Section Score Breakdown with mini progress bars
-  - Flesch-Kincaid Readability Score
-  - Formatting Warnings for ATS-breaking characters
-  - Industry Keywords database (20 industries, 201 roles, 25-30 keywords each)
-  - Resume Length Check with visual zone bar
-  - Date Consistency checker (format, order, overlaps)
-  - Active Voice Detector with suggested alternatives
-  - JD Comparison with highlighted keyword matches
-  - Multi-JD Matching (save up to 5 JDs, compare scores)
-  - Keyword Auto-Insert suggestions by section
-  - AI Gap Analysis for natural keyword integration
 
 ## Troubleshooting
 

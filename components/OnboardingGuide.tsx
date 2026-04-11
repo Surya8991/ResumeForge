@@ -58,13 +58,13 @@ const STEPS: Step[] = [
   },
   {
     title: '20 Templates & Styling',
-    description: 'Choose from 20 unique templates in the Style panel. Customize fonts, colors, spacing, and margins to match your style.',
+    description: 'Choose from 20 unique templates in the Style panel. Click the eye icon to preview full-size before selecting. Customize fonts, colors, spacing, and margins to match your style.',
     icon: <Settings2 className="h-8 w-8" />,
     tip: 'Try the "Compact" preset to fit more content on one page, or "Comfortable" for better readability.',
   },
   {
     title: 'Custom Sections & Reordering',
-    description: 'Add custom sections like Volunteer Work, Publications, or Awards. Drag and drop to reorder how sections appear on your resume.',
+    description: 'Add custom sections like Volunteer Work, Publications, or Awards. Drag and drop to reorder sections and individual entries within Experience, Education, and Projects.',
     icon: <Layers className="h-8 w-8" />,
     tip: 'Click "Add Section" in the sidebar, and "Reorder Sections" at the bottom of any form.',
   },
@@ -88,13 +88,13 @@ const STEPS: Step[] = [
   },
   {
     title: 'Import & Export',
-    description: 'Import existing resumes from DOCX, TXT, HTML, or MD files. Export as PDF (best for ATS), DOCX, or HTML.',
+    description: 'Import existing resumes from PDF, DOCX, TXT, HTML, or MD files. Export as PDF (best for ATS), DOCX, or HTML.',
     icon: <div className="flex gap-2"><Upload className="h-8 w-8" /><Download className="h-8 w-8" /></div>,
     tip: 'Use Ctrl+S to save a JSON backup of your resume data.',
   },
   {
     title: 'You\'re All Set!',
-    description: 'Start editing the sample resume or clear it and start fresh. Your data auto-saves to your browser. Happy job hunting!',
+    description: 'Start editing the sample resume or clear it and start fresh. Save up to 10 resume profiles for different job targets. Your data auto-saves to your browser. Happy job hunting!',
     icon: <span className="text-4xl">🎉</span>,
     tip: 'Keyboard shortcuts: Ctrl+P to print PDF, Ctrl+S to save backup.',
   },
