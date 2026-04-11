@@ -49,11 +49,13 @@ A fully client-side, professional resume builder with 20 ATS-optimized templates
 - **Swipeable Tabs** - Swipe left/right between Edit, Preview, Style, ATS, and AI tabs on mobile
 - **Bottom Sheet Section Picker** - Slide-up sheet with icons and completion dots for quick section navigation
 - **Touch-Friendly Drag Handles** - Larger grip areas on Experience, Education, and Projects for easy reordering
-- **Auto-Scaling Preview** - Mobile resume preview automatically scales to fit the viewport
+- **Auto-Scaling Preview** - Mobile resume preview automatically scales to fit the viewport width
 - **Responsive Sidebar** - Adaptive widths (320px md, 400px lg, 460px xl) for optimal use of screen space
 - **Mobile Action Bar** - Vertical icon+label layout with larger tap targets
 - **Mobile Tab Row** - Full-width, evenly spaced tabs with icon+label below the navbar
-- **Tested on 10 Devices** - Verified on screen widths from 280px to 1440px with no overflow issues
+- **Mobile Dropdown Filter** - Templates page uses a native dropdown on mobile instead of horizontal buttons
+- **Overflow Protection** - All content uses overflow-x-hidden to prevent horizontal scroll on any device
+- **Tested on 10 Devices** - Verified on Galaxy Fold (280px), Galaxy S23, iPhone SE, iPhone 14 Pro, Samsung A52, Pixel 7, iPad Mini, Tablet 768px, iPad Pro, Desktop 1440px
 
 ### Multiple Resume Profiles
 - **Save Up to 10 Profiles** - Keep separate resumes for different job targets
