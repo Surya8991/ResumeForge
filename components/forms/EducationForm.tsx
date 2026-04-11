@@ -9,27 +9,47 @@ import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Plus, Trash2, ChevronDown, ChevronUp, GripVertical } from 'lucide-react';
+import { DndContext, closestCenter, DragEndEvent, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { SortableContext, verticalListSortingStrategy, useSortable, arrayMove } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 
 function generateId() {
   return Math.random().toString(36).substring(2, 9);
 }
 
-function EducationEntry({ edu, onUpdate, onRemove }: {
+function SortableEducationEntry({ edu, onUpdate, onRemove }: {
   edu: Education;
   onUpdate: (data: Partial<Education>) => void;
   onRemove: () => void;
 }) {
   const [isOpen, setIsOpen] = useState(true);
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: edu.id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : 1,
+  };
 
   return (
-    <Card className="p-4">
+    <Card className="p-4" ref={setNodeRef} style={style}>
       <div className="flex items-center justify-between mb-2">
-        <button onClick={() => setIsOpen(!isOpen)} className="flex items-center gap-2 text-sm font-medium flex-1 text-left">
-          <GripVertical className="h-4 w-4 text-muted-foreground" />
-          {edu.degree || edu.institution ? `${edu.degree}${edu.institution ? ` - ${edu.institution}` : ''}` : 'New Education'}
-          {isOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-        </button>
-        <Button variant="ghost" size="icon" onClick={onRemove} className="h-8 w-8 text-destructive">
+        <div className="flex items-center gap-2 flex-1 min-w-0">
+          <div
+            className="cursor-grab active:cursor-grabbing touch-none shrink-0"
+            {...attributes}
+            {...listeners}
+          >
+            <GripVertical className="h-4 w-4 text-muted-foreground" />
+          </div>
+          <button onClick={() => setIsOpen(!isOpen)} className="flex items-center gap-2 text-sm font-medium flex-1 text-left min-w-0">
+            <span className="truncate">
+              {edu.degree || edu.institution ? `${edu.degree}${edu.institution ? ` - ${edu.institution}` : ''}` : 'New Education'}
+            </span>
+            {isOpen ? <ChevronUp className="h-4 w-4 shrink-0" /> : <ChevronDown className="h-4 w-4 shrink-0" />}
+          </button>
+        </div>
+        <Button variant="ghost" size="icon" onClick={onRemove} className="h-8 w-8 text-destructive shrink-0">
           <Trash2 className="h-4 w-4" />
         </Button>
       </div>
@@ -85,7 +105,8 @@ function EducationEntry({ edu, onUpdate, onRemove }: {
 }
 
 export default function EducationForm() {
-  const { resumeData, addEducation, updateEducation, removeEducation } = useResumeStore();
+  const { resumeData, addEducation, updateEducation, removeEducation, reorderEducation } = useResumeStore();
+  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 5 } }));
 
   const handleAdd = () => {
     addEducation({
@@ -99,6 +120,15 @@ export default function EducationForm() {
       gpa: '',
       highlights: [],
     });
+  };
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (over && active.id !== over.id) {
+      const oldIndex = resumeData.education.findIndex((e) => e.id === active.id);
+      const newIndex = resumeData.education.findIndex((e) => e.id === over.id);
+      reorderEducation(arrayMove(resumeData.education, oldIndex, newIndex));
+    }
   };
 
   return (
@@ -116,16 +146,20 @@ export default function EducationForm() {
         </p>
       )}
 
-      <div className="space-y-3">
-        {resumeData.education.map((edu) => (
-          <EducationEntry
-            key={edu.id}
-            edu={edu}
-            onUpdate={(data) => updateEducation(edu.id, data)}
-            onRemove={() => removeEducation(edu.id)}
-          />
-        ))}
-      </div>
+      <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+        <SortableContext items={resumeData.education.map((e) => e.id)} strategy={verticalListSortingStrategy}>
+          <div className="space-y-3">
+            {resumeData.education.map((edu) => (
+              <SortableEducationEntry
+                key={edu.id}
+                edu={edu}
+                onUpdate={(data) => updateEducation(edu.id, data)}
+                onRemove={() => removeEducation(edu.id)}
+              />
+            ))}
+          </div>
+        </SortableContext>
+      </DndContext>
     </div>
   );
 }

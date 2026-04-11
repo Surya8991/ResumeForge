@@ -8,27 +8,46 @@ import { Label } from '@/components/ui/label';
 import RichTextarea from '@/components/ui/rich-textarea';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Plus, Trash2, ChevronDown, ChevronUp } from 'lucide-react';
+import { Plus, Trash2, ChevronDown, ChevronUp, GripVertical } from 'lucide-react';
+import { DndContext, closestCenter, DragEndEvent, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { SortableContext, verticalListSortingStrategy, useSortable, arrayMove } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 
 function generateId() {
   return Math.random().toString(36).substring(2, 9);
 }
 
-function ProjectEntry({ project, onUpdate, onRemove }: {
+function SortableProjectEntry({ project, onUpdate, onRemove }: {
   project: Project;
   onUpdate: (data: Partial<Project>) => void;
   onRemove: () => void;
 }) {
   const [isOpen, setIsOpen] = useState(true);
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: project.id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : 1,
+  };
 
   return (
-    <Card className="p-4">
+    <Card className="p-4" ref={setNodeRef} style={style}>
       <div className="flex items-center justify-between mb-2">
-        <button onClick={() => setIsOpen(!isOpen)} className="flex items-center gap-2 text-sm font-medium flex-1 text-left">
-          {project.name || 'New Project'}
-          {isOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-        </button>
-        <Button variant="ghost" size="icon" onClick={onRemove} className="h-8 w-8 text-destructive">
+        <div className="flex items-center gap-2 flex-1 min-w-0">
+          <div
+            className="cursor-grab active:cursor-grabbing touch-none shrink-0"
+            {...attributes}
+            {...listeners}
+          >
+            <GripVertical className="h-4 w-4 text-muted-foreground" />
+          </div>
+          <button onClick={() => setIsOpen(!isOpen)} className="flex items-center gap-2 text-sm font-medium flex-1 text-left min-w-0">
+            <span className="truncate">{project.name || 'New Project'}</span>
+            {isOpen ? <ChevronUp className="h-4 w-4 shrink-0" /> : <ChevronDown className="h-4 w-4 shrink-0" />}
+          </button>
+        </div>
+        <Button variant="ghost" size="icon" onClick={onRemove} className="h-8 w-8 text-destructive shrink-0">
           <Trash2 className="h-4 w-4" />
         </Button>
       </div>
@@ -79,7 +98,8 @@ function ProjectEntry({ project, onUpdate, onRemove }: {
 }
 
 export default function ProjectsForm() {
-  const { resumeData, addProject, updateProject, removeProject } = useResumeStore();
+  const { resumeData, addProject, updateProject, removeProject, reorderProjects } = useResumeStore();
+  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 5 } }));
 
   const handleAdd = () => {
     addProject({
@@ -92,6 +112,15 @@ export default function ProjectsForm() {
       endDate: '',
       highlights: [],
     });
+  };
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (over && active.id !== over.id) {
+      const oldIndex = resumeData.projects.findIndex((p) => p.id === active.id);
+      const newIndex = resumeData.projects.findIndex((p) => p.id === over.id);
+      reorderProjects(arrayMove(resumeData.projects, oldIndex, newIndex));
+    }
   };
 
   return (
@@ -109,16 +138,20 @@ export default function ProjectsForm() {
         </p>
       )}
 
-      <div className="space-y-3">
-        {resumeData.projects.map((project) => (
-          <ProjectEntry
-            key={project.id}
-            project={project}
-            onUpdate={(data) => updateProject(project.id, data)}
-            onRemove={() => removeProject(project.id)}
-          />
-        ))}
-      </div>
+      <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+        <SortableContext items={resumeData.projects.map((p) => p.id)} strategy={verticalListSortingStrategy}>
+          <div className="space-y-3">
+            {resumeData.projects.map((project) => (
+              <SortableProjectEntry
+                key={project.id}
+                project={project}
+                onUpdate={(data) => updateProject(project.id, data)}
+                onRemove={() => removeProject(project.id)}
+              />
+            ))}
+          </div>
+        </SortableContext>
+      </DndContext>
     </div>
   );
 }

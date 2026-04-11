@@ -60,6 +60,7 @@ interface ResumeStore {
   addProject: (project: Project) => void;
   updateProject: (id: string, project: Partial<Project>) => void;
   removeProject: (id: string) => void;
+  reorderProjects: (projects: Project[]) => void;
 
   // Certifications
   addCertification: (cert: Certification) => void;
@@ -82,6 +83,22 @@ interface ResumeStore {
   // Import/Export
   importData: (data: ResumeData) => void;
   resetData: () => void;
+
+  // Saved Profiles
+  savedProfiles: SavedProfile[];
+  saveProfile: (name: string) => void;
+  loadProfile: (id: string) => void;
+  deleteProfile: (id: string) => void;
+  renameProfile: (id: string, name: string) => void;
+}
+
+interface SavedProfile {
+  id: string;
+  name: string;
+  data: ResumeData;
+  template: string;
+  primaryColor: string;
+  createdAt: number;
 }
 
 export const useResumeStore = create<ResumeStore>()(
@@ -92,6 +109,7 @@ export const useResumeStore = create<ResumeStore>()(
       primaryColor: '#2563eb',
       activeSection: 'personalInfo',
       styleOptions: DEFAULT_STYLE_OPTIONS,
+      savedProfiles: [],
 
       setSelectedTemplate: (template) => set({ selectedTemplate: template }),
       setPrimaryColor: (color) => set({ primaryColor: color }),
@@ -222,6 +240,10 @@ export const useResumeStore = create<ResumeStore>()(
             projects: state.resumeData.projects.filter((p) => p.id !== id),
           },
         })),
+      reorderProjects: (projects) =>
+        set((state) => ({
+          resumeData: { ...state.resumeData, projects },
+        })),
 
       addCertification: (cert) =>
         set((state) => ({
@@ -304,6 +326,40 @@ export const useResumeStore = create<ResumeStore>()(
 
       importData: (data) => set({ resumeData: data }),
       resetData: () => set({ resumeData: defaultResumeData }),
+
+      saveProfile: (name) =>
+        set((state) => {
+          const profile: SavedProfile = {
+            id: Math.random().toString(36).substring(2, 9),
+            name,
+            data: JSON.parse(JSON.stringify(state.resumeData)),
+            template: state.selectedTemplate,
+            primaryColor: state.primaryColor,
+            createdAt: Date.now(),
+          };
+          const profiles = [profile, ...state.savedProfiles].slice(0, 10);
+          return { savedProfiles: profiles };
+        }),
+      loadProfile: (id) =>
+        set((state) => {
+          const profile = state.savedProfiles.find((p) => p.id === id);
+          if (!profile) return {};
+          return {
+            resumeData: JSON.parse(JSON.stringify(profile.data)),
+            selectedTemplate: profile.template as TemplateName,
+            primaryColor: profile.primaryColor,
+          };
+        }),
+      deleteProfile: (id) =>
+        set((state) => ({
+          savedProfiles: state.savedProfiles.filter((p) => p.id !== id),
+        })),
+      renameProfile: (id, name) =>
+        set((state) => ({
+          savedProfiles: state.savedProfiles.map((p) =>
+            p.id === id ? { ...p, name } : p
+          ),
+        })),
     }),
     {
       name: 'resumeforge-storage',

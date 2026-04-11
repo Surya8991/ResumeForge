@@ -9,29 +9,47 @@ import RichTextarea from '@/components/ui/rich-textarea';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Switch } from '@/components/ui/switch';
-import { Plus, Trash2, ChevronDown, ChevronUp, Briefcase } from 'lucide-react';
+import { Plus, Trash2, ChevronDown, ChevronUp, Briefcase, GripVertical } from 'lucide-react';
+import { DndContext, closestCenter, DragEndEvent, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { SortableContext, verticalListSortingStrategy, useSortable, arrayMove } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 
 function generateId() {
   return Math.random().toString(36).substring(2, 9);
 }
 
-function ExperienceEntry({ exp, onUpdate, onRemove }: {
+function SortableExperienceEntry({ exp, onUpdate, onRemove }: {
   exp: Experience;
   onUpdate: (data: Partial<Experience>) => void;
   onRemove: () => void;
 }) {
   const [isOpen, setIsOpen] = useState(true);
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({ id: exp.id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : 1,
+  };
 
   const title = exp.position || 'New Position';
   const subtitle = exp.company || '';
 
   return (
-    <Card className="overflow-hidden">
+    <Card className="overflow-hidden" ref={setNodeRef} style={style}>
       {/* Header - always visible */}
       <div
         className="flex items-center gap-3 px-4 py-3 cursor-pointer hover:bg-muted/30 transition-colors"
         onClick={() => setIsOpen(!isOpen)}
       >
+        <div
+          className="cursor-grab active:cursor-grabbing touch-none shrink-0"
+          {...attributes}
+          {...listeners}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <GripVertical className="h-4 w-4 text-muted-foreground" />
+        </div>
         <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
           <Briefcase className="h-4 w-4 text-primary" />
         </div>
@@ -112,7 +130,8 @@ function ExperienceEntry({ exp, onUpdate, onRemove }: {
 }
 
 export default function ExperienceForm() {
-  const { resumeData, addExperience, updateExperience, removeExperience } = useResumeStore();
+  const { resumeData, addExperience, updateExperience, removeExperience, reorderExperience } = useResumeStore();
+  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 5 } }));
 
   const handleAdd = () => {
     addExperience({
@@ -126,6 +145,15 @@ export default function ExperienceForm() {
       description: '',
       highlights: [],
     });
+  };
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event;
+    if (over && active.id !== over.id) {
+      const oldIndex = resumeData.experience.findIndex((e) => e.id === active.id);
+      const newIndex = resumeData.experience.findIndex((e) => e.id === over.id);
+      reorderExperience(arrayMove(resumeData.experience, oldIndex, newIndex));
+    }
   };
 
   return (
@@ -147,16 +175,20 @@ export default function ExperienceForm() {
         </Card>
       )}
 
-      <div className="space-y-3">
-        {resumeData.experience.map((exp) => (
-          <ExperienceEntry
-            key={exp.id}
-            exp={exp}
-            onUpdate={(data) => updateExperience(exp.id, data)}
-            onRemove={() => removeExperience(exp.id)}
-          />
-        ))}
-      </div>
+      <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+        <SortableContext items={resumeData.experience.map((e) => e.id)} strategy={verticalListSortingStrategy}>
+          <div className="space-y-3">
+            {resumeData.experience.map((exp) => (
+              <SortableExperienceEntry
+                key={exp.id}
+                exp={exp}
+                onUpdate={(data) => updateExperience(exp.id, data)}
+                onRemove={() => removeExperience(exp.id)}
+              />
+            ))}
+          </div>
+        </SortableContext>
+      </DndContext>
     </div>
   );
 }

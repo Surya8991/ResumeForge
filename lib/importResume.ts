@@ -20,6 +20,23 @@ async function extractTextFromHtml(file: File): Promise<string> {
   return doc.body?.textContent?.trim() || '';
 }
 
+async function extractTextFromPdf(file: File): Promise<string> {
+  const pdfjsLib = await import('pdfjs-dist');
+  pdfjsLib.GlobalWorkerOptions.workerSrc = '';
+  const arrayBuffer = await file.arrayBuffer();
+  const pdf = await pdfjsLib.getDocument({ data: arrayBuffer, useWorkerFetch: false, isEvalSupported: false, useSystemFonts: true }).promise;
+  const pages: string[] = [];
+  for (let i = 1; i <= pdf.numPages; i++) {
+    const page = await pdf.getPage(i);
+    const content = await page.getTextContent();
+    const text = content.items
+      .map((item: Record<string, unknown>) => ('str' in item ? (item.str as string) : ''))
+      .join(' ');
+    pages.push(text);
+  }
+  return pages.join('\n\n');
+}
+
 async function extractTextFromPlain(file: File): Promise<string> {
   return file.text();
 }
@@ -321,12 +338,13 @@ export async function importResumeFromFile(file: File): Promise<ImportResult> {
   if (file.size > MAX_SIZE) return { success: false, error: 'File exceeds 10MB limit.' };
 
   const ext = file.name.split('.').pop()?.toLowerCase() || '';
-  const supported = ['docx', 'doc', 'txt', 'html', 'htm', 'md'];
-  if (!supported.includes(ext)) return { success: false, error: `Unsupported: .${ext}. Use DOCX, TXT, HTML, or MD.` };
+  const supported = ['pdf', 'docx', 'doc', 'txt', 'html', 'htm', 'md'];
+  if (!supported.includes(ext)) return { success: false, error: `Unsupported: .${ext}. Use PDF, DOCX, TXT, HTML, or MD.` };
 
   try {
     let rawText: string;
-    if (ext === 'docx' || ext === 'doc') rawText = await extractTextFromDocx(file);
+    if (ext === 'pdf') rawText = await extractTextFromPdf(file);
+    else if (ext === 'docx' || ext === 'doc') rawText = await extractTextFromDocx(file);
     else if (ext === 'html' || ext === 'htm') rawText = await extractTextFromHtml(file);
     else rawText = await extractTextFromPlain(file); // txt and md
 
@@ -344,4 +362,4 @@ export async function importResumeFromFile(file: File): Promise<ImportResult> {
   }
 }
 
-export const SUPPORTED_IMPORT_FORMATS = '.docx,.doc,.txt,.html,.htm,.md';
+export const SUPPORTED_IMPORT_FORMATS = '.pdf,.docx,.doc,.txt,.html,.htm,.md';

@@ -1,17 +1,20 @@
 'use client';
 
+import { useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useResumeStore } from '@/store/useResumeStore';
 import { TEMPLATES, DEFAULT_COLORS, sampleResumeData } from '@/types/resume';
 import { Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
-import { Check, RotateCcw } from 'lucide-react';
+import { Check, RotateCcw, Eye, X } from 'lucide-react';
 import { getTemplateComponent } from '@/components/templates';
 import { FONT_OPTIONS, DEFAULT_STYLE_OPTIONS } from '@/components/templates/TemplateWrapper';
 import { HelpTip } from '@/components/ui/help-tip';
 
 export default function TemplateSelector() {
-  const { selectedTemplate, setSelectedTemplate, primaryColor, setPrimaryColor, styleOptions, updateStyleOptions } = useResumeStore();
+  const { selectedTemplate, setSelectedTemplate, primaryColor, setPrimaryColor, styleOptions, updateStyleOptions, resumeData } = useResumeStore();
+  const [previewTemplate, setPreviewTemplate] = useState<string | null>(null);
 
   return (
     <div className="space-y-6">
@@ -23,14 +26,17 @@ export default function TemplateSelector() {
             const TemplateComponent = getTemplateComponent(t.name);
             const isSelected = selectedTemplate === t.name;
             return (
-              <button
+              <div
                 key={t.name}
-                className={`group relative rounded-lg overflow-hidden border-2 transition-all text-left ${
+                className={`group relative rounded-lg overflow-hidden border-2 transition-all text-left cursor-pointer ${
                   isSelected
                     ? 'border-primary shadow-md ring-1 ring-primary/20'
                     : 'border-transparent hover:border-muted-foreground/20 hover:shadow-sm'
                 }`}
                 onClick={() => setSelectedTemplate(t.name)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setSelectedTemplate(t.name); }}
               >
                 {/* Mini preview */}
                 <div className="relative bg-white overflow-hidden" style={{ height: '100px' }}>
@@ -56,11 +62,18 @@ export default function TemplateSelector() {
                       <Check className="h-3 w-3 text-primary-foreground" />
                     </div>
                   )}
+                  <button
+                    onClick={(e) => { e.stopPropagation(); setPreviewTemplate(t.name); }}
+                    className="absolute top-1.5 left-1.5 h-6 w-6 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-sm hover:bg-background"
+                    title="Preview template"
+                  >
+                    <Eye className="h-3 w-3" />
+                  </button>
                 </div>
                 <div className="px-1.5 py-1 bg-muted/50">
                   <span className={`text-xs font-medium ${isSelected ? 'text-primary' : 'text-foreground'}`}>{t.label}</span>
                 </div>
-              </button>
+              </div>
             );
           })}
         </div>
@@ -246,6 +259,33 @@ export default function TemplateSelector() {
           </div>
         </div>
       </section>
+
+      {previewTemplate && typeof document !== 'undefined' && createPortal(
+        <div className="fixed inset-0 z-[100] bg-black/60 flex items-center justify-center p-4" onClick={() => setPreviewTemplate(null)}>
+          <div className="bg-background rounded-xl shadow-2xl max-w-3xl w-full max-h-[90vh] overflow-hidden" onClick={e => e.stopPropagation()}>
+            <div className="flex items-center justify-between px-4 py-3 border-b">
+              <div>
+                <h3 className="text-sm font-semibold">{TEMPLATES.find(t => t.name === previewTemplate)?.label} Template</h3>
+                <p className="text-xs text-muted-foreground">Preview with your resume data</p>
+              </div>
+              <div className="flex gap-2">
+                <button onClick={() => { setSelectedTemplate(previewTemplate as any); setPreviewTemplate(null); }} className="text-xs px-3 py-1.5 rounded-md bg-primary text-primary-foreground font-medium hover:bg-primary/90">
+                  Select Template
+                </button>
+                <button onClick={() => setPreviewTemplate(null)} className="p-1.5 rounded-full hover:bg-muted">
+                  <X className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+            <div className="overflow-auto p-4 bg-gray-100 dark:bg-gray-900 max-h-[calc(90vh-60px)]">
+              <div className="mx-auto" style={{ width: '210mm', transform: 'scale(0.55)', transformOrigin: 'top center', height: 'calc(297mm * 0.55)' }}>
+                {(() => { const TC = getTemplateComponent(previewTemplate as any); return <TC data={resumeData || sampleResumeData} primaryColor={primaryColor} />; })()}
+              </div>
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
     </div>
   );
 }

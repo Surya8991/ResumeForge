@@ -8,6 +8,7 @@ import { downloadHtml } from '@/lib/exportHtml';
 import { importResumeFromFile, SUPPORTED_IMPORT_FORMATS } from '@/lib/importResume';
 import ResumePreview from '@/components/preview/ResumePreview';
 import HelpDialog from '@/components/HelpDialog';
+import ResumeProfileManager from '@/components/ResumeProfileManager';
 import PersonalInfoForm from '@/components/forms/PersonalInfoForm';
 import SummaryForm from '@/components/forms/SummaryForm';
 import ExperienceForm from '@/components/forms/ExperienceForm';
@@ -302,12 +303,13 @@ export default function HomePage() {
                 )}
               </div>
               <div className="w-px h-6 bg-border mx-1" />
-              <Button variant="ghost" size="icon" className="h-8 w-8" onClick={handleImportFile} title="Import Resume (DOCX, TXT, HTML, MD)">
+              <Button variant="ghost" size="icon" className="h-8 w-8" onClick={handleImportFile} title="Import Resume (PDF, DOCX, TXT, HTML, MD)">
                 <Upload className="h-4 w-4" />
               </Button>
               <Button variant="ghost" size="icon" className="h-8 w-8" onClick={handleReset} title="Reset">
                 <RotateCcw className="h-4 w-4" />
               </Button>
+              <ResumeProfileManager />
               <HelpDialog />
             </div>
 
