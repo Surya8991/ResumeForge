@@ -85,10 +85,12 @@ export default function TemplatesPage() {
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {filtered.map((t) => (
                 <div key={t.name} className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition group">
-                  <div className="h-44 relative" style={{ backgroundColor: t.primaryColor, opacity: 0.9 }}>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <FileText className="h-12 w-12 text-white/60" />
-                    </div>
+                  <div className="h-56 relative bg-gray-100 overflow-hidden">
+                    <img
+                      src={`/templates/${t.name}.png`}
+                      alt={`${t.label} template preview`}
+                      className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                    />
                   </div>
                   <div className="p-5">
                     <div className="flex items-center justify-between mb-2">
