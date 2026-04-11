@@ -422,7 +422,7 @@ export default function HomePage() {
       {/* Main content */}
       <div className="flex flex-1 overflow-hidden">
         {/* Desktop Left Panel */}
-        <div className={`hidden md:flex flex-col border-r bg-background transition-all duration-200 shrink-0 overflow-hidden ${sidebarCollapsed ? 'w-[52px]' : 'w-[460px]'}`}>
+        <div className={`hidden md:flex flex-col border-r bg-background transition-all duration-200 shrink-0 overflow-hidden ${sidebarCollapsed ? 'w-[52px]' : 'w-[320px] lg:w-[400px] xl:w-[460px]'}`}>
           {/* Section header - sticky */}
           <div className="flex items-center border-b bg-muted/30 sticky top-0 z-10 shrink-0">
             {sidebarCollapsed ? (
@@ -588,7 +588,7 @@ export default function HomePage() {
         <div className="flex-1 md:hidden">
           {activeTab === 'edit' && (
             <ScrollArea className="h-full">
-              <div className="p-4 pb-20">
+              <div className="px-5 py-4 pb-20">
                 {/* Step indicator */}
                 {(() => {
                   const idx = FORM_SECTIONS.findIndex(s => s.id === activeSection);
