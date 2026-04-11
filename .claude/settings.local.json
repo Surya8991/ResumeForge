@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(wc -l D:/Coding/ResumeForge/components/ats/utils/textAnalysis.ts D:/Coding/ResumeForge/components/ats/hooks/*.ts D:/Coding/ResumeForge/components/ats/sections/*.tsx D:/Coding/ResumeForge/components/ats/data/industryKeywords.ts)",
+      "Bash(npx next:*)",
+      "Bash(npx tsc:*)"
+    ]
+  }
+}
