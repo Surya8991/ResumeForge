@@ -13,13 +13,13 @@ export default function ATSGuidePage() {
         {/* Hero */}
         <section className="bg-gradient-to-br from-gray-900 via-slate-900 to-black py-20 md:py-28">
           <div className="max-w-4xl mx-auto px-4 text-center">
-            <span className="inline-block bg-blue-500/10 text-blue-400 text-sm font-medium px-4 py-1.5 rounded-full mb-6">
+            <span className="inline-block bg-blue-500/10 text-blue-400 text-sm font-medium px-4 py-1.5 rounded-full mb-6 animate-fade-in">
               ATS Guide
             </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 animate-fade-in-up delay-100">
               The Complete ATS Guide
             </h1>
-            <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto animate-fade-in-up delay-200">
               Everything you need to know about Applicant Tracking Systems and how to get your resume past them.
             </p>
           </div>
@@ -28,7 +28,7 @@ export default function ATSGuidePage() {
         {/* What is ATS */}
         <section className="bg-white py-16 md:py-20">
           <div className="max-w-4xl mx-auto px-4">
-            <div className="flex items-start gap-4 md:gap-6">
+            <div className="flex items-start gap-4 md:gap-6 animate-fade-in-up">
               <div className="flex-shrink-0 w-12 h-12 md:w-14 md:h-14 bg-blue-50 rounded-xl flex items-center justify-center">
                 <svg className="w-6 h-6 md:w-7 md:h-7 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -50,8 +50,8 @@ export default function ATSGuidePage() {
         {/* How ATS Works */}
         <section className="bg-gray-50 py-16 md:py-20">
           <div className="max-w-6xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-4">How ATS Works</h2>
-            <p className="text-gray-500 text-center mb-12 max-w-2xl mx-auto">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-4 animate-fade-in-up">How ATS Works</h2>
+            <p className="text-gray-500 text-center mb-12 max-w-2xl mx-auto animate-fade-in-up delay-100">
               Understanding the ATS pipeline helps you optimize your resume for each stage.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -60,8 +60,8 @@ export default function ATSGuidePage() {
                 { step: '2', title: 'Parsing', desc: 'The system extracts text from your resume, identifying sections like experience, education, and skills.', icon: '🔍' },
                 { step: '3', title: 'Keyword Match', desc: 'Your resume is compared against the job description. The ATS looks for matching keywords and phrases.', icon: '🔑' },
                 { step: '4', title: 'Ranking', desc: 'Resumes are scored and ranked. Top-scoring resumes are forwarded to recruiters for review.', icon: '📊' },
-              ].map((item) => (
-                <div key={item.step} className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 text-center relative">
+              ].map((item, i) => (
+                <div key={item.step} className={`bg-white rounded-xl shadow-sm border border-gray-100 p-6 text-center relative animate-fade-in-up delay-${(i + 1) * 100}`}>
                   <div className="text-3xl mb-4">{item.icon}</div>
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-500 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center">
                     {item.step}
@@ -77,7 +77,7 @@ export default function ATSGuidePage() {
         {/* ATS Statistics */}
         <section className="bg-white py-16 md:py-20">
           <div className="max-w-6xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-12">ATS Statistics You Should Know</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-12 animate-fade-in-up">ATS Statistics You Should Know</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
                 { stat: '75%', desc: 'of resumes are rejected by ATS before reaching a human recruiter' },
@@ -85,7 +85,7 @@ export default function ATSGuidePage() {
                 { stat: '250+', desc: 'applications are received for a single corporate job posting on average' },
                 { stat: '70%', desc: 'of jobs are filled through networking and optimized applications' },
               ].map((item, i) => (
-                <div key={i} className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 text-center">
+                <div key={i} className={`bg-white rounded-xl shadow-sm border border-gray-100 p-6 text-center animate-fade-in-up delay-${(i + 1) * 100}`}>
                   <div className="text-4xl font-bold text-blue-500 mb-2">{item.stat}</div>
                   <p className="text-sm text-gray-600">{item.desc}</p>
                 </div>
@@ -97,7 +97,7 @@ export default function ATSGuidePage() {
         {/* How to Pass ATS */}
         <section className="bg-gray-50 py-16 md:py-20">
           <div className="max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-4">10 Tips to Pass ATS Screening</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-4 animate-fade-in-up">10 Tips to Pass ATS Screening</h2>
             <p className="text-gray-500 text-center mb-12 max-w-2xl mx-auto">
               Follow these proven strategies to increase your chances of getting past the ATS.
             </p>
@@ -113,8 +113,8 @@ export default function ATSGuidePage() {
                 { num: 8, title: 'Tailor Each Application', desc: 'Customize your resume for every job. One-size-fits-all resumes score poorly with ATS keyword matching.' },
                 { num: 9, title: 'Proofread Carefully', desc: 'Typos and misspellings can prevent keyword matches. Double-check all text, especially technical terms.' },
                 { num: 10, title: 'Use ResumeForge', desc: 'Our ATS-optimized templates and built-in ATS score checker help you create resumes that pass any system.' },
-              ].map((tip) => (
-                <div key={tip.num} className="bg-white rounded-xl shadow-sm border border-gray-100 p-5 flex items-start gap-4">
+              ].map((tip, i) => (
+                <div key={tip.num} className={`bg-white rounded-xl shadow-sm border border-gray-100 p-5 flex items-start gap-4 animate-fade-in-up delay-${Math.min((i + 1) * 100, 500)}`}>
                   <span className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white text-sm font-bold rounded-full flex items-center justify-center">
                     {tip.num}
                   </span>
@@ -131,7 +131,7 @@ export default function ATSGuidePage() {
         {/* Common ATS Mistakes */}
         <section className="bg-white py-16 md:py-20">
           <div className="max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-12">Common ATS Mistakes to Avoid</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-12 animate-fade-in-up">Common ATS Mistakes to Avoid</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {[
                 { title: 'Using Creative File Formats', desc: 'Submitting resumes as JPG, PNG, or in portfolio formats that ATS cannot parse.' },
@@ -140,7 +140,7 @@ export default function ATSGuidePage() {
                 { title: 'Ignoring Job Description Language', desc: 'Using different terminology than the job posting, even if they mean the same thing.' },
                 { title: 'Multi-Column Complex Layouts', desc: 'Fancy two or three-column designs can scramble the reading order for ATS parsers.' },
               ].map((mistake, i) => (
-                <div key={i} className="bg-white rounded-xl shadow-sm border border-gray-100 p-5 flex items-start gap-4">
+                <div key={i} className={`bg-white rounded-xl shadow-sm border border-gray-100 p-5 flex items-start gap-4 animate-fade-in-up delay-${Math.min((i + 1) * 100, 500)}`}>
                   <span className="flex-shrink-0 w-8 h-8 bg-red-100 text-red-500 rounded-full flex items-center justify-center font-bold text-lg">
                     &times;
                   </span>
@@ -192,7 +192,7 @@ export default function ATSGuidePage() {
         {/* CTA */}
         <section className="bg-gradient-to-br from-gray-900 via-slate-900 to-black py-16 md:py-20">
           <div className="max-w-3xl mx-auto px-4 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 animate-fade-in-up">
               Check Your Resume&apos;s ATS Score
             </h2>
             <p className="text-gray-400 mb-8 max-w-xl mx-auto">

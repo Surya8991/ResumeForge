@@ -5,8 +5,9 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Plus, Trash2, X } from 'lucide-react';
-import { useState } from 'react';
+import { Plus, Trash2, X, Sparkles } from 'lucide-react';
+import { useState, useMemo } from 'react';
+import { INDUSTRIES } from '@/components/ats/data/industryKeywords';
 
 function generateId() {
   return Math.random().toString(36).substring(2, 9);
@@ -15,6 +16,27 @@ function generateId() {
 export default function SkillsForm() {
   const { resumeData, addSkill, updateSkill, removeSkill } = useResumeStore();
   const [newSkillInput, setNewSkillInput] = useState<Record<string, string>>({});
+
+  const jobTitle = resumeData.personalInfo.jobTitle;
+  const allExistingSkills = resumeData.skills.flatMap((s) => s.items.map((i) => i.toLowerCase()));
+
+  const suggestedSkills = useMemo(() => {
+    if (!jobTitle || jobTitle.trim().length < 2) return [];
+    const title = jobTitle.toLowerCase().trim();
+    const matchedKeywords: string[] = [];
+    for (const industry of INDUSTRIES) {
+      for (const role of industry.roles) {
+        const roleName = role.role.toLowerCase();
+        if (roleName.includes(title) || title.includes(roleName) || title.split(/\s+/).some(word => word.length > 2 && roleName.includes(word))) {
+          matchedKeywords.push(...role.keywords);
+        }
+      }
+    }
+    const unique = [...new Set(matchedKeywords)];
+    return unique
+      .filter((kw) => !allExistingSkills.includes(kw.toLowerCase()))
+      .slice(0, 20);
+  }, [jobTitle, allExistingSkills]);
 
   const handleAdd = () => {
     addSkill({
@@ -54,6 +76,34 @@ export default function SkillsForm() {
         <p className="text-sm text-muted-foreground text-center py-8">
           No skills added yet. Click &quot;Add Category&quot; to organize your skills.
         </p>
+      )}
+
+      {suggestedSkills.length > 0 && (
+        <div className="p-3 rounded-lg border border-dashed border-primary/30 bg-primary/5 space-y-2">
+          <p className="text-xs font-medium flex items-center gap-1.5 text-primary">
+            <Sparkles className="h-3.5 w-3.5" /> Suggested skills for &quot;{jobTitle}&quot;
+          </p>
+          <div className="flex flex-wrap gap-1.5">
+            {suggestedSkills.map((skill) => (
+              <button
+                key={skill}
+                type="button"
+                onClick={() => {
+                  const firstCategory = resumeData.skills[0];
+                  if (firstCategory) {
+                    updateSkill(firstCategory.id, { items: [...firstCategory.items, skill] });
+                  } else {
+                    const id = Math.random().toString(36).substring(2, 9);
+                    addSkill({ id, category: 'Skills', items: [skill] });
+                  }
+                }}
+                className="text-xs px-2 py-1 rounded-full border border-dashed border-primary/40 text-primary hover:bg-primary/10 cursor-pointer transition-colors"
+              >
+                + {skill}
+              </button>
+            ))}
+          </div>
+        </div>
       )}
 
       <div className="space-y-3">

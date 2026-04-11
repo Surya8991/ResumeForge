@@ -86,7 +86,21 @@ export default function HomePage() {
   const [showExportMenu, setShowExportMenu] = useState(false);
   const [showSectionDropdown, setShowSectionDropdown] = useState(false);
   const [showReorder, setShowReorder] = useState(false);
+  const [isExporting, setIsExporting] = useState(false);
+  const [exportingType, setExportingType] = useState<string | null>(null);
   const { importData, resetData, addCustomSection, resumeData } = useResumeStore();
+
+  const sectionFilled: Record<string, boolean> = {
+    personalInfo: !!resumeData.personalInfo.fullName,
+    summary: resumeData.summary.length > 0,
+    experience: resumeData.experience.length > 0,
+    education: resumeData.education.length > 0,
+    skills: resumeData.skills.length > 0,
+    projects: resumeData.projects.length > 0,
+    certifications: resumeData.certifications.length > 0,
+    languages: resumeData.languages.length > 0,
+    coverLetter: resumeData.coverLetter.length > 0,
+  };
 
   // Dynamic sections: base + custom sections
   const customSections = resumeData.customSections.map(s => ({
@@ -158,15 +172,31 @@ export default function HomePage() {
   };
 
   const handleExportDocx = async () => {
-    const { resumeData, primaryColor } = useResumeStore.getState();
-    await downloadDocx(resumeData, primaryColor);
+    setIsExporting(true);
+    setExportingType('docx');
+    try {
+      const { resumeData, primaryColor } = useResumeStore.getState();
+      await downloadDocx(resumeData, primaryColor);
+    } finally {
+      setTimeout(() => { setIsExporting(false); setExportingType(null); }, 500);
+    }
     setShowExportMenu(false);
   };
 
   const handleExportHtml = () => {
+    setIsExporting(true);
+    setExportingType('html');
     const { resumeData, primaryColor } = useResumeStore.getState();
     downloadHtml(resumeData, primaryColor);
+    setTimeout(() => { setIsExporting(false); setExportingType(null); }, 500);
     setShowExportMenu(false);
+  };
+
+  const handleExportPdf = () => {
+    setIsExporting(true);
+    setExportingType('pdf');
+    handlePrint();
+    setTimeout(() => { setIsExporting(false); setExportingType(null); }, 500);
   };
 
   const handleReset = () => {
@@ -289,14 +319,14 @@ export default function HomePage() {
                   <>
                     <div className="fixed inset-0 z-40" onClick={() => setShowExportMenu(false)} />
                     <div className="absolute right-0 top-full mt-1.5 z-50 bg-background border rounded-xl shadow-xl py-1.5 w-48 animate-in fade-in slide-in-from-top-1 duration-150">
-                      <button onClick={() => { handlePrint(); setShowExportMenu(false); }} className="w-full px-3 py-2 text-sm flex items-center gap-2.5 hover:bg-muted text-left rounded-lg mx-0.5 transition-colors" style={{ width: 'calc(100% - 4px)' }}>
-                        <Download className="h-4 w-4 text-muted-foreground" /> PDF <span className="text-[11px] text-emerald-600 font-medium ml-auto">Best for ATS</span>
+                      <button onClick={() => { handleExportPdf(); setShowExportMenu(false); }} disabled={isExporting} className="w-full px-3 py-2 text-sm flex items-center gap-2.5 hover:bg-muted text-left rounded-lg mx-0.5 transition-colors" style={{ width: 'calc(100% - 4px)' }}>
+                        <Download className="h-4 w-4 text-muted-foreground" /> {exportingType === 'pdf' ? 'Exporting...' : 'PDF'} <span className="text-[11px] text-emerald-600 font-medium ml-auto">Best for ATS</span>
                       </button>
-                      <button onClick={handleExportDocx} className="w-full px-3 py-2 text-sm flex items-center gap-2.5 hover:bg-muted text-left rounded-lg mx-0.5 transition-colors" style={{ width: 'calc(100% - 4px)' }}>
-                        <FileType className="h-4 w-4 text-muted-foreground" /> DOCX <span className="text-[11px] text-muted-foreground ml-auto">Word</span>
+                      <button onClick={handleExportDocx} disabled={isExporting} className="w-full px-3 py-2 text-sm flex items-center gap-2.5 hover:bg-muted text-left rounded-lg mx-0.5 transition-colors" style={{ width: 'calc(100% - 4px)' }}>
+                        <FileType className="h-4 w-4 text-muted-foreground" /> {exportingType === 'docx' ? 'Exporting...' : 'DOCX'} <span className="text-[11px] text-muted-foreground ml-auto">Word</span>
                       </button>
-                      <button onClick={handleExportHtml} className="w-full px-3 py-2 text-sm flex items-center gap-2.5 hover:bg-muted text-left rounded-lg mx-0.5 transition-colors" style={{ width: 'calc(100% - 4px)' }}>
-                        <Code className="h-4 w-4 text-muted-foreground" /> HTML <span className="text-[11px] text-muted-foreground ml-auto">Web</span>
+                      <button onClick={handleExportHtml} disabled={isExporting} className="w-full px-3 py-2 text-sm flex items-center gap-2.5 hover:bg-muted text-left rounded-lg mx-0.5 transition-colors" style={{ width: 'calc(100% - 4px)' }}>
+                        <Code className="h-4 w-4 text-muted-foreground" /> {exportingType === 'html' ? 'Exporting...' : 'HTML'} <span className="text-[11px] text-muted-foreground ml-auto">Web</span>
                       </button>
                     </div>
                   </>
@@ -391,6 +421,7 @@ export default function HomePage() {
                                     : 'hover:bg-muted text-foreground'
                                 }`}
                               >
+                                <span className={`h-2 w-2 rounded-full shrink-0 ${sectionFilled[s.id] ? 'bg-green-500' : 'bg-gray-300'}`} />
                                 <s.icon className={`h-4 w-4 shrink-0 ${activeSection === s.id ? 'text-primary' : 'text-muted-foreground'}`} />
                                 <span className="flex-1 text-left">{s.label}</span>
                                 <span className="text-xs text-muted-foreground">{i + 1}/{FORM_SECTIONS.length}</span>
@@ -424,7 +455,9 @@ export default function HomePage() {
                   </div>
                 ) : (
                   <>
-                    {renderForm()}
+                    <div key={activeSection} className="animate-fade-in">
+                      {renderForm()}
+                    </div>
 
                     {/* Step navigation */}
                     <div className="mt-6 pt-4 border-t flex items-center justify-between">
@@ -512,7 +545,9 @@ export default function HomePage() {
                   );
                 })()}
 
-                {renderForm()}
+                <div key={activeSection} className="animate-fade-in">
+                  {renderForm()}
+                </div>
 
                 {/* Step navigation */}
                 <div className="mt-6 pt-4 border-t flex items-center justify-between">
@@ -631,7 +666,7 @@ export default function HomePage() {
             </div>
 
             {(activeTab === 'templates' || activeTab === 'ats' || activeTab === 'ai') && (
-              <div className="w-[300px] xl:w-[340px] border-l overflow-y-auto bg-background shrink-0">
+              <div className="w-[300px] xl:w-[340px] border-l overflow-y-auto bg-background shrink-0 animate-slide-in-right">
                 <ScrollArea className="h-full">
                   <div className="p-4">
                     {activeTab === 'templates' && <TemplateSelector />}
@@ -647,14 +682,14 @@ export default function HomePage() {
 
       {/* Mobile bottom bar */}
       <div className="md:hidden border-t p-2 flex justify-center gap-1.5 bg-background/95 backdrop-blur-sm">
-        <Button size="sm" onClick={() => handlePrint()} className="gap-1 shadow-sm">
-          <Download className="h-3.5 w-3.5" /> PDF
+        <Button size="sm" onClick={handleExportPdf} disabled={isExporting} className="gap-1 shadow-sm">
+          <Download className="h-3.5 w-3.5" /> {exportingType === 'pdf' ? 'Exporting...' : 'PDF'}
         </Button>
-        <Button variant="outline" size="sm" onClick={handleExportDocx} className="gap-1">
-          <FileType className="h-3.5 w-3.5" /> DOCX
+        <Button variant="outline" size="sm" onClick={handleExportDocx} disabled={isExporting} className="gap-1">
+          <FileType className="h-3.5 w-3.5" /> {exportingType === 'docx' ? 'Exporting...' : 'DOCX'}
         </Button>
-        <Button variant="outline" size="sm" onClick={handleExportHtml} className="gap-1">
-          <Code className="h-3.5 w-3.5" /> HTML
+        <Button variant="outline" size="sm" onClick={handleExportHtml} disabled={isExporting} className="gap-1">
+          <Code className="h-3.5 w-3.5" /> {exportingType === 'html' ? 'Exporting...' : 'HTML'}
         </Button>
         <Button variant="ghost" size="sm" onClick={handleImportFile} title="Import Resume">
           <Upload className="h-3.5 w-3.5" />
@@ -662,6 +697,7 @@ export default function HomePage() {
         <Button variant="ghost" size="sm" onClick={handleReset} title="Reset">
           <RotateCcw className="h-3.5 w-3.5" />
         </Button>
+        <ResumeProfileManager />
       </div>
 
       {/* Footer */}

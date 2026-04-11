@@ -26,8 +26,8 @@ export default function ContactPage() {
       {/* Hero */}
       <section className="bg-gradient-to-br from-gray-900 via-slate-900 to-black py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Get in Touch</h1>
-          <p className="text-xl text-gray-300">We&apos;d love to hear from you</p>
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 animate-fade-in-up">Get in Touch</h1>
+          <p className="text-xl text-gray-300 animate-fade-in-up delay-100">We&apos;d love to hear from you</p>
         </div>
       </section>
 
@@ -35,7 +35,7 @@ export default function ContactPage() {
       <section className="bg-white py-16 px-4">
         <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-10">
           {/* Contact Info Card */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8 animate-fade-in-up delay-100">
             <h2 className="text-2xl font-bold text-gray-900 mb-6">Contact Information</h2>
             <div className="space-y-6">
               <div className="flex items-start gap-4">
@@ -64,7 +64,7 @@ export default function ContactPage() {
           </div>
 
           {/* Contact Form */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8 animate-scale-in delay-200">
             <h2 className="text-2xl font-bold text-gray-900 mb-6">Send a Message</h2>
             {submitted ? (
               <div className="text-center py-12">

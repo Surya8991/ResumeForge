@@ -63,7 +63,7 @@ export default function SiteNavbar() {
 
         {/* Mobile menu */}
         {mobileOpen && (
-          <div className="md:hidden border-t border-gray-800 py-3 space-y-1">
+          <div className="md:hidden border-t border-gray-800 py-3 space-y-1 animate-fade-in-up">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}

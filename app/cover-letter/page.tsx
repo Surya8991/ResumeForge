@@ -73,13 +73,13 @@ export default function CoverLetterGuidePage() {
         {/* Hero */}
         <section className="bg-gradient-to-br from-gray-900 via-slate-900 to-black py-20 md:py-28">
           <div className="max-w-4xl mx-auto px-4 text-center">
-            <span className="inline-block bg-blue-500/10 text-blue-400 text-sm font-medium px-4 py-1.5 rounded-full mb-6">
+            <span className="inline-block bg-blue-500/10 text-blue-400 text-sm font-medium px-4 py-1.5 rounded-full mb-6 animate-fade-in">
               Cover Letter Guide
             </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 animate-fade-in-up delay-100">
               Cover Letter Guide
             </h1>
-            <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto animate-fade-in-up delay-200">
               Write compelling cover letters that get interviews and set you apart from other candidates.
             </p>
           </div>
@@ -88,14 +88,14 @@ export default function CoverLetterGuidePage() {
         {/* Why Cover Letters Matter */}
         <section className="bg-white py-16 md:py-20">
           <div className="max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-12">Why Cover Letters Matter</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-12 animate-fade-in-up">Why Cover Letters Matter</h2>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
               {[
                 { stat: '83%', label: 'of hiring managers read cover letters' },
                 { stat: '49%', label: 'say a cover letter is their second most valued document' },
                 { stat: '2x', label: 'more likely to get an interview with a strong cover letter' },
               ].map((item, i) => (
-                <div key={i} className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 text-center">
+                <div key={i} className={`bg-white rounded-xl shadow-sm border border-gray-100 p-6 text-center animate-fade-in-up delay-${(i + 1) * 100}`}>
                   <div className="text-3xl font-bold text-blue-500 mb-2">{item.stat}</div>
                   <p className="text-sm text-gray-600">{item.label}</p>
                 </div>
@@ -110,13 +110,13 @@ export default function CoverLetterGuidePage() {
         {/* Structure */}
         <section className="bg-gray-50 py-16 md:py-20">
           <div className="max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-4">The 4-Part Structure</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-4 animate-fade-in-up">The 4-Part Structure</h2>
             <p className="text-gray-500 text-center mb-12 max-w-2xl mx-auto">
               Follow this proven structure for a cover letter that is clear, compelling, and professional.
             </p>
             <div className="space-y-6">
-              {structureParts.map((part) => (
-                <div key={part.step} className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+              {structureParts.map((part, i) => (
+                <div key={part.step} className={`bg-white rounded-xl shadow-sm border border-gray-100 p-6 animate-fade-in-up delay-${(i + 1) * 100}`}>
                   <div className="flex items-start gap-4">
                     <span className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white text-sm font-bold rounded-full flex items-center justify-center">
                       {part.step}
@@ -138,9 +138,9 @@ export default function CoverLetterGuidePage() {
         {/* Do's and Don'ts */}
         <section className="bg-white py-16 md:py-20">
           <div className="max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-12">Do&apos;s and Don&apos;ts</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-12 animate-fade-in-up">Do&apos;s and Don&apos;ts</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+              <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 animate-fade-in-up delay-100">
                 <div className="flex items-center gap-2 mb-5">
                   <span className="w-7 h-7 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-sm font-bold">&#10003;</span>
                   <h3 className="font-semibold text-green-700 text-lg">Do</h3>
@@ -163,7 +163,7 @@ export default function CoverLetterGuidePage() {
                   ))}
                 </ul>
               </div>
-              <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+              <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 animate-fade-in-up delay-200">
                 <div className="flex items-center gap-2 mb-5">
                   <span className="w-7 h-7 bg-red-100 text-red-500 rounded-full flex items-center justify-center text-lg font-bold">&times;</span>
                   <h3 className="font-semibold text-red-600 text-lg">Don&apos;t</h3>
@@ -198,8 +198,8 @@ export default function CoverLetterGuidePage() {
               Sample opening lines tailored to different industries. Use these as inspiration for your own cover letter.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {industryTemplates.map((tmpl) => (
-                <div key={tmpl.industry} className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+              {industryTemplates.map((tmpl, i) => (
+                <div key={tmpl.industry} className={`bg-white rounded-xl shadow-sm border border-gray-100 p-6 animate-scale-in delay-${Math.min((i + 1) * 100, 500)}`}>
                   <div className="text-3xl mb-3">{tmpl.icon}</div>
                   <h3 className="font-semibold text-gray-900 mb-3">{tmpl.industry}</h3>
                   <p className="text-sm text-gray-500 italic leading-relaxed">&ldquo;{tmpl.opening}&rdquo;</p>
@@ -241,7 +241,7 @@ export default function CoverLetterGuidePage() {
         {/* CTA */}
         <section className="bg-gradient-to-br from-gray-900 via-slate-900 to-black py-16 md:py-20">
           <div className="max-w-3xl mx-auto px-4 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 animate-fade-in-up">
               Generate Your Cover Letter
             </h2>
             <p className="text-gray-400 mb-8 max-w-xl mx-auto">

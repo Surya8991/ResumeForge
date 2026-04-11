@@ -47,15 +47,15 @@ export default function TemplatesPage() {
       {/* Hero */}
       <section className="bg-gradient-to-br from-gray-900 via-slate-900 to-black text-white py-14 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-3xl md:text-5xl font-bold mb-4">20 ATS-Friendly Templates</h1>
-          <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+          <h1 className="text-3xl md:text-5xl font-bold mb-4 animate-fade-in-up">20 ATS-Friendly Templates</h1>
+          <p className="text-gray-300 text-lg max-w-2xl mx-auto animate-fade-in-up delay-100">
             Every template is designed to pass Applicant Tracking Systems while looking great on screen and in print.
           </p>
         </div>
       </section>
 
       {/* Filter Bar */}
-      <section className="bg-white border-b border-gray-100 sticky top-0 z-10">
+      <section className="bg-white border-b border-gray-100 sticky top-0 z-10 animate-fade-in delay-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center gap-3 overflow-x-auto">
             <Filter className="h-4 w-4 text-gray-400 shrink-0" />
@@ -83,8 +83,8 @@ export default function TemplatesPage() {
             <p className="text-center text-gray-500 py-12">No templates match this filter.</p>
           ) : (
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {filtered.map((t) => (
-                <div key={t.name} className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition group">
+              {filtered.map((t, i) => (
+                <div key={t.name} className={`bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition group animate-scale-in delay-${Math.min((i + 1) * 100, 500)}`}>
                   <div className="h-56 relative bg-gray-100 overflow-hidden">
                     <img
                       src={`/templates/${t.name}.png`}

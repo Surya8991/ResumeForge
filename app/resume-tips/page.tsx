@@ -84,13 +84,13 @@ export default function ResumeTipsPage() {
         {/* Hero */}
         <section className="bg-gradient-to-br from-gray-900 via-slate-900 to-black py-20 md:py-28">
           <div className="max-w-4xl mx-auto px-4 text-center">
-            <span className="inline-block bg-blue-500/10 text-blue-400 text-sm font-medium px-4 py-1.5 rounded-full mb-6">
+            <span className="inline-block bg-blue-500/10 text-blue-400 text-sm font-medium px-4 py-1.5 rounded-full mb-6 animate-fade-in">
               Expert Advice
             </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 animate-fade-in-up delay-100">
               Resume Writing Tips
             </h1>
-            <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto animate-fade-in-up delay-200">
               Expert advice to make your resume stand out and land more interviews.
             </p>
           </div>
@@ -99,9 +99,9 @@ export default function ResumeTipsPage() {
         {/* Writing Your Summary */}
         <section className="bg-white py-16 md:py-20">
           <div className="max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-12">Writing Your Professional Summary</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-12 animate-fade-in-up">Writing Your Professional Summary</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+              <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 animate-fade-in-up delay-100">
                 <div className="flex items-center gap-2 mb-4">
                   <span className="w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-sm font-bold">&#10003;</span>
                   <h3 className="font-semibold text-green-700 text-lg">Do&apos;s</h3>
@@ -121,7 +121,7 @@ export default function ResumeTipsPage() {
                   ))}
                 </ul>
               </div>
-              <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+              <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 animate-fade-in-up delay-200">
                 <div className="flex items-center gap-2 mb-4">
                   <span className="w-6 h-6 bg-red-100 text-red-500 rounded-full flex items-center justify-center text-lg font-bold">&times;</span>
                   <h3 className="font-semibold text-red-600 text-lg">Don&apos;ts</h3>
@@ -148,13 +148,13 @@ export default function ResumeTipsPage() {
         {/* Action Verbs */}
         <section className="bg-gray-50 py-16 md:py-20">
           <div className="max-w-6xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-4">Power Action Verbs</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-4 animate-fade-in-up">Power Action Verbs</h2>
             <p className="text-gray-500 text-center mb-12 max-w-2xl mx-auto">
               Start your bullet points with these strong action verbs to make your experience more impactful.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {Object.entries(actionVerbs).map(([category, verbs]) => (
-                <div key={category} className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+              {Object.entries(actionVerbs).map(([category, verbs], i) => (
+                <div key={category} className={`bg-white rounded-xl shadow-sm border border-gray-100 p-6 animate-fade-in-up delay-${(i + 1) * 100}`}>
                   <h3 className="font-semibold text-gray-900 mb-4 text-blue-500">{category}</h3>
                   <div className="flex flex-wrap gap-2">
                     {verbs.map((verb) => (
@@ -172,7 +172,7 @@ export default function ResumeTipsPage() {
         {/* Quantifying Achievements */}
         <section className="bg-white py-16 md:py-20">
           <div className="max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-4">Quantifying Your Achievements</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-4 animate-fade-in-up">Quantifying Your Achievements</h2>
             <p className="text-gray-500 text-center mb-12 max-w-2xl mx-auto">
               Numbers make your accomplishments concrete and memorable. Transform vague statements into powerful proof.
             </p>
@@ -184,7 +184,7 @@ export default function ResumeTipsPage() {
                 { weak: 'Reduced costs', strong: 'Cut operational expenses by 22% ($180K annually) through process automation' },
                 { weak: 'Built a website', strong: 'Developed a React application serving 50K+ daily active users with 99.9% uptime' },
               ].map((ex, i) => (
-                <div key={i} className="bg-white rounded-xl shadow-sm border border-gray-100 p-5 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div key={i} className={`bg-white rounded-xl shadow-sm border border-gray-100 p-5 grid grid-cols-1 md:grid-cols-2 gap-4 animate-fade-in-up delay-${Math.min((i + 1) * 100, 500)}`}>
                   <div className="flex items-start gap-3">
                     <span className="flex-shrink-0 w-6 h-6 bg-red-100 text-red-500 rounded-full flex items-center justify-center text-xs font-bold">&times;</span>
                     <div>
@@ -243,10 +243,10 @@ export default function ResumeTipsPage() {
         {/* Common Mistakes */}
         <section className="bg-white py-16 md:py-20">
           <div className="max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-12">8 Mistakes to Avoid</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-12 animate-fade-in-up">8 Mistakes to Avoid</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {commonMistakes.map((mistake, i) => (
-                <div key={i} className="bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+                <div key={i} className={`bg-white rounded-xl shadow-sm border border-gray-100 p-5 animate-fade-in-up delay-${Math.min((i + 1) * 100, 500)}`}>
                   <div className="flex items-start gap-3">
                     <span className="flex-shrink-0 w-7 h-7 bg-red-100 text-red-500 rounded-full flex items-center justify-center text-sm font-bold">
                       {i + 1}
@@ -270,8 +270,8 @@ export default function ResumeTipsPage() {
               Every industry has different expectations. Tailor your resume to match.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {industryTips.map((ind) => (
-                <div key={ind.industry} className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+              {industryTips.map((ind, i) => (
+                <div key={ind.industry} className={`bg-white rounded-xl shadow-sm border border-gray-100 p-6 animate-fade-in-up delay-${(i + 1) * 100}`}>
                   <div className="text-3xl mb-3">{ind.icon}</div>
                   <h3 className="font-semibold text-gray-900 mb-3">{ind.industry}</h3>
                   <ul className="space-y-2">
@@ -291,7 +291,7 @@ export default function ResumeTipsPage() {
         {/* CTA */}
         <section className="bg-gradient-to-br from-gray-900 via-slate-900 to-black py-16 md:py-20">
           <div className="max-w-3xl mx-auto px-4 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 animate-fade-in-up">
               Start Building Your Resume
             </h2>
             <p className="text-gray-400 mb-8 max-w-xl mx-auto">

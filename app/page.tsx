@@ -57,13 +57,13 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-fade-in-up">
                 Build ATS-Friendly Resumes in Minutes
               </h1>
-              <p className="text-lg text-gray-300 mb-8 max-w-lg">
+              <p className="text-lg text-gray-300 mb-8 max-w-lg animate-fade-in-up delay-100">
                 20 professional templates, AI-powered writing, 12 ATS analysis tools, and a cover letter builder. 100% free, no sign-up required.
               </p>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap gap-4 animate-fade-in-up delay-200">
                 <Link href="/builder" className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold transition flex items-center gap-2">
                   Build My Resume <ArrowRight className="h-4 w-4" />
                 </Link>
@@ -72,7 +72,7 @@ export default function HomePage() {
                 </Link>
               </div>
             </div>
-            <div className="hidden md:flex justify-center">
+            <div className="hidden md:flex justify-center animate-scale-in delay-300">
               <div className="w-72 h-96 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20 flex items-center justify-center">
                 <div className="text-center">
                   <FileText className="h-16 w-16 text-blue-400 mx-auto mb-4" />
@@ -93,8 +93,8 @@ export default function HomePage() {
               { num: '201', label: 'Roles' },
               { num: '12', label: 'ATS Tools' },
               { num: '100%', label: 'Free' },
-            ].map((s) => (
-              <div key={s.label}>
+            ].map((s, i) => (
+              <div key={s.label} className={`animate-fade-in-up delay-${(i + 1) * 100}`}>
                 <div className="text-2xl md:text-3xl font-bold">{s.num}</div>
                 <div className="text-blue-100 text-sm">{s.label}</div>
               </div>
@@ -106,13 +106,13 @@ export default function HomePage() {
       {/* Features */}
       <section className="bg-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-900 text-center mb-4">Everything You Need</h2>
-          <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
+          <h2 className="text-3xl font-bold text-gray-900 text-center mb-4 animate-fade-in-up">Everything You Need</h2>
+          <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto animate-fade-in-up delay-100">
             Professional resume tools that are completely free and private.
           </p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {FEATURES.map((f) => (
-              <div key={f.title} className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition">
+            {FEATURES.map((f, i) => (
+              <div key={f.title} className={`bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition animate-fade-in-up delay-${Math.min((i + 1) * 100, 500)}`}>
                 <f.icon className="h-10 w-10 text-blue-400 mb-4" />
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">{f.title}</h3>
                 <p className="text-gray-600 text-sm">{f.desc}</p>
@@ -125,10 +125,10 @@ export default function HomePage() {
       {/* How It Works */}
       <section className="bg-gray-50 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">How It Works</h2>
+          <h2 className="text-3xl font-bold text-gray-900 text-center mb-12 animate-fade-in-up">How It Works</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {STEPS.map((step) => (
-              <div key={step.num} className="text-center">
+            {STEPS.map((step, i) => (
+              <div key={step.num} className={`text-center animate-fade-in-up delay-${(i + 1) * 100}`}>
                 <div className="w-14 h-14 bg-blue-500 text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">
                   {step.num}
                 </div>
@@ -148,8 +148,8 @@ export default function HomePage() {
             Pick from 20 professionally designed templates, each optimized for ATS.
           </p>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-            {SHOWCASE_TEMPLATES.map((t) => (
-              <div key={t.name} className="rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition">
+            {SHOWCASE_TEMPLATES.map((t, i) => (
+              <div key={t.name} className={`rounded-xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-md transition animate-scale-in delay-${Math.min((i + 1) * 100, 500)}`}>
                 <div className="h-40" style={{ backgroundColor: t.color, opacity: 0.85 }} />
                 <div className="p-4 bg-white">
                   <h3 className="font-semibold text-gray-900">{t.name}</h3>
@@ -223,8 +223,8 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">What People Say</h2>
           <div className="grid md:grid-cols-3 gap-8">
-            {TESTIMONIALS.map((t) => (
-              <div key={t.name} className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+            {TESTIMONIALS.map((t, i) => (
+              <div key={t.name} className={`bg-white rounded-xl shadow-sm border border-gray-100 p-6 animate-fade-in-up delay-${(i + 1) * 100}`}>
                 <div className="flex gap-1 mb-4">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star key={i} className="h-4 w-4 text-yellow-400 fill-yellow-400" />
@@ -244,8 +244,8 @@ export default function HomePage() {
       {/* CTA */}
       <section className="bg-gradient-to-br from-gray-900 via-slate-900 to-black py-20">
         <div className="max-w-3xl mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Ready to Land Your Dream Job?</h2>
-          <p className="text-gray-300 mb-8 text-lg">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 animate-fade-in-up">Ready to Land Your Dream Job?</h2>
+          <p className="text-gray-300 mb-8 text-lg animate-fade-in-up delay-100">
             Join thousands of job seekers who built their resume with ResumeForge.
           </p>
           <Link href="/builder" className="inline-flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold text-lg transition">

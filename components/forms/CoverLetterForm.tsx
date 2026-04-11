@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useResumeStore } from '@/store/useResumeStore';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
@@ -14,6 +14,13 @@ export default function CoverLetterForm() {
   const [company, setCompany] = useState('');
   const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    if (!jobTitle && resumeData.personalInfo.jobTitle) {
+      setJobTitle(resumeData.personalInfo.jobTitle);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const generateCoverLetter = async () => {
     const apiKey = localStorage.getItem('groq-api-key');

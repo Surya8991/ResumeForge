@@ -45,8 +45,8 @@ export default function AboutPage() {
       {/* Hero */}
       <section className="bg-gradient-to-br from-gray-900 via-slate-900 to-black text-white py-14 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-3xl md:text-5xl font-bold mb-4">About ResumeForge</h1>
-          <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+          <h1 className="text-3xl md:text-5xl font-bold mb-4 animate-fade-in-up">About ResumeForge</h1>
+          <p className="text-gray-300 text-lg max-w-2xl mx-auto animate-fade-in-up delay-100">
             A free, open-source resume builder designed to help everyone create professional, ATS-optimized resumes.
           </p>
         </div>
@@ -56,23 +56,23 @@ export default function AboutPage() {
       <section className="bg-white py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-3xl mx-auto text-center">
-            <Heart className="h-10 w-10 text-blue-400 mx-auto mb-6" />
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Mission</h2>
+            <Heart className="h-10 w-10 text-blue-400 mx-auto mb-6 animate-fade-in" />
+            <h2 className="text-3xl font-bold text-gray-900 mb-6 animate-fade-in-up delay-100">Our Mission</h2>
             <p className="text-gray-600 text-lg leading-relaxed mb-6">
               Job seekers deserve access to professional resume tools without paywalls, sign-up barriers, or privacy trade-offs. ResumeForge was built to provide exactly that -- a completely free, fully private resume builder that runs entirely in your browser.
             </p>
             <div className="grid sm:grid-cols-3 gap-6 mt-10">
-              <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+              <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 animate-fade-in-up delay-100">
                 <Shield className="h-8 w-8 text-blue-400 mx-auto mb-3" />
                 <h3 className="font-semibold text-gray-900 mb-1">100% Private</h3>
                 <p className="text-gray-600 text-sm">Your data never leaves your browser. No tracking, no analytics.</p>
               </div>
-              <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+              <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 animate-fade-in-up delay-200">
                 <UserX className="h-8 w-8 text-blue-400 mx-auto mb-3" />
                 <h3 className="font-semibold text-gray-900 mb-1">No Sign-up</h3>
                 <p className="text-gray-600 text-sm">Start building immediately. No email, no account needed.</p>
               </div>
-              <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+              <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 animate-fade-in-up delay-300">
                 <ExternalLink className="h-8 w-8 text-blue-400 mx-auto mb-3" />
                 <h3 className="font-semibold text-gray-900 mb-1">Open Source</h3>
                 <p className="text-gray-600 text-sm">View, fork, or contribute to the source code on GitHub.</p>
@@ -86,7 +86,7 @@ export default function AboutPage() {
       <section className="bg-gray-50 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">Created By</h2>
-          <div className="max-w-md mx-auto bg-white rounded-xl shadow-sm border border-gray-100 p-8 text-center">
+          <div className="max-w-md mx-auto bg-white rounded-xl shadow-sm border border-gray-100 p-8 text-center animate-scale-in">
             <div className="w-20 h-20 bg-blue-500 rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">
               SL
             </div>
@@ -112,8 +112,8 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">Tech Stack</h2>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {TECH_STACK.map((tech) => (
-              <div key={tech.name} className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition">
+            {TECH_STACK.map((tech, i) => (
+              <div key={tech.name} className={`bg-white rounded-xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition animate-fade-in-up delay-${Math.min((i + 1) * 100, 500)}`}>
                 <tech.icon className="h-8 w-8 text-blue-400 mb-3" />
                 <h3 className="font-semibold text-gray-900 mb-1">{tech.name}</h3>
                 <p className="text-gray-600 text-sm">{tech.desc}</p>
@@ -147,8 +147,8 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-gray-900 text-center mb-12">By the Numbers</h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            {STATS.map((s) => (
-              <div key={s.label} className="text-center">
+            {STATS.map((s, i) => (
+              <div key={s.label} className={`text-center animate-fade-in-up delay-${Math.min((i + 1) * 100, 500)}`}>
                 <div className="text-3xl font-bold text-blue-500 mb-1">{s.num}</div>
                 <div className="text-gray-600 text-sm">{s.label}</div>
               </div>

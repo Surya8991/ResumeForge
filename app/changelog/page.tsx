@@ -89,8 +89,8 @@ export default function ChangelogPage() {
       {/* Hero */}
       <section className="bg-gradient-to-br from-gray-900 via-slate-900 to-black text-white py-14 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-3xl md:text-5xl font-bold mb-4">Changelog</h1>
-          <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+          <h1 className="text-3xl md:text-5xl font-bold mb-4 animate-fade-in-up">Changelog</h1>
+          <p className="text-gray-300 text-lg max-w-2xl mx-auto animate-fade-in-up delay-100">
             All notable changes and updates to ResumeForge, documented by version.
           </p>
         </div>
@@ -105,7 +105,7 @@ export default function ChangelogPage() {
 
             <div className="space-y-12">
               {CHANGELOG.map((entry, index) => (
-                <div key={entry.version} className="relative md:pl-16">
+                <div key={entry.version} className={`relative md:pl-16 animate-slide-in-left delay-${Math.min((index + 1) * 100, 500)}`}>
                   {/* Dot */}
                   <div className="absolute left-4 top-1 w-5 h-5 bg-blue-500 rounded-full border-4 border-white shadow hidden md:block" />
 

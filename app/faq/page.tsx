@@ -104,16 +104,18 @@ export default function FAQPage() {
       {/* Hero */}
       <section className="bg-gradient-to-br from-gray-900 via-slate-900 to-black py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Frequently Asked Questions</h1>
-          <p className="text-xl text-gray-300">Everything you need to know about ResumeForge</p>
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 animate-fade-in-up">Frequently Asked Questions</h1>
+          <p className="text-xl text-gray-300 animate-fade-in-up delay-100">Everything you need to know about ResumeForge</p>
         </div>
       </section>
 
       {/* FAQ Accordion */}
       <section className="bg-gray-50 py-16 px-4">
         <div className="max-w-3xl mx-auto space-y-4">
-          {faqItems.map((item) => (
-            <FAQItem key={item.question} question={item.question} answer={item.answer} />
+          {faqItems.map((item, i) => (
+            <div key={item.question} className={`animate-fade-in-up delay-${Math.min((i + 1) * 100, 500)}`}>
+              <FAQItem question={item.question} answer={item.answer} />
+            </div>
           ))}
         </div>
       </section>
