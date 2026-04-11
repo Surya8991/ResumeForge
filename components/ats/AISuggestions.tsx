@@ -172,7 +172,7 @@ export default function AISuggestions() {
       )}
 
       {/* Quick actions */}
-      <div className="grid grid-cols-3 gap-1.5">
+      <div className="flex flex-wrap gap-1.5">
         <Button
           variant="outline" size="sm"
           className="text-xs h-9"

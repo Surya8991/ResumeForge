@@ -610,7 +610,7 @@ export default function HomePage() {
         </div>
 
         {/* Mobile view */}
-        <div className="flex-1 md:hidden" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
+        <div className="flex-1 md:hidden overflow-x-hidden" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
           {activeTab === 'edit' && (
             <ScrollArea className="h-full">
               <div className="px-5 py-4 pb-20">
@@ -730,17 +730,17 @@ export default function HomePage() {
           })()}
           {activeTab === 'templates' && (
             <ScrollArea className="h-full">
-              <div className="p-4"><TemplateSelector /></div>
+              <div className="px-3 py-4 sm:px-4 overflow-hidden"><TemplateSelector /></div>
             </ScrollArea>
           )}
           {activeTab === 'ats' && (
             <ScrollArea className="h-full">
-              <div className="p-4"><ATSScoreChecker /></div>
+              <div className="px-3 py-4 sm:px-4 overflow-hidden"><ATSScoreChecker /></div>
             </ScrollArea>
           )}
           {activeTab === 'ai' && (
             <ScrollArea className="h-full">
-              <div className="p-4"><AISuggestions /></div>
+              <div className="px-3 py-4 sm:px-4 overflow-hidden"><AISuggestions /></div>
             </ScrollArea>
           )}
         </div>
