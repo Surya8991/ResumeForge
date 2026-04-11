@@ -36,11 +36,11 @@ function SortableEducationEntry({ edu, onUpdate, onRemove }: {
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-2 flex-1 min-w-0">
           <div
-            className="cursor-grab active:cursor-grabbing touch-none shrink-0"
+            className="p-2 -ml-2 touch-action-none cursor-grab active:cursor-grabbing shrink-0"
             {...attributes}
             {...listeners}
           >
-            <GripVertical className="h-4 w-4 text-muted-foreground" />
+            <GripVertical className="h-5 w-5 md:h-4 md:w-4 text-muted-foreground" />
           </div>
           <button onClick={() => setIsOpen(!isOpen)} className="flex items-center gap-2 text-sm font-medium flex-1 text-left min-w-0">
             <span className="truncate">

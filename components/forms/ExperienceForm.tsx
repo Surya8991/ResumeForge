@@ -43,12 +43,12 @@ function SortableExperienceEntry({ exp, onUpdate, onRemove }: {
         onClick={() => setIsOpen(!isOpen)}
       >
         <div
-          className="cursor-grab active:cursor-grabbing touch-none shrink-0"
+          className="p-2 -ml-2 touch-action-none cursor-grab active:cursor-grabbing shrink-0"
           {...attributes}
           {...listeners}
           onClick={(e) => e.stopPropagation()}
         >
-          <GripVertical className="h-4 w-4 text-muted-foreground" />
+          <GripVertical className="h-5 w-5 md:h-4 md:w-4 text-muted-foreground" />
         </div>
         <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
           <Briefcase className="h-4 w-4 text-primary" />
