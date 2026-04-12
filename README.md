@@ -5,6 +5,7 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-38bdf8?logo=tailwindcss)
 ![License](https://img.shields.io/badge/License-Non--Commercial-red)
 ![Templates](https://img.shields.io/badge/Templates-20-purple)
+[![Buy Me A Coffee](https://img.shields.io/badge/Buy%20Me%20A%20Coffee-FFDD00?style=flat&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/suryal8991)
 
 A fully client-side, professional resume builder with 20 ATS-optimized templates, AI-powered writing assistant, cover letter builder, guided onboarding, and multi-format import/export. Built with Next.js 16, Tailwind CSS, and shadcn/ui.
 
