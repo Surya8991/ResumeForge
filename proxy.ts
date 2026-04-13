@@ -26,14 +26,8 @@ export async function proxy(request: NextRequest) {
       }
     );
 
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
-    // Protect /builder — redirect to /login if not authenticated
-    if (!user && request.nextUrl.pathname.startsWith('/builder')) {
-      return NextResponse.redirect(new URL('/login', request.url));
-    }
+    // Refresh auth session (keeps cookies alive)
+    await supabase.auth.getUser();
   } catch {
     // If Supabase fails, allow the request through
   }
@@ -42,5 +36,7 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/builder/:path*'],
+  matcher: [
+    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+  ],
 };
