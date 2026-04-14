@@ -60,19 +60,17 @@ function SortableProjectEntry({ project, onUpdate, onRemove }: {
               <Label className="text-sm">Project Name</Label>
               <Input placeholder="E-commerce Platform" value={project.name} onChange={(e) => onUpdate({ name: e.target.value })} />
             </div>
-            <div>
+            <div className="md:col-span-2">
               <Label className="text-sm">Link (optional)</Label>
               <Input type="url" placeholder="https://github.com/..." value={project.link} onChange={(e) => onUpdate({ link: e.target.value })} />
             </div>
-            <div className="flex gap-3">
-              <div className="flex-1">
-                <Label className="text-sm">Start Date</Label>
-                <Input type="month" value={toMonthInput(project.startDate)} onChange={(e) => onUpdate({ startDate: fromMonthInput(e.target.value) })} />
-              </div>
-              <div className="flex-1">
-                <Label className="text-sm">End Date</Label>
-                <Input type="month" value={toMonthInput(project.endDate)} onChange={(e) => onUpdate({ endDate: fromMonthInput(e.target.value) })} />
-              </div>
+            <div>
+              <Label className="text-sm">Start Date</Label>
+              <Input type="month" value={toMonthInput(project.startDate)} onChange={(e) => onUpdate({ startDate: fromMonthInput(e.target.value) })} />
+            </div>
+            <div>
+              <Label className="text-sm">End Date</Label>
+              <Input type="month" value={toMonthInput(project.endDate)} onChange={(e) => onUpdate({ endDate: fromMonthInput(e.target.value) })} />
             </div>
             <div className="md:col-span-2">
               <Label className="text-sm">Technologies (comma-separated)</Label>

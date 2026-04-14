@@ -74,17 +74,15 @@ function SortableEducationEntry({ edu, onUpdate, onRemove }: {
               <Label className="text-sm">Location</Label>
               <Input placeholder="Stanford, CA" value={edu.location} onChange={(e) => onUpdate({ location: e.target.value })} />
             </div>
-            <div className="flex gap-3">
-              <div className="flex-1">
-                <Label className="text-sm">Start Date</Label>
-                <Input type="month" value={toMonthInput(edu.startDate)} onChange={(e) => onUpdate({ startDate: fromMonthInput(e.target.value) })} />
-              </div>
-              <div className="flex-1">
-                <Label className="text-sm">End Date</Label>
-                <Input type="month" value={toMonthInput(edu.endDate)} onChange={(e) => onUpdate({ endDate: fromMonthInput(e.target.value) })} />
-              </div>
+            <div>
+              <Label className="text-sm">Start Date</Label>
+              <Input type="month" value={toMonthInput(edu.startDate)} onChange={(e) => onUpdate({ startDate: fromMonthInput(e.target.value) })} />
             </div>
             <div>
+              <Label className="text-sm">End Date</Label>
+              <Input type="month" value={toMonthInput(edu.endDate)} onChange={(e) => onUpdate({ endDate: fromMonthInput(e.target.value) })} />
+            </div>
+            <div className="md:col-span-2">
               <Label className="text-sm">GPA (optional)</Label>
               <Input placeholder="3.9/4.0" value={edu.gpa} onChange={(e) => onUpdate({ gpa: e.target.value })} />
             </div>

@@ -102,13 +102,21 @@ function SortableExperienceEntry({ exp, onUpdate, onRemove }: {
             </div>
             <div>
               <Label className="text-xs text-muted-foreground">End Date</Label>
-              <Input
-                type="month"
-                value={exp.current ? '' : toMonthInput(exp.endDate)}
-                onChange={(e) => onUpdate({ endDate: fromMonthInput(e.target.value) })}
-                disabled={exp.current}
-                className={`mt-1 ${exp.current ? 'opacity-50' : ''}`}
-              />
+              {exp.current ? (
+                <Input
+                  type="text"
+                  value="Present"
+                  disabled
+                  className="mt-1 opacity-60"
+                />
+              ) : (
+                <Input
+                  type="month"
+                  value={toMonthInput(exp.endDate)}
+                  onChange={(e) => onUpdate({ endDate: fromMonthInput(e.target.value) })}
+                  className="mt-1"
+                />
+              )}
             </div>
           </div>
 
