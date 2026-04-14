@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/Providers";
+import { Analytics } from "@vercel/analytics/react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -83,14 +84,6 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="ResumeForge" />
-        {/* Plausible Analytics (privacy-friendly, no cookies, GDPR safe) */}
-        {process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN && (
-          <script
-            defer
-            data-domain={process.env.NEXT_PUBLIC_PLAUSIBLE_DOMAIN}
-            src="https://plausible.io/js/script.js"
-          />
-        )}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -147,7 +140,10 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col"><Providers>{children}</Providers></body>
+      <body className="min-h-full flex flex-col">
+        <Providers>{children}</Providers>
+        <Analytics />
+      </body>
     </html>
   );
 }

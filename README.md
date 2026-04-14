@@ -330,8 +330,25 @@ resumeforge/
 - **Lazy font loading**: only the selected Google Font is fetched
 - **Edge OG image**: dynamic generation via Next.js ImageResponse
 - **Turbopack**: fast development builds with Next.js 16
-- **No third-party tracking**: zero analytics, cookies, or scripts
 - **Typical bundle size**: ~600KB gzipped
+
+## Analytics
+
+ResumeForge uses **Vercel Web Analytics** by default. It is privacy-friendly (no cookies, GDPR safe), free on the Vercel Hobby plan, and requires zero configuration beyond enabling it in the Vercel dashboard.
+
+Enable it under **Vercel project → Analytics tab → Enable Web Analytics**.
+
+### Free Alternatives
+
+If you self-host outside Vercel or want a different provider, here are three free, privacy-friendly alternatives:
+
+| Alternative | Free Tier | Cookies | Notes |
+|---|---|---|---|
+| **Cloudflare Web Analytics** | 100% free, unlimited | None | Pure free with no event limits. Requires you to add a script tag and your domain. |
+| **Umami Cloud** | 10k events/month | None | Open-source, includes funnels and page heatmaps in free tier. |
+| **PostHog Cloud** | 1M events/month | Optional | Heavier (full product analytics + feature flags), good for funnel tracking once you scale. |
+
+To switch, remove the `<Analytics />` import from `app/layout.tsx` and add the alternative provider's snippet there instead.
 
 ## Contributing
 
