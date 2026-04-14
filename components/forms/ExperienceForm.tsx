@@ -5,6 +5,7 @@ import { useResumeStore } from '@/store/useResumeStore';
 import { Experience } from '@/types/resume';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { toMonthInput, fromMonthInput } from '@/lib/dateUtils';
 import RichTextarea from '@/components/ui/rich-textarea';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -97,14 +98,14 @@ function SortableExperienceEntry({ exp, onUpdate, onRemove }: {
           <div className="grid grid-cols-2 gap-3">
             <div>
               <Label className="text-xs text-muted-foreground">Start Date</Label>
-              <Input placeholder="e.g. Jan 2020" value={exp.startDate} onChange={(e) => onUpdate({ startDate: e.target.value })} className="mt-1" />
+              <Input type="month" value={toMonthInput(exp.startDate)} onChange={(e) => onUpdate({ startDate: fromMonthInput(e.target.value) })} className="mt-1" />
             </div>
             <div>
               <Label className="text-xs text-muted-foreground">End Date</Label>
               <Input
-                placeholder={exp.current ? 'Present' : 'e.g. Dec 2023'}
-                value={exp.current ? 'Present' : exp.endDate}
-                onChange={(e) => onUpdate({ endDate: e.target.value })}
+                type="month"
+                value={exp.current ? '' : toMonthInput(exp.endDate)}
+                onChange={(e) => onUpdate({ endDate: fromMonthInput(e.target.value) })}
                 disabled={exp.current}
                 className={`mt-1 ${exp.current ? 'opacity-50' : ''}`}
               />

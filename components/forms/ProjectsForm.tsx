@@ -6,6 +6,7 @@ import { Project } from '@/types/resume';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import RichTextarea from '@/components/ui/rich-textarea';
+import { toMonthInput, fromMonthInput } from '@/lib/dateUtils';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Plus, Trash2, ChevronDown, ChevronUp, GripVertical } from 'lucide-react';
@@ -66,11 +67,11 @@ function SortableProjectEntry({ project, onUpdate, onRemove }: {
             <div className="flex gap-3">
               <div className="flex-1">
                 <Label className="text-sm">Start Date</Label>
-                <Input placeholder="Jan 2023" value={project.startDate} onChange={(e) => onUpdate({ startDate: e.target.value })} />
+                <Input type="month" value={toMonthInput(project.startDate)} onChange={(e) => onUpdate({ startDate: fromMonthInput(e.target.value) })} />
               </div>
               <div className="flex-1">
                 <Label className="text-sm">End Date</Label>
-                <Input placeholder="Mar 2023" value={project.endDate} onChange={(e) => onUpdate({ endDate: e.target.value })} />
+                <Input type="month" value={toMonthInput(project.endDate)} onChange={(e) => onUpdate({ endDate: fromMonthInput(e.target.value) })} />
               </div>
             </div>
             <div className="md:col-span-2">

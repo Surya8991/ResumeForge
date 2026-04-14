@@ -6,6 +6,7 @@ import { Education } from '@/types/resume';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { toMonthInput, fromMonthInput } from '@/lib/dateUtils';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Plus, Trash2, ChevronDown, ChevronUp, GripVertical } from 'lucide-react';
@@ -76,11 +77,11 @@ function SortableEducationEntry({ edu, onUpdate, onRemove }: {
             <div className="flex gap-3">
               <div className="flex-1">
                 <Label className="text-sm">Start Date</Label>
-                <Input placeholder="Aug 2016" value={edu.startDate} onChange={(e) => onUpdate({ startDate: e.target.value })} />
+                <Input type="month" value={toMonthInput(edu.startDate)} onChange={(e) => onUpdate({ startDate: fromMonthInput(e.target.value) })} />
               </div>
               <div className="flex-1">
                 <Label className="text-sm">End Date</Label>
-                <Input placeholder="May 2020" value={edu.endDate} onChange={(e) => onUpdate({ endDate: e.target.value })} />
+                <Input type="month" value={toMonthInput(edu.endDate)} onChange={(e) => onUpdate({ endDate: fromMonthInput(e.target.value) })} />
               </div>
             </div>
             <div>

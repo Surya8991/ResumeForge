@@ -6,6 +6,7 @@ import { Certification } from '@/types/resume';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
+import { toMonthInput, fromMonthInput } from '@/lib/dateUtils';
 import { Card } from '@/components/ui/card';
 import { Plus, Trash2, ChevronDown, ChevronUp } from 'lucide-react';
 
@@ -44,11 +45,11 @@ function CertEntry({ cert, onUpdate, onRemove }: {
           </div>
           <div>
             <Label className="text-sm">Date Earned</Label>
-            <Input placeholder="Mar 2023" value={cert.date} onChange={(e) => onUpdate({ date: e.target.value })} />
+            <Input type="month" value={toMonthInput(cert.date)} onChange={(e) => onUpdate({ date: fromMonthInput(e.target.value) })} />
           </div>
           <div>
             <Label className="text-sm">Expiry Date (optional)</Label>
-            <Input placeholder="Mar 2026" value={cert.expiryDate} onChange={(e) => onUpdate({ expiryDate: e.target.value })} />
+            <Input type="month" value={toMonthInput(cert.expiryDate)} onChange={(e) => onUpdate({ expiryDate: fromMonthInput(e.target.value) })} />
           </div>
           <div>
             <Label className="text-sm">Credential ID (optional)</Label>
