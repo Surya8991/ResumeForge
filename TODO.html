@@ -141,11 +141,11 @@
   <h1>ResumeForge - Deferred TODO Items</h1>
   <p>Items requiring external services, major architectural changes, or extended development time. Generated from deep code review.</p>
   <div class="stats">
-    <div class="stat"><div class="num">22</div><div class="label">Total Fixed</div></div>
-    <div class="stat"><div class="num">29</div><div class="label">Deferred Items</div></div>
+    <div class="stat"><div class="num">35+</div><div class="label">Total Fixed</div></div>
+    <div class="stat"><div class="num">25</div><div class="label">Deferred Items</div></div>
     <div class="stat"><div class="num">2</div><div class="label">Critical Bugs Left</div></div>
     <div class="stat"><div class="num">15+</div><div class="label">Features Missing</div></div>
-    <div class="stat"><div class="num">~60h</div><div class="label">Remaining Effort</div></div>
+    <div class="stat"><div class="num">~55h</div><div class="label">Remaining Effort</div></div>
   </div>
 </header>
 
@@ -175,6 +175,18 @@
     <tr><td><span class="check">&#10003;</span> Touch swipe ignores inputs/draggable + vertical tolerance</td><td><code>app/builder/page.tsx</code></td></tr>
     <tr><td><span class="check">&#10003;</span> Keyboard shortcuts: Ctrl+E, Ctrl+1-5, ignores form fields</td><td><code>app/builder/page.tsx</code></td></tr>
     <tr><td><span class="check">&#10003;</span> Undo/Redo system: 50 snapshots, Ctrl+Z/Ctrl+Y, debounced auto-save</td><td><code>store/useResumeStore.ts, app/builder/page.tsx</code></td></tr>
+    <tr><td><span class="check">&#10003;</span> Vercel Web Analytics (cookieless, GDPR-safe)</td><td><code>app/layout.tsx</code></td></tr>
+    <tr><td><span class="check">&#10003;</span> Cookie consent banner</td><td><code>components/CookieBanner.tsx</code></td></tr>
+    <tr><td><span class="check">&#10003;</span> Login Gateway on all builder CTAs (navbar, footer, all pages)</td><td>multiple pages</td></tr>
+    <tr><td><span class="check">&#10003;</span> Paste Import workflow (LinkedIn alternative)</td><td><code>components/PasteImportModal.tsx</code></td></tr>
+    <tr><td><span class="check">&#10003;</span> HowTo JSON-LD schema for ATS Guide</td><td><code>app/ats-guide/page.tsx</code></td></tr>
+    <tr><td><span class="check">&#10003;</span> Privacy Policy rewrite (legal compliance fix)</td><td><code>app/privacy/page.tsx</code></td></tr>
+    <tr><td><span class="check">&#10003;</span> Terms of Use Section 3 update</td><td><code>app/terms/page.tsx</code></td></tr>
+    <tr><td><span class="check">&#10003;</span> Homepage Privacy First card claim fix</td><td><code>app/page.tsx</code></td></tr>
+    <tr><td><span class="check">&#10003;</span> About page mission/stats/tech stack updates</td><td><code>app/about/page.tsx</code></td></tr>
+    <tr><td><span class="check">&#10003;</span> Template Showcase uses real PNG thumbnails</td><td><code>app/page.tsx</code></td></tr>
+    <tr><td><span class="check">&#10003;</span> Navbar 1024px overflow fix (whitespace-nowrap, removed Resume Builder)</td><td><code>components/SiteNavbar.tsx</code></td></tr>
+    <tr><td><span class="check">&#10003;</span> Contact form mailto fix (no longer fakes submission)</td><td><code>app/contact/page.tsx</code></td></tr>
   </table>
 </section>
 
