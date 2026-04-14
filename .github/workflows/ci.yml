@@ -27,6 +27,10 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: https://placeholder.supabase.co
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: placeholder
+          NEXT_PUBLIC_SITE_URL: https://resume-forge-orcin.vercel.app
 
       - name: Check bundle size
         run: |
