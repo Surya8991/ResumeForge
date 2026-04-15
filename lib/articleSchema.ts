@@ -7,7 +7,7 @@
 const SITE_URL = 'https://resume-forge-orcin.vercel.app';
 const PUBLISHER = {
   '@type': 'Organization',
-  name: 'ResumeForge',
+  name: 'ResumeBuildz',
   url: SITE_URL,
   logo: {
     '@type': 'ImageObject',
@@ -18,7 +18,7 @@ const DEFAULT_AUTHOR = {
   '@type': 'Person',
   name: 'Surya L',
   url: `${SITE_URL}/about`,
-  jobTitle: 'Founder, ResumeForge',
+  jobTitle: 'Founder, ResumeBuildz',
 };
 
 export interface ArticleInput {

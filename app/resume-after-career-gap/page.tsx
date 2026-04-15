@@ -80,7 +80,7 @@ export default function ResumeAfterCareerGapPage() {
   const { openGateway } = useLoginGateway();
 
   useEffect(() => {
-    document.title = 'Resume After Career Gap 2026 - How to Explain & Win | ResumeForge';
+    document.title = 'Resume After Career Gap 2026 - How to Explain & Win | ResumeBuildz';
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
       metaDesc.setAttribute(
@@ -96,7 +96,7 @@ export default function ResumeAfterCareerGapPage() {
       );
     }
     const ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) ogTitle.setAttribute('content', 'Resume After Career Gap 2026 - How to Explain & Win | ResumeForge');
+    if (ogTitle) ogTitle.setAttribute('content', 'Resume After Career Gap 2026 - How to Explain & Win | ResumeBuildz');
   }, []);
 
   const schema = combineSchemas(

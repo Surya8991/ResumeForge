@@ -69,13 +69,13 @@ const industryTemplates = [
 export default function CoverLetterGuidePage() {
   const { openGateway } = useLoginGateway();
   useEffect(() => {
-    document.title = 'Cover Letter Guide & Templates | ResumeForge';
+    document.title = 'Cover Letter Guide & Templates | ResumeBuildz';
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) metaDesc.setAttribute('content', 'Learn how to write compelling cover letters with our complete guide. Structure, do\'s and don\'ts, and industry templates.');
     const ogDesc = document.querySelector('meta[property="og:description"]');
     if (ogDesc) ogDesc.setAttribute('content', 'Learn how to write compelling cover letters with our complete guide. Structure, do\'s and don\'ts, and industry templates.');
     const ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) ogTitle.setAttribute('content', 'Cover Letter Guide & Templates | ResumeForge');
+    if (ogTitle) ogTitle.setAttribute('content', 'Cover Letter Guide & Templates | ResumeBuildz');
   }, []);
 
   return (
@@ -237,7 +237,7 @@ export default function CoverLetterGuidePage() {
                     AI-Powered Cover Letters
                   </h2>
                   <p className="text-gray-400 mb-6 leading-relaxed">
-                    Don&apos;t want to start from scratch? ResumeForge&apos;s AI takes your resume data and the job description, then writes a tailored cover letter in seconds. It pulls your most relevant experience, matches the company&apos;s tone, and follows the 4-part structure above. You can edit every word before exporting.
+                    Don&apos;t want to start from scratch? ResumeBuildz&apos;s AI takes your resume data and the job description, then writes a tailored cover letter in seconds. It pulls your most relevant experience, matches the company&apos;s tone, and follows the 4-part structure above. You can edit every word before exporting.
                   </p>
                   <div className="flex flex-wrap gap-3 justify-center md:justify-start">
                     <span className="text-sm bg-blue-500/10 text-blue-400 px-3 py-1 rounded-full">Groq AI Powered</span>

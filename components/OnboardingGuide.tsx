@@ -33,7 +33,7 @@ interface Step {
 
 const STEPS: Step[] = [
   {
-    title: 'Welcome to ResumeForge!',
+    title: 'Welcome to ResumeBuildz!',
     description: 'Create professional, ATS-optimized resumes in minutes. This quick tour will show you the key features.',
     icon: <FileText className="h-8 w-8" />,
     tip: 'You can restart this tour anytime from the Help menu.',

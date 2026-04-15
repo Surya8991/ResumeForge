@@ -1,21 +1,21 @@
 # Security Policy
 
-ResumeForge takes security seriously. This document describes the security practices, data handling, and vulnerability reporting process for the project.
+ResumeBuildz takes security seriously. This document describes the security practices, data handling, and vulnerability reporting process for the project.
 
 ## Security Practices
 
 ### Client-Side Architecture
 
-ResumeForge is a fully client-side application. There is no backend server, no database, and no server-side data processing.
+ResumeBuildz is a fully client-side application. There is no backend server, no database, and no server-side data processing.
 
 - All resume data is processed entirely in the browser.
-- No data is ever transmitted to any server owned or operated by ResumeForge.
+- No data is ever transmitted to any server owned or operated by ResumeBuildz.
 - The application works offline after initial load (PWA support).
 - No user accounts, no authentication, no cookies.
 
 ### No Data Collection
 
-ResumeForge does not collect, store, or transmit any user data. There are:
+ResumeBuildz does not collect, store, or transmit any user data. There are:
 
 - No analytics or tracking scripts.
 - No third-party data collection.
@@ -27,7 +27,7 @@ ResumeForge does not collect, store, or transmit any user data. There are:
 If users choose to use the AI writing assistant, they provide their own Groq API key.
 
 - API keys are stored **only** in the browser's `localStorage`.
-- API keys are sent **directly** from the browser to the Groq API. They never pass through any ResumeForge server.
+- API keys are sent **directly** from the browser to the Groq API. They never pass through any ResumeBuildz server.
 - API keys are never logged, transmitted, or stored anywhere other than the user's own browser.
 - Users can delete their API key at any time by clearing their browser data or using the in-app settings.
 
@@ -65,7 +65,7 @@ This data never leaves the browser. Clearing browser data or `localStorage` remo
 
 ## Reporting Vulnerabilities
 
-If you discover a security vulnerability in ResumeForge, please report it responsibly.
+If you discover a security vulnerability in ResumeBuildz, please report it responsibly.
 
 ### How to Report
 
@@ -110,7 +110,7 @@ The following are **out of scope**:
 
 - Vulnerabilities in third-party services (e.g., Groq API).
 - Issues that require physical access to the user's device.
-- Browser-specific vulnerabilities not caused by ResumeForge code.
+- Browser-specific vulnerabilities not caused by ResumeBuildz code.
 - Social engineering attacks.
 
 ## Disclosure Timeline

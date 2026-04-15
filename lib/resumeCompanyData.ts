@@ -44,7 +44,7 @@ export const COMPANIES: CompanyEntry[] = [
       'Avoid graphics, columns, and tables. Google Workday-based ATS strips formatting and a single garbled section can sink you.',
     ],
     recommendedTemplate: 'modern',
-    metaTitle: 'Google Resume Guide 2026 - Templates, Keywords & Tips | ResumeForge',
+    metaTitle: 'Google Resume Guide 2026 - Templates, Keywords & Tips | ResumeBuildz',
     metaDescription:
       'How to write a resume that gets noticed at Google. Real keywords, formatting rules, recommended template, and 5 tips from how Google actually screens resumes.',
   },
@@ -71,7 +71,7 @@ export const COMPANIES: CompanyEntry[] = [
       'Avoid the word "we." Amazon explicitly screens for individual ownership. Use "I led," "I owned," "I shipped."',
     ],
     recommendedTemplate: 'professional',
-    metaTitle: 'Amazon Resume Guide 2026 - Leadership Principles & STAR Format | ResumeForge',
+    metaTitle: 'Amazon Resume Guide 2026 - Leadership Principles & STAR Format | ResumeBuildz',
     metaDescription:
       'How to write an Amazon resume that maps to the 16 Leadership Principles. STAR format examples, AWS keywords, recommended template, and 5 insider tips.',
   },
@@ -98,7 +98,7 @@ export const COMPANIES: CompanyEntry[] = [
       'Quantify scope and customers but soften the lone-hero tone. "Partnered with 4 teams to ship" beats "Single-handedly delivered."',
     ],
     recommendedTemplate: 'corporate',
-    metaTitle: 'Microsoft Resume Guide 2026 - Azure, Growth Mindset & Tips | ResumeForge',
+    metaTitle: 'Microsoft Resume Guide 2026 - Azure, Growth Mindset & Tips | ResumeBuildz',
     metaDescription:
       'How to write a Microsoft resume that wins. Azure keywords, growth-mindset language, recommended template, and 5 tips on what Microsoft recruiters look for.',
   },
@@ -125,7 +125,7 @@ export const COMPANIES: CompanyEntry[] = [
       'Avoid academic-style resumes. Meta prefers tight, single-page, results-first resumes.',
     ],
     recommendedTemplate: 'modern',
-    metaTitle: 'Meta (Facebook) Resume Guide 2026 - React, Growth & Tips | ResumeForge',
+    metaTitle: 'Meta (Facebook) Resume Guide 2026 - React, Growth & Tips | ResumeBuildz',
     metaDescription:
       'How to write a Meta resume that gets the phone screen. React/GraphQL keywords, scale-first bullets, recommended template, and 5 tips from real screening signal.',
   },
@@ -152,7 +152,7 @@ export const COMPANIES: CompanyEntry[] = [
       'Mention any work that touched accessibility, privacy, or sustainability — Apple publicly prioritizes all three.',
     ],
     recommendedTemplate: 'minimalist',
-    metaTitle: 'Apple Resume Guide 2026 - Swift, Craft & Tips | ResumeForge',
+    metaTitle: 'Apple Resume Guide 2026 - Swift, Craft & Tips | ResumeBuildz',
     metaDescription:
       'How to write an Apple resume that signals craft. Swift/iOS keywords, polish requirements, recommended template, and 5 tips on what Apple recruiters scan for.',
   },
@@ -179,7 +179,7 @@ export const COMPANIES: CompanyEntry[] = [
       'Keep formatting clean and structured. A two-column or graphic resume often fails Deloitte ATS parsing.',
     ],
     recommendedTemplate: 'corporate',
-    metaTitle: 'Deloitte Resume Guide 2026 - Consulting Templates & Tips | ResumeForge',
+    metaTitle: 'Deloitte Resume Guide 2026 - Consulting Templates & Tips | ResumeBuildz',
     metaDescription:
       'How to write a Deloitte resume that beats Workday ATS. Consulting keywords, client-impact bullets, recommended template, and 5 insider tips for Big Four hiring.',
   },
@@ -207,7 +207,7 @@ export const COMPANIES: CompanyEntry[] = [
       'GPA matters at McKinsey for early-career hires. If you graduated with 3.7+ or first-class honours, list it.',
     ],
     recommendedTemplate: 'professional',
-    metaTitle: 'McKinsey Resume Guide 2026 - One-Page Format & Tips | ResumeForge',
+    metaTitle: 'McKinsey Resume Guide 2026 - One-Page Format & Tips | ResumeBuildz',
     metaDescription:
       'How to write a McKinsey resume that lands the interview. The one-page format, distinctive achievement bullets, recommended template, and 5 insider tips.',
   },
@@ -234,7 +234,7 @@ export const COMPANIES: CompanyEntry[] = [
       'Keep it one page, conservative formatting, no colors beyond grayscale. Goldman culture is traditional.',
     ],
     recommendedTemplate: 'classic',
-    metaTitle: 'Goldman Sachs Resume Guide 2026 - IBD Templates & Tips | ResumeForge',
+    metaTitle: 'Goldman Sachs Resume Guide 2026 - IBD Templates & Tips | ResumeBuildz',
     metaDescription:
       'How to write a Goldman Sachs resume for IBD, S&T, or AM. GPA rules, finance keywords, recommended template, and 5 insider tips on what Goldman screens for.',
   },
@@ -261,7 +261,7 @@ export const COMPANIES: CompanyEntry[] = [
       'Use professional, conservative formatting. JPM prefers traditional resumes over creative layouts.',
     ],
     recommendedTemplate: 'corporate',
-    metaTitle: 'JP Morgan Resume Guide 2026 - Banking & Tech Tips | ResumeForge',
+    metaTitle: 'JP Morgan Resume Guide 2026 - Banking & Tech Tips | ResumeBuildz',
     metaDescription:
       'How to write a JP Morgan resume for banking or tech roles. Java/finance keywords, conservative formatting, recommended template, and 5 insider tips.',
   },
@@ -288,7 +288,7 @@ export const COMPANIES: CompanyEntry[] = [
       'Keep it ATS-clean. Accenture uses Workday and aggressively filters non-parseable formats.',
     ],
     recommendedTemplate: 'corporate',
-    metaTitle: 'Accenture Resume Guide 2026 - Certifications & Tips | ResumeForge',
+    metaTitle: 'Accenture Resume Guide 2026 - Certifications & Tips | ResumeBuildz',
     metaDescription:
       'How to write an Accenture resume that beats Workday ATS. Certifications list, platform keywords, recommended template, and 5 tips for IT consulting hiring.',
   },
@@ -317,7 +317,7 @@ export const COMPANIES: CompanyEntry[] = [
       'Keep it 1-2 pages. Avoid graphics — TCS uses an internal ATS that often fails on creative layouts.',
     ],
     recommendedTemplate: 'classic',
-    metaTitle: 'TCS Resume Guide 2026 - NQT, Freshers & Lateral Tips | ResumeForge',
+    metaTitle: 'TCS Resume Guide 2026 - NQT, Freshers & Lateral Tips | ResumeBuildz',
     metaDescription:
       'How to write a TCS resume for freshers (NQT) and laterals. Academic percentage rules, tech keywords, recommended template, and 5 tips for the TCS hiring portal.',
   },
@@ -344,7 +344,7 @@ export const COMPANIES: CompanyEntry[] = [
       'Use ATS-friendly format. Infosys uses Workday + an internal portal that fails on multi-column layouts.',
     ],
     recommendedTemplate: 'modern',
-    metaTitle: 'Infosys Resume Guide 2026 - InfyTQ, Freshers & Tips | ResumeForge',
+    metaTitle: 'Infosys Resume Guide 2026 - InfyTQ, Freshers & Tips | ResumeBuildz',
     metaDescription:
       'How to write an Infosys resume for freshers and laterals. InfyTQ rules, full-stack keywords, recommended template, and 5 tips for Infosys hiring.',
   },
@@ -371,7 +371,7 @@ export const COMPANIES: CompanyEntry[] = [
       'Keep formatting plain text friendly — Wipro internal ATS struggles with visual layouts.',
     ],
     recommendedTemplate: 'classic',
-    metaTitle: 'Wipro Resume Guide 2026 - NTH, Freshers & Tips | ResumeForge',
+    metaTitle: 'Wipro Resume Guide 2026 - NTH, Freshers & Tips | ResumeBuildz',
     metaDescription:
       'How to write a Wipro resume for freshers (NTH) and laterals. Academic rules, platform keywords, recommended template, and 5 tips for Wipro hiring.',
   },
@@ -398,7 +398,7 @@ export const COMPANIES: CompanyEntry[] = [
       'Use clean modern formatting. Flipkart is Bangalore startup-style and conservative templates feel out of place.',
     ],
     recommendedTemplate: 'modern',
-    metaTitle: 'Flipkart Resume Guide 2026 - Engineering & PM Tips | ResumeForge',
+    metaTitle: 'Flipkart Resume Guide 2026 - Engineering & PM Tips | ResumeBuildz',
     metaDescription:
       'How to write a Flipkart resume for engineering, PM, or category roles. DSA + scale keywords, GMV bullets, recommended template, and 5 insider tips.',
   },
@@ -425,7 +425,7 @@ export const COMPANIES: CompanyEntry[] = [
       'Use a modern minimalist template. Zomato culture is design-conscious.',
     ],
     recommendedTemplate: 'modern',
-    metaTitle: 'Zomato Resume Guide 2026 - Engineering, Growth & Tips | ResumeForge',
+    metaTitle: 'Zomato Resume Guide 2026 - Engineering, Growth & Tips | ResumeBuildz',
     metaDescription:
       'How to write a Zomato resume that signals ownership. Tech + growth keywords, unit-economics bullets, recommended template, and 5 insider tips.',
   },
@@ -452,7 +452,7 @@ export const COMPANIES: CompanyEntry[] = [
       'Use clean, modern formatting. Swiggy is design-conscious and conservative templates feel off.',
     ],
     recommendedTemplate: 'modern',
-    metaTitle: 'Swiggy Resume Guide 2026 - Engineering, Ops & Tips | ResumeForge',
+    metaTitle: 'Swiggy Resume Guide 2026 - Engineering, Ops & Tips | ResumeBuildz',
     metaDescription:
       'How to write a Swiggy resume for engineering, growth, or supply roles. Quick commerce keywords, scale bullets, recommended template, and 5 insider tips.',
   },
@@ -479,7 +479,7 @@ export const COMPANIES: CompanyEntry[] = [
       'Keep the resume plain and content-focused. Visual flair is not valued.',
     ],
     recommendedTemplate: 'classic',
-    metaTitle: 'Zoho Resume Guide 2026 - Engineering & Self-Taught Tips | ResumeForge',
+    metaTitle: 'Zoho Resume Guide 2026 - Engineering & Self-Taught Tips | ResumeBuildz',
     metaDescription:
       'How to write a Zoho resume that wins on substance. C/C++/Java keywords, project-first format, recommended template, and 5 tips for Zoho hiring.',
   },
@@ -506,7 +506,7 @@ export const COMPANIES: CompanyEntry[] = [
       'Use clean professional formatting. BYJU\'S HR processes high volume and ATS-friendly resumes get prioritized.',
     ],
     recommendedTemplate: 'professional',
-    metaTitle: "BYJU'S Resume Guide 2026 - Sales, Tech & Tips | ResumeForge",
+    metaTitle: "BYJU'S Resume Guide 2026 - Sales, Tech & Tips | ResumeBuildz",
     metaDescription:
       "How to write a BYJU'S resume for sales, BD, content, or tech roles. Revenue bullets, recommended template, and 5 insider tips for BYJU'S hiring.",
   },
@@ -533,7 +533,7 @@ export const COMPANIES: CompanyEntry[] = [
       'Use modern professional formatting; PhonePe culture is fast-paced but professional.',
     ],
     recommendedTemplate: 'modern',
-    metaTitle: 'PhonePe Resume Guide 2026 - Fintech, Engineering & Tips | ResumeForge',
+    metaTitle: 'PhonePe Resume Guide 2026 - Fintech, Engineering & Tips | ResumeBuildz',
     metaDescription:
       'How to write a PhonePe resume for engineering, PM, or fintech roles. UPI/payments keywords, scale bullets, recommended template, and 5 insider tips.',
   },
@@ -560,7 +560,7 @@ export const COMPANIES: CompanyEntry[] = [
       'Use modern professional formatting; Razorpay is Bangalore-style and design-aware.',
     ],
     recommendedTemplate: 'modern',
-    metaTitle: 'Razorpay Resume Guide 2026 - Fintech Engineering & Tips | ResumeForge',
+    metaTitle: 'Razorpay Resume Guide 2026 - Fintech Engineering & Tips | ResumeBuildz',
     metaDescription:
       'How to write a Razorpay resume for engineering, PM, or fintech roles. Go/payments keywords, API bullets, recommended template, and 5 insider tips.',
   },
@@ -587,7 +587,7 @@ export const COMPANIES: CompanyEntry[] = [
       'Use modern professional formatting. Freshworks is a NASDAQ-listed company and the resume should feel polished.',
     ],
     recommendedTemplate: 'professional',
-    metaTitle: 'Freshworks Resume Guide 2026 - SaaS, Engineering & Tips | ResumeForge',
+    metaTitle: 'Freshworks Resume Guide 2026 - SaaS, Engineering & Tips | ResumeBuildz',
     metaDescription:
       'How to write a Freshworks resume for engineering, sales, or CS roles. SaaS keywords, ARR bullets, recommended template, and 5 insider tips for Freshworks hiring.',
   },
@@ -614,7 +614,7 @@ export const COMPANIES: CompanyEntry[] = [
       'Use modern professional formatting; Ola is fast-paced startup-style.',
     ],
     recommendedTemplate: 'modern',
-    metaTitle: 'Ola Resume Guide 2026 - Mobility, EV & AI Tips | ResumeForge',
+    metaTitle: 'Ola Resume Guide 2026 - Mobility, EV & AI Tips | ResumeBuildz',
     metaDescription:
       'How to write an Ola resume for ride-hailing, Ola Electric, or Krutrim AI roles. EV/AI/mobility keywords, recommended template, and 5 insider tips.',
   },

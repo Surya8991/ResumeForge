@@ -17,7 +17,7 @@ interface Props {
  */
 export default function ArticleMeta({
   author = 'Surya L',
-  authorRole = 'Founder, ResumeForge',
+  authorRole = 'Founder, ResumeBuildz',
   publishedDate,
   updatedDate,
   readingTime,

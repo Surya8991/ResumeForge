@@ -15,6 +15,19 @@ interface ChangelogEntry {
 
 const CHANGELOG: ChangelogEntry[] = [
   {
+    version: 'v1.11.0',
+    date: 'April 15, 2026',
+    title: 'Project Renamed to ResumeBuildz',
+    added: [],
+    improved: [
+      'Brand renamed from ResumeForge to ResumeBuildz across 43 files: metadata (titles, descriptions, OG/Twitter tags), JSON-LD publisher, brand logo in navbar/footer/login/builder/404, all in-page copy, testimonials, manifest.json, llms.txt, README, CONTRIBUTING, SECURITY, LICENSE, .env.example, and every blog/resources/situation/company page.',
+      'package.json name changed from "resumeforge" to "resumebuildz".',
+      'Historical CHANGELOG entries rewritten for brand consistency (no historical inaccuracy — same product, new name).',
+      'localStorage keys kept as `resumeforge-*` intentionally to preserve existing user data.',
+      'Vercel deployment URL and GitHub repo URL unchanged — rename those via dashboard/settings to complete the migration.',
+    ],
+  },
+  {
     version: 'v1.10.0',
     date: 'April 15, 2026',
     title: 'Blog Section with Topic Clusters + Ultimate Hero',
@@ -180,7 +193,7 @@ const CHANGELOG: ChangelogEntry[] = [
     date: 'March 28, 2026',
     title: 'PDF Import & Multi-Profile Support',
     added: [
-      'PDF import. Upload an existing PDF resume and ResumeForge extracts the content automatically.',
+      'PDF import. Upload an existing PDF resume and ResumeBuildz extracts the content automatically.',
       'Multiple resume profiles. Save up to 10 different resume versions, each with its own data and template.',
       'Template preview. See a full-size preview of any template before applying it.',
       'Drag-and-drop reordering for Experience, Education, and Projects entries.',
@@ -224,7 +237,7 @@ const CHANGELOG: ChangelogEntry[] = [
     date: 'February 1, 2026',
     title: 'Initial Release',
     added: [
-      'Initial release of ResumeForge.',
+      'Initial release of ResumeBuildz.',
       '20 professionally designed resume templates, each ATS-optimized.',
       'AI writing assistant powered by Groq for generating summaries, bullet points, and cover letters.',
       'Cover letter builder with customizable templates.',
@@ -244,13 +257,13 @@ const CHANGELOG: ChangelogEntry[] = [
 
 export default function ChangelogPage() {
   useEffect(() => {
-    document.title = 'Changelog - ResumeForge Updates';
+    document.title = 'Changelog - ResumeBuildz Updates';
     const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) metaDesc.setAttribute('content', 'ResumeForge version history and release notes. See all updates, new features, and improvements.');
+    if (metaDesc) metaDesc.setAttribute('content', 'ResumeBuildz version history and release notes. See all updates, new features, and improvements.');
     const ogDesc = document.querySelector('meta[property="og:description"]');
-    if (ogDesc) ogDesc.setAttribute('content', 'ResumeForge version history and release notes. See all updates, new features, and improvements.');
+    if (ogDesc) ogDesc.setAttribute('content', 'ResumeBuildz version history and release notes. See all updates, new features, and improvements.');
     const ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) ogTitle.setAttribute('content', 'Changelog - ResumeForge Updates');
+    if (ogTitle) ogTitle.setAttribute('content', 'Changelog - ResumeBuildz Updates');
   }, []);
 
   return (
@@ -262,7 +275,7 @@ export default function ChangelogPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-3xl md:text-5xl font-bold mb-4 animate-fade-in-up">Changelog</h1>
           <p className="text-gray-300 text-lg max-w-2xl mx-auto animate-fade-in-up delay-100">
-            What&apos;s new in ResumeForge. Every feature, fix, and improvement in one place.
+            What&apos;s new in ResumeBuildz. Every feature, fix, and improvement in one place.
           </p>
         </div>
       </section>

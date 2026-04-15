@@ -195,7 +195,7 @@ export default function HeroPreviewPage() {
   const [familyFilter, setFamilyFilter] = useState<Family | 'all'>('all');
 
   useEffect(() => {
-    document.title = 'Hero Preview Gallery (internal) - ResumeForge';
+    document.title = 'Hero Preview Gallery (internal) - ResumeBuildz';
   }, []);
 
   const visibleOptions = familyFilter === 'all' ? OPTIONS : OPTIONS.filter((o) => o.family === familyFilter);

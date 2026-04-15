@@ -77,13 +77,13 @@ const industryTips = [
 export default function ResumeTipsPage() {
   const { openGateway } = useLoginGateway();
   useEffect(() => {
-    document.title = 'Resume Writing Tips & Action Verbs | ResumeForge';
+    document.title = 'Resume Writing Tips & Action Verbs | ResumeBuildz';
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) metaDesc.setAttribute('content', 'Expert resume writing tips including action verbs, achievement examples, and industry-specific advice. Improve your resume today.');
     const ogDesc = document.querySelector('meta[property="og:description"]');
     if (ogDesc) ogDesc.setAttribute('content', 'Expert resume writing tips including action verbs, achievement examples, and industry-specific advice. Improve your resume today.');
     const ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) ogTitle.setAttribute('content', 'Resume Writing Tips & Action Verbs | ResumeForge');
+    if (ogTitle) ogTitle.setAttribute('content', 'Resume Writing Tips & Action Verbs | ResumeBuildz');
   }, []);
   const [openSection, setOpenSection] = useState<number | null>(0);
 

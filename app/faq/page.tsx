@@ -8,7 +8,7 @@ import { useLoginGateway } from '@/components/LoginGateway';
 
 const faqItems = [
   {
-    question: 'Is ResumeForge free?',
+    question: 'Is ResumeBuildz free?',
     answer: 'The free tier includes all 20 templates, 12 ATS tools, DOCX and HTML export, and job description matching. No sign-up required. AI rewrites and PDF exports have daily limits on the free plan. Upgrade to Pro for unlimited access.',
   },
   {
@@ -25,11 +25,11 @@ const faqItems = [
   },
   {
     question: 'Can I have multiple resumes?',
-    answer: 'Yes! ResumeForge supports up to 10 resume profiles. You can create different versions of your resume tailored for different job applications, industries, or career paths. Switch between profiles instantly using the profile manager.',
+    answer: 'Yes! ResumeBuildz supports up to 10 resume profiles. You can create different versions of your resume tailored for different job applications, industries, or career paths. Switch between profiles instantly using the profile manager.',
   },
   {
     question: 'What file formats can I import?',
-    answer: 'ResumeForge supports importing resumes from multiple formats including PDF, DOCX, TXT, HTML, and Markdown (MD). The import feature intelligently parses your existing resume and maps the content to the appropriate sections.',
+    answer: 'ResumeBuildz supports importing resumes from multiple formats including PDF, DOCX, TXT, HTML, and Markdown (MD). The import feature intelligently parses your existing resume and maps the content to the appropriate sections.',
   },
   {
     question: 'What export formats are available?',
@@ -41,7 +41,7 @@ const faqItems = [
   },
   {
     question: 'Is my data private?',
-    answer: "Yes, 100%. ResumeForge is entirely client-side, meaning all processing happens in your browser. We don't collect any data, use any cookies, or run any analytics. Your resume content is never sent to any server (unless you optionally use the AI feature, which communicates directly with Groq).",
+    answer: "Yes, 100%. ResumeBuildz is entirely client-side, meaning all processing happens in your browser. We don't collect any data, use any cookies, or run any analytics. Your resume content is never sent to any server (unless you optionally use the AI feature, which communicates directly with Groq).",
   },
   {
     question: 'What is ATS?',
@@ -53,7 +53,7 @@ const faqItems = [
   },
   {
     question: 'Can I use this commercially?',
-    answer: "ResumeForge is released under a non-commercial license. You're free to use it for personal resume building, but commercial use (such as offering it as a paid service or integrating it into commercial products) requires a separate commercial license. Please contact us at Suryaraj8147@gmail.com for commercial licensing inquiries.",
+    answer: "ResumeBuildz is released under a non-commercial license. You're free to use it for personal resume building, but commercial use (such as offering it as a paid service or integrating it into commercial products) requires a separate commercial license. Please contact us at Suryaraj8147@gmail.com for commercial licensing inquiries.",
   },
   {
     question: 'How do I report a bug?',
@@ -61,15 +61,15 @@ const faqItems = [
   },
   {
     question: 'What browsers are supported?',
-    answer: 'ResumeForge supports all modern browsers including Google Chrome, Mozilla Firefox, Apple Safari, and Microsoft Edge (version 90 and above). For the best experience, we recommend using the latest version of your preferred browser.',
+    answer: 'ResumeBuildz supports all modern browsers including Google Chrome, Mozilla Firefox, Apple Safari, and Microsoft Edge (version 90 and above). For the best experience, we recommend using the latest version of your preferred browser.',
   },
   {
     question: 'Is it mobile-friendly?',
-    answer: 'Yes, ResumeForge is built with a fully responsive design that works on smartphones, tablets, and desktop computers. While you can view and make quick edits on mobile devices, we recommend using a desktop or laptop for the full resume-building experience.',
+    answer: 'Yes, ResumeBuildz is built with a fully responsive design that works on smartphones, tablets, and desktop computers. While you can view and make quick edits on mobile devices, we recommend using a desktop or laptop for the full resume-building experience.',
   },
   {
     question: 'Can multiple people edit the same resume?',
-    answer: 'Not yet. ResumeForge is currently a single-user tool. To share a resume with someone, export it as PDF, DOCX, or JSON and send the file. Real-time collaboration is on our roadmap for the Pro plan.',
+    answer: 'Not yet. ResumeBuildz is currently a single-user tool. To share a resume with someone, export it as PDF, DOCX, or JSON and send the file. Real-time collaboration is on our roadmap for the Pro plan.',
   },
   {
     question: 'How do I share my resume?',
@@ -108,13 +108,13 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
 export default function FAQPage() {
   const { openGateway } = useLoginGateway();
   useEffect(() => {
-    document.title = 'FAQ - ResumeForge';
+    document.title = 'FAQ - ResumeBuildz';
     const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) metaDesc.setAttribute('content', 'Frequently asked questions about ResumeForge. Learn about features, data privacy, export formats, and AI capabilities.');
+    if (metaDesc) metaDesc.setAttribute('content', 'Frequently asked questions about ResumeBuildz. Learn about features, data privacy, export formats, and AI capabilities.');
     const ogDesc = document.querySelector('meta[property="og:description"]');
-    if (ogDesc) ogDesc.setAttribute('content', 'Frequently asked questions about ResumeForge. Learn about features, data privacy, export formats, and AI capabilities.');
+    if (ogDesc) ogDesc.setAttribute('content', 'Frequently asked questions about ResumeBuildz. Learn about features, data privacy, export formats, and AI capabilities.');
     const ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) ogTitle.setAttribute('content', 'FAQ - ResumeForge');
+    if (ogTitle) ogTitle.setAttribute('content', 'FAQ - ResumeBuildz');
   }, []);
 
   return (
@@ -125,7 +125,7 @@ export default function FAQPage() {
       <section className="bg-gradient-to-br from-gray-900 via-slate-900 to-black py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 animate-fade-in-up">Frequently Asked Questions</h1>
-          <p className="text-xl text-gray-300 animate-fade-in-up delay-100">Everything you need to know about ResumeForge</p>
+          <p className="text-xl text-gray-300 animate-fade-in-up delay-100">Everything you need to know about ResumeBuildz</p>
         </div>
       </section>
 
@@ -171,7 +171,7 @@ export default function FAQPage() {
             mainEntity: [
               {
                 "@type": "Question",
-                name: "Is ResumeForge free?",
+                name: "Is ResumeBuildz free?",
                 acceptedAnswer: {
                   "@type": "Answer",
                   text: "The free tier includes all 20 templates, 12 ATS tools, DOCX/HTML export, and job description matching. AI rewrites and PDF exports have daily limits. Upgrade to Pro for unlimited access.",
@@ -179,10 +179,10 @@ export default function FAQPage() {
               },
               {
                 "@type": "Question",
-                name: "Does ResumeForge store my data?",
+                name: "Does ResumeBuildz store my data?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "No. ResumeForge is entirely client-side. Your resume data never leaves your browser and is stored only in your device's localStorage. There are no servers, no tracking, and no analytics.",
+                  text: "No. ResumeBuildz is entirely client-side. Your resume data never leaves your browser and is stored only in your device's localStorage. There are no servers, no tracking, and no analytics.",
                 },
               },
               {
@@ -198,7 +198,7 @@ export default function FAQPage() {
                 name: "What formats can I export my resume in?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "ResumeForge supports PDF export (via browser print), DOCX (Microsoft Word), and HTML. PDF gives the best visual output. DOCX is best for ATS compatibility.",
+                  text: "ResumeBuildz supports PDF export (via browser print), DOCX (Microsoft Word), and HTML. PDF gives the best visual output. DOCX is best for ATS compatibility.",
                 },
               },
               {
@@ -206,7 +206,7 @@ export default function FAQPage() {
                 name: "How do the AI features work?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "AI features use the Groq API (Llama 3.3 70B model). You bring your own free Groq API key from console.groq.com. It is stored only in your browser and never sent to any ResumeForge server.",
+                  text: "AI features use the Groq API (Llama 3.3 70B model). You bring your own free Groq API key from console.groq.com. It is stored only in your browser and never sent to any ResumeBuildz server.",
                 },
               },
               {

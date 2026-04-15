@@ -19,11 +19,11 @@ const sections = [
   },
   {
     title: 'Cookies',
-    content: "ResumeForge uses minimal cookies. Authentication cookies are set when you sign in (managed by Supabase) so we can recognize your session. We do NOT use tracking cookies, advertising cookies, or third-party marketing cookies. The only first-party cookies are session cookies for auth.",
+    content: "ResumeBuildz uses minimal cookies. Authentication cookies are set when you sign in (managed by Supabase) so we can recognize your session. We do NOT use tracking cookies, advertising cookies, or third-party marketing cookies. The only first-party cookies are session cookies for auth.",
   },
   {
     title: 'Third-Party Services',
-    content: 'ResumeForge offers an optional AI-powered feature that uses the Groq API. This feature requires your own free API key from console.groq.com. When you use this feature, your resume data is sent directly from your browser to Groq\'s servers — it never passes through our servers. We do not have access to your API key or the data you send to Groq. Please review Groq\'s privacy policy for information about how they handle your data.',
+    content: 'ResumeBuildz offers an optional AI-powered feature that uses the Groq API. This feature requires your own free API key from console.groq.com. When you use this feature, your resume data is sent directly from your browser to Groq\'s servers — it never passes through our servers. We do not have access to your API key or the data you send to Groq. Please review Groq\'s privacy policy for information about how they handle your data.',
   },
   {
     title: 'Waitlist Emails',
@@ -39,7 +39,7 @@ const sections = [
   },
   {
     title: "Children's Privacy",
-    content: "ResumeForge is not directed at children under the age of 13. We do not knowingly collect personal information from children. If you believe a child has provided us with personal information, please contact us so we can delete it.",
+    content: "ResumeBuildz is not directed at children under the age of 13. We do not knowingly collect personal information from children. If you believe a child has provided us with personal information, please contact us so we can delete it.",
   },
   {
     title: 'Changes to This Policy',
@@ -47,19 +47,19 @@ const sections = [
   },
   {
     title: 'Contact',
-    content: 'If you have any questions about this privacy policy or ResumeForge\'s data practices, please contact us at Suryaraj8147@gmail.com.',
+    content: 'If you have any questions about this privacy policy or ResumeBuildz\'s data practices, please contact us at Suryaraj8147@gmail.com.',
   },
 ];
 
 export default function PrivacyPage() {
   useEffect(() => {
-    document.title = 'Privacy Policy - ResumeForge';
+    document.title = 'Privacy Policy - ResumeBuildz';
     const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) metaDesc.setAttribute('content', 'ResumeForge privacy policy. We don\'t collect data, use cookies, or track users. All resume data stays in your browser.');
+    if (metaDesc) metaDesc.setAttribute('content', 'ResumeBuildz privacy policy. We don\'t collect data, use cookies, or track users. All resume data stays in your browser.');
     const ogDesc = document.querySelector('meta[property="og:description"]');
-    if (ogDesc) ogDesc.setAttribute('content', 'ResumeForge privacy policy. We don\'t collect data, use cookies, or track users. All resume data stays in your browser.');
+    if (ogDesc) ogDesc.setAttribute('content', 'ResumeBuildz privacy policy. We don\'t collect data, use cookies, or track users. All resume data stays in your browser.');
     const ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) ogTitle.setAttribute('content', 'Privacy Policy - ResumeForge');
+    if (ogTitle) ogTitle.setAttribute('content', 'Privacy Policy - ResumeBuildz');
   }, []);
 
   return (

@@ -100,7 +100,7 @@ export default function ResumeForCareerChangePage() {
   const { openGateway } = useLoginGateway();
 
   useEffect(() => {
-    document.title = 'Resume for Career Change 2026 - 5-Step Pivot Guide | ResumeForge';
+    document.title = 'Resume for Career Change 2026 - 5-Step Pivot Guide | ResumeBuildz';
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
       metaDesc.setAttribute(
@@ -116,7 +116,7 @@ export default function ResumeForCareerChangePage() {
       );
     }
     const ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) ogTitle.setAttribute('content', 'Resume for Career Change 2026 - 5-Step Pivot Guide | ResumeForge');
+    if (ogTitle) ogTitle.setAttribute('content', 'Resume for Career Change 2026 - 5-Step Pivot Guide | ResumeBuildz');
   }, []);
 
   const schema = combineSchemas(

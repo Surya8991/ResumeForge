@@ -13,7 +13,7 @@ export default function BlogHubPage() {
   const [activeCategory, setActiveCategory] = useState<string>('all');
 
   useEffect(() => {
-    document.title = 'Blog - Resume Writing, ATS, and Career Guides | ResumeForge';
+    document.title = 'Blog - Resume Writing, ATS, and Career Guides | ResumeBuildz';
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) metaDesc.setAttribute('content', 'Practical, research-backed guides on resume writing, ATS optimization, career transitions, Indian hiring, and company-specific job applications. Updated weekly.');
   }, []);
@@ -34,7 +34,7 @@ export default function BlogHubPage() {
       <section className="bg-gradient-to-br from-gray-900 via-slate-900 to-black text-white py-14 md:py-20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <span className="inline-block bg-blue-500/10 text-blue-400 text-sm font-medium px-4 py-1.5 rounded-full mb-4 animate-fade-in">
-            <BookOpen className="inline-block h-3.5 w-3.5 mr-1 -mt-0.5" /> ResumeForge Blog
+            <BookOpen className="inline-block h-3.5 w-3.5 mr-1 -mt-0.5" /> ResumeBuildz Blog
           </span>
           <h1 className="text-3xl md:text-5xl font-bold mb-4 animate-fade-in-up">
             Resume, ATS, and Career Guides

@@ -56,7 +56,7 @@ export default function SiteFooter() {
             <div className="h-7 w-7 rounded-md bg-blue-500 flex items-center justify-center">
               <FileText className="h-3.5 w-3.5 text-white" />
             </div>
-            <span className="text-white font-bold">Resume<span className="text-blue-400">Forge</span></span>
+            <span className="text-white font-bold">Resume<span className="text-blue-400">Buildz</span></span>
           </Link>
           <p className="text-xs text-gray-500 flex items-center gap-1">
             Designed with <Heart className="h-3 w-3 text-red-500 fill-red-500" /> by Surya L &copy; {new Date().getFullYear()}

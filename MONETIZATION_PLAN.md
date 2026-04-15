@@ -1,4 +1,4 @@
-# ResumeForge — 1-Year Monetization & Growth Execution Plan
+# ResumeBuildz — 1-Year Monetization & Growth Execution Plan
 
 **Author:** Surya L
 **Date:** April 2026
@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-ResumeForge is a free, open-source, client-side ATS resume builder with 20 templates, AI writing, and 12 ATS analysis tools. This plan outlines the strategy to monetize it through a freemium model while maintaining the open-source community.
+ResumeBuildz is a free, open-source, client-side ATS resume builder with 20 templates, AI writing, and 12 ATS analysis tools. This plan outlines the strategy to monetize it through a freemium model while maintaining the open-source community.
 
 ---
 
@@ -216,7 +216,7 @@ ResumeForge is a free, open-source, client-side ATS resume builder with 20 templ
 
 ### Hashtags
 - #ResumeBuilder #ATSResume #JobSearch #CareerTips #ResumeTips
-- #FreeResumeBuilder #ResumeForge #ATSOptimization #JobHunting
+- #FreeResumeBuilder #ResumeBuildz #ATSOptimization #JobHunting
 
 ---
 
@@ -313,7 +313,7 @@ ResumeForge is a free, open-source, client-side ATS resume builder with 20 templ
 
 ## Competitive Advantages
 
-| vs Competitor | ResumeForge Edge |
+| vs Competitor | ResumeBuildz Edge |
 |--------------|-----------------|
 | Resume.io ($25/mo) | Free tier, lifetime deal, open source |
 | Zety ($24/mo) | No sign-up needed, 100% private |
@@ -341,6 +341,6 @@ ResumeForge is a free, open-source, client-side ATS resume builder with 20 templ
 
 ## Summary
 
-ResumeForge has strong product-market fit with a differentiated value proposition (free, private, open-source, comprehensive ATS tools). The monetization path is clear: freemium model with generous free tier to drive adoption, Pro tier for power users, and lifetime deals for early traction. The 95%+ profit margin and zero server-side costs make this highly scalable.
+ResumeBuildz has strong product-market fit with a differentiated value proposition (free, private, open-source, comprehensive ATS tools). The monetization path is clear: freemium model with generous free tier to drive adoption, Pro tier for power users, and lifetime deals for early traction. The 95%+ profit margin and zero server-side costs make this highly scalable.
 
 **Next action:** Tell me when you're ready to start Sprint 1 (Auth + Payments).

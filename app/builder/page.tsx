@@ -81,13 +81,13 @@ const BASE_SECTIONS = [
 
 export default function HomePage() {
   useEffect(() => {
-    document.title = 'Resume Builder - ResumeForge';
+    document.title = 'Resume Builder - ResumeBuildz';
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) metaDesc.setAttribute('content', 'Create your resume with 20 ATS-friendly templates, drag-and-drop sections, and AI-powered writing. Export as PDF, DOCX, or HTML.');
     const ogDesc = document.querySelector('meta[property="og:description"]');
     if (ogDesc) ogDesc.setAttribute('content', 'Create your resume with 20 ATS-friendly templates, drag-and-drop sections, and AI-powered writing. Export as PDF, DOCX, or HTML.');
     const ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) ogTitle.setAttribute('content', 'Resume Builder - ResumeForge');
+    if (ogTitle) ogTitle.setAttribute('content', 'Resume Builder - ResumeBuildz');
   }, []);
   const resumeRef = useRef<HTMLDivElement>(null);
   const [activeTab, setActiveTab] = useState<'edit' | 'preview' | 'templates' | 'ats' | 'ai'>('edit');
@@ -466,7 +466,7 @@ export default function HomePage() {
       <div className="h-screen flex items-center justify-center bg-gradient-to-br from-primary/5 to-background">
         <div className="flex flex-col items-center gap-3">
           <Sparkles className="h-12 w-12 text-primary animate-pulse" />
-          <span className="text-2xl font-bold text-foreground">ResumeForge</span>
+          <span className="text-2xl font-bold text-foreground">ResumeBuildz</span>
           <span className="text-sm text-muted-foreground">Loading...</span>
           <span className="text-xs text-muted-foreground/60 mt-1">Built by Surya L</span>
         </div>
@@ -494,7 +494,7 @@ export default function HomePage() {
               </div>
               <div className="hidden sm:block">
                 <h1 className="text-lg font-bold tracking-tight leading-none text-white">
-                  Resume<span className="text-blue-400">Forge</span>
+                  Resume<span className="text-blue-400">Buildz</span>
                 </h1>
                 <span className="text-[11px] text-gray-400 leading-none">Resume Builder</span>
               </div>
@@ -1028,7 +1028,7 @@ export default function HomePage() {
       {/* Footer */}
       <footer className="h-10 border-t border-gray-800 bg-gray-900 flex items-center justify-between px-5 shrink-0">
         <Link href="/" className="text-xs text-gray-400 hover:text-white hidden sm:inline transition-colors">
-          ResumeForge
+          ResumeBuildz
         </Link>
         <div className="flex items-center gap-4 mx-auto md:mx-0">
           <span className="text-xs text-gray-400 flex items-center gap-1">

@@ -1,6 +1,6 @@
-# Contributing to ResumeForge
+# Contributing to ResumeBuildz
 
-Welcome, and thank you for your interest in contributing to ResumeForge! This is an open-source, client-side ATS resume builder, and we appreciate contributions of all kinds: bug fixes, new features, documentation improvements, and more.
+Welcome, and thank you for your interest in contributing to ResumeBuildz! This is an open-source, client-side ATS resume builder, and we appreciate contributions of all kinds: bug fixes, new features, documentation improvements, and more.
 
 ## Getting Started
 
@@ -11,11 +11,11 @@ Welcome, and thank you for your interest in contributing to ResumeForge! This is
 
 ### Setup
 
-1. **Fork** the repository on GitHub: [github.com/Surya8991/ResumeForge](https://github.com/Surya8991/ResumeForge)
+1. **Fork** the repository on GitHub: [github.com/Surya8991/ResumeBuildz](https://github.com/Surya8991/ResumeBuildz)
 2. **Clone** your fork:
    ```bash
-   git clone https://github.com/<your-username>/ResumeForge.git
-   cd ResumeForge
+   git clone https://github.com/<your-username>/ResumeBuildz.git
+   cd ResumeBuildz
    ```
 3. **Install dependencies:**
    ```bash
@@ -52,7 +52,7 @@ Welcome, and thank you for your interest in contributing to ResumeForge! This is
 ## File Structure Overview
 
 ```
-ResumeForge/
+ResumeBuildz/
 ├── app/                    # Next.js app directory (pages, layouts)
 ├── components/
 │   ├── ats/                # ATS analysis tools and scoring
@@ -156,7 +156,7 @@ Before submitting a PR, please verify:
 
 ## Testing on Mobile
 
-ResumeForge must work correctly across a range of mobile devices. Before submitting any PR that touches layout, tabs, navigation, or responsive styles, verify your changes at the following 10 breakpoints:
+ResumeBuildz must work correctly across a range of mobile devices. Before submitting any PR that touches layout, tabs, navigation, or responsive styles, verify your changes at the following 10 breakpoints:
 
 | Width | Device class |
 |-------|-------------|
@@ -187,4 +187,4 @@ Use Chrome DevTools device toolbar or a physical device to test these breakpoint
 
 If you have questions about contributing, feel free to open a discussion or issue on the repository. We are happy to help!
 
-Thank you for helping make ResumeForge better!
+Thank you for helping make ResumeBuildz better!

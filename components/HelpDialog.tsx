@@ -61,7 +61,7 @@ export default function HelpDialog() {
         <div className="sticky top-0 z-10 rounded-t-xl overflow-hidden">
           <div className="bg-gradient-to-r from-primary via-primary/80 to-primary/60 px-6 py-4 flex items-center justify-between">
             <div>
-              <h2 className="text-lg font-bold text-primary-foreground">How to Use ResumeForge</h2>
+              <h2 className="text-lg font-bold text-primary-foreground">How to Use ResumeBuildz</h2>
               <p className="text-[10px] text-primary-foreground/70">Created by Surya L</p>
             </div>
             <button

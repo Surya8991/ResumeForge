@@ -1,4 +1,4 @@
-# ResumeForge - ATS-Friendly Resume Generator
+# ResumeBuildz - ATS-Friendly Resume Generator
 
 ![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)
@@ -126,7 +126,7 @@ A professional resume builder with 20 ATS-optimized templates, AI-powered writin
 - **OAuth Redirect Whitelist**: Auth callback validates redirect destinations
 - **Singleton Supabase Client**: Prevents memory leaks and infinite re-renders
 - **Email Verification Gate**: Pro features blocked until email is confirmed
-- **Browser-Only API Keys**: Groq API key stored in localStorage, never sent to ResumeForge servers
+- **Browser-Only API Keys**: Groq API key stored in localStorage, never sent to ResumeBuildz servers
 - **Photo Upload Validation**: MIME type whitelist (no SVG to prevent embedded scripts), 2MB size limit
 - **AI Error Handling**: Granular error messages for 401, 429, 402, 403, malformed JSON responses
 - **Validation Helpers**: `lib/validation.ts` shared email/phone/URL/length validators with sanitization
@@ -147,7 +147,7 @@ A professional resume builder with 20 ATS-optimized templates, AI-powered writin
 
 ## Getting Started
 
-ResumeForge runs in your browser with optional Supabase auth for Pro features. Clone the repository, install dependencies, set up environment variables, and you are ready to build resumes locally. All resume data is persisted in your browser's localStorage so your content stays on your machine.
+ResumeBuildz runs in your browser with optional Supabase auth for Pro features. Clone the repository, install dependencies, set up environment variables, and you are ready to build resumes locally. All resume data is persisted in your browser's localStorage so your content stays on your machine.
 
 ### Prerequisites
 
@@ -334,7 +334,7 @@ resumeforge/
 
 ## Analytics
 
-ResumeForge uses **Vercel Web Analytics** by default. It is privacy-friendly (no cookies, GDPR safe), free on the Vercel Hobby plan, and requires zero configuration beyond enabling it in the Vercel dashboard.
+ResumeBuildz uses **Vercel Web Analytics** by default. It is privacy-friendly (no cookies, GDPR safe), free on the Vercel Hobby plan, and requires zero configuration beyond enabling it in the Vercel dashboard.
 
 Enable it under **Vercel project → Analytics tab → Enable Web Analytics**.
 
@@ -352,7 +352,7 @@ To switch, remove the `<Analytics />` import from `app/layout.tsx` and add the a
 
 ## Contributing
 
-Contributions are welcome and appreciated. Whether it is fixing a bug, adding a feature, improving documentation, or suggesting ideas, all contributions help make ResumeForge better for everyone.
+Contributions are welcome and appreciated. Whether it is fixing a bug, adding a feature, improving documentation, or suggesting ideas, all contributions help make ResumeBuildz better for everyone.
 
 ### How to Contribute
 
@@ -396,6 +396,6 @@ Found a bug or have a suggestion? [Open an issue](https://github.com/Surya8991/r
 - White-label and resell it
 - Clone it to create a competing commercial product
 
-The original author (Surya L) retains exclusive rights to monetize and operate ResumeForge as a commercial service.
+The original author (Surya L) retains exclusive rights to monetize and operate ResumeBuildz as a commercial service.
 
 **For commercial licensing:** Contact Suryaraj8147@gmail.com

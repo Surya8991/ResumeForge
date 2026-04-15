@@ -1,6 +1,6 @@
 ---
 name: Feature Request
-about: Suggest a new feature for ResumeForge
+about: Suggest a new feature for ResumeBuildz
 title: '[Feature] '
 labels: enhancement
 assignees: ''

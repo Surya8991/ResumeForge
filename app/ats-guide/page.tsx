@@ -9,13 +9,13 @@ import { useLoginGateway } from '@/components/LoginGateway';
 export default function ATSGuidePage() {
   const { openGateway } = useLoginGateway();
   useEffect(() => {
-    document.title = 'Complete ATS Guide - How to Pass ATS Screening | ResumeForge';
+    document.title = 'Complete ATS Guide - How to Pass ATS Screening | ResumeBuildz';
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) metaDesc.setAttribute('content', 'Learn how Applicant Tracking Systems work and how to optimize your resume to pass ATS screening. Complete guide with tips and statistics.');
     const ogDesc = document.querySelector('meta[property="og:description"]');
     if (ogDesc) ogDesc.setAttribute('content', 'Learn how Applicant Tracking Systems work and how to optimize your resume to pass ATS screening. Complete guide with tips and statistics.');
     const ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) ogTitle.setAttribute('content', 'Complete ATS Guide - How to Pass ATS Screening | ResumeForge');
+    if (ogTitle) ogTitle.setAttribute('content', 'Complete ATS Guide - How to Pass ATS Screening | ResumeBuildz');
   }, []);
   return (
     <div className="min-h-screen flex flex-col">
@@ -127,7 +127,7 @@ export default function ATSGuidePage() {
                 { num: 7, title: 'Quantify Your Achievements', desc: 'Use numbers and metrics to demonstrate impact: percentages, dollar amounts, team sizes, and time saved.' },
                 { num: 8, title: 'Tailor Each Application', desc: 'Customize your resume for every job. One-size-fits-all resumes score poorly with ATS keyword matching.' },
                 { num: 9, title: 'Proofread Carefully', desc: 'Typos and misspellings can prevent keyword matches. Double-check all text, especially technical terms.' },
-                { num: 10, title: 'Use an ATS-Optimized Template', desc: 'Start with a template that\'s already built for ATS compatibility. ResumeForge\'s 20 templates are tested against real ATS parsers.' },
+                { num: 10, title: 'Use an ATS-Optimized Template', desc: 'Start with a template that\'s already built for ATS compatibility. ResumeBuildz\'s 20 templates are tested against real ATS parsers.' },
               ].map((tip, i) => (
                 <div key={tip.num} className={`bg-white rounded-xl shadow-sm border border-gray-100 p-5 flex items-start gap-4 animate-fade-in-up delay-${Math.min((i + 1) * 100, 500)}`}>
                   <span className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white text-sm font-bold rounded-full flex items-center justify-center">
@@ -246,7 +246,7 @@ export default function ATSGuidePage() {
             description: "Step-by-step guide to optimize your resume for Applicant Tracking Systems (ATS) and ensure it gets past automated filters.",
             totalTime: "PT15M",
             estimatedCost: { "@type": "MonetaryAmount", currency: "USD", value: "0" },
-            tool: [{ "@type": "HowToTool", name: "ResumeForge ATS Score Checker" }],
+            tool: [{ "@type": "HowToTool", name: "ResumeBuildz ATS Score Checker" }],
             step: [
               {
                 "@type": "HowToStep",
@@ -282,7 +282,7 @@ export default function ATSGuidePage() {
                 "@type": "HowToStep",
                 position: 6,
                 name: "Run an ATS score check before submitting",
-                text: "Use ResumeForge's free 12-point ATS checker to verify keyword match, formatting, readability, and active voice before you apply.",
+                text: "Use ResumeBuildz's free 12-point ATS checker to verify keyword match, formatting, readability, and active voice before you apply.",
               },
             ],
           }),
@@ -332,7 +332,7 @@ export default function ATSGuidePage() {
                 name: "How can I check my resume's ATS score?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "ResumeForge has a free built-in ATS checker with 12 analysis tools including keyword matching, formatting checks, readability scoring, and active voice detection. No sign-up required.",
+                  text: "ResumeBuildz has a free built-in ATS checker with 12 analysis tools including keyword matching, formatting checks, readability scoring, and active voice detection. No sign-up required.",
                 },
               },
             ],

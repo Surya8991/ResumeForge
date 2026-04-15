@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const data = getCompanyBySlug(company);
   if (!data) {
     return {
-      title: 'Company guide not found - ResumeForge',
+      title: 'Company guide not found - ResumeBuildz',
       description: 'The requested company resume guide could not be found.',
     };
   }

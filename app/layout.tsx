@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 const siteUrl = "https://resume-forge-orcin.vercel.app";
 
 export const metadata: Metadata = {
-  title: "ResumeForge by Surya L - Free ATS-Friendly Resume Generator",
+  title: "ResumeBuildz by Surya L - Free ATS-Friendly Resume Generator",
   description: "Create professional, ATS-optimized resumes with 20 templates, AI writing assistant, cover letter builder, and JD keyword matcher. Free to start, no sign-up required. Built by Surya L.",
   keywords: [
     "resume builder", "resume generator", "ATS resume", "ATS-friendly resume",
@@ -36,21 +36,21 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_IN",
     url: siteUrl,
-    siteName: "ResumeForge",
-    title: "ResumeForge - Free ATS Resume Builder with 20 Templates & AI",
+    siteName: "ResumeBuildz",
+    title: "ResumeBuildz - Free ATS Resume Builder with 20 Templates & AI",
     description: "Build professional resumes in minutes. 20 ATS-optimized templates, AI writing assistant, cover letter builder, JD keyword matcher. Free to start, no sign-up required.",
     images: [
       {
         url: `${siteUrl}/opengraph-image`,
         width: 1200,
         height: 630,
-        alt: "ResumeForge - Free ATS-Friendly Resume Generator",
+        alt: "ResumeBuildz - Free ATS-Friendly Resume Generator",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "ResumeForge - Free ATS Resume Builder",
+    title: "ResumeBuildz - Free ATS Resume Builder",
     description: "20 templates, AI writing assistant, cover letter builder. No sign-up required.",
     images: [`${siteUrl}/opengraph-image`],
     creator: "@surya_l",
@@ -83,7 +83,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#2563eb" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="ResumeForge" />
+        <meta name="apple-mobile-web-app-title" content="ResumeBuildz" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -92,13 +92,13 @@ export default function RootLayout({
               "@graph": [
                 {
                   "@type": "WebSite",
-                  name: "ResumeForge",
+                  name: "ResumeBuildz",
                   url: siteUrl,
                   description: "Free ATS-friendly resume builder with 20 templates, AI writing assistant, and ATS score checker.",
                 },
                 {
                   "@type": "WebApplication",
-                  name: "ResumeForge",
+                  name: "ResumeBuildz",
                   url: siteUrl,
                   applicationCategory: "BusinessApplication",
                   operatingSystem: "Web",
@@ -124,7 +124,7 @@ export default function RootLayout({
                 },
                 {
                   "@type": "Organization",
-                  name: "ResumeForge",
+                  name: "ResumeBuildz",
                   url: siteUrl,
                   logo: `${siteUrl}/icon-512.svg`,
                   founder: {

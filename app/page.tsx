@@ -47,19 +47,19 @@ const SHOWCASE_TEMPLATES = [
 const TESTIMONIALS = [
   { name: 'Alex R.', role: 'Software Engineer', text: 'I rewrote my resume in about 25 minutes. The ATS checker flagged that I was missing 4 keywords from the job description. Added them, applied, and got a callback the next day.' },
   { name: 'Priya S.', role: 'Marketing Manager', text: 'Honestly didn\'t expect a free tool to be this polished. The AI rewrote my bullet points with actual metrics, and I got 3 interview calls in my first week of applying.' },
-  { name: 'James C.', role: '2024 CS Graduate', text: 'I\'d been using Google Docs for my resume. Switched to ResumeForge, ran the ATS check, and realized my old resume would\'ve been filtered out by most systems. Wish I found this sooner.' },
+  { name: 'James C.', role: '2024 CS Graduate', text: 'I\'d been using Google Docs for my resume. Switched to ResumeBuildz, ran the ATS check, and realized my old resume would\'ve been filtered out by most systems. Wish I found this sooner.' },
 ];
 
 export default function HomePage() {
   const { openGateway } = useLoginGateway();
   useEffect(() => {
-    document.title = 'ResumeForge - Free ATS Resume Builder with 20 Templates & AI';
+    document.title = 'ResumeBuildz - Free ATS Resume Builder with 20 Templates & AI';
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) metaDesc.setAttribute('content', 'Build professional, ATS-optimized resumes with 20 free templates, AI writing assistant, and real-time ATS scoring. No sign-up required.');
     const ogDesc = document.querySelector('meta[property="og:description"]');
     if (ogDesc) ogDesc.setAttribute('content', 'Build professional, ATS-optimized resumes with 20 free templates, AI writing assistant, and real-time ATS scoring. No sign-up required.');
     const ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) ogTitle.setAttribute('content', 'ResumeForge - Free ATS Resume Builder with 20 Templates & AI');
+    if (ogTitle) ogTitle.setAttribute('content', 'ResumeBuildz - Free ATS Resume Builder with 20 Templates & AI');
   }, []);
 
   return (
@@ -75,7 +75,7 @@ export default function HomePage() {
                 Land More Interviews with ATS-Tested Resumes
               </h1>
               <p className="text-lg text-gray-300 mb-8 max-w-lg animate-fade-in-up delay-100">
-                75% of resumes get filtered by ATS before a human sees them <span className="text-gray-500 text-sm">(Jobscan, 2024)</span>. ResumeForge gives you 20 templates, AI writing help, and 12 ATS checks. Free to start, no sign-up needed.
+                75% of resumes get filtered by ATS before a human sees them <span className="text-gray-500 text-sm">(Jobscan, 2024)</span>. ResumeBuildz gives you 20 templates, AI writing help, and 12 ATS checks. Free to start, no sign-up needed.
               </p>
               <div className="flex items-center justify-center gap-6 mb-6 animate-fade-in-up delay-200">
                 <div className="flex items-center gap-2">

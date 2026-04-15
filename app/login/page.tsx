@@ -29,14 +29,14 @@ export default function LoginPage() {
   const router = useRouter();
 
   useEffect(() => {
-    document.title = mode === 'login' ? 'Log In - ResumeForge' : 'Sign Up - ResumeForge';
+    document.title = mode === 'login' ? 'Log In - ResumeBuildz' : 'Sign Up - ResumeBuildz';
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
       metaDesc.setAttribute(
         'content',
         mode === 'login'
-          ? 'Sign in to ResumeForge to access your resume profiles, Pro features, and unlimited AI rewrites.'
-          : 'Create a free ResumeForge account to save your resumes, sync across devices, and unlock Pro features.'
+          ? 'Sign in to ResumeBuildz to access your resume profiles, Pro features, and unlimited AI rewrites.'
+          : 'Create a free ResumeBuildz account to save your resumes, sync across devices, and unlock Pro features.'
       );
     }
     // Show auth errors from callback redirect
@@ -89,7 +89,7 @@ export default function LoginPage() {
             <FileText className="h-4 w-4 text-white" />
           </div>
           <span className="font-bold text-lg text-gray-900">
-            Resume<span className="text-blue-500">Forge</span>
+            Resume<span className="text-blue-500">Buildz</span>
           </span>
         </Link>
 

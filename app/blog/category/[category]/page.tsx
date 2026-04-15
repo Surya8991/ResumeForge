@@ -17,16 +17,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const cat = getCategoryBySlug(category);
   if (!cat) {
     return {
-      title: 'Category not found - ResumeForge Blog',
+      title: 'Category not found - ResumeBuildz Blog',
     };
   }
   return {
-    title: `${cat.name} - ResumeForge Blog`,
+    title: `${cat.name} - ResumeBuildz Blog`,
     description: cat.description,
     alternates: { canonical: `https://resume-forge-orcin.vercel.app/blog/category/${cat.slug}` },
     keywords: cat.keywords,
     openGraph: {
-      title: `${cat.name} - ResumeForge Blog`,
+      title: `${cat.name} - ResumeBuildz Blog`,
       description: cat.description,
       type: 'website',
     },

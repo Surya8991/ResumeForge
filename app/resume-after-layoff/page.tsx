@@ -157,7 +157,7 @@ export default function ResumeAfterLayoffPage() {
   const { openGateway } = useLoginGateway();
 
   useEffect(() => {
-    document.title = 'Resume After Layoff 2026 - 5-Step Guide & Templates | ResumeForge';
+    document.title = 'Resume After Layoff 2026 - 5-Step Guide & Templates | ResumeBuildz';
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
       metaDesc.setAttribute(
@@ -173,7 +173,7 @@ export default function ResumeAfterLayoffPage() {
       );
     }
     const ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) ogTitle.setAttribute('content', 'Resume After Layoff 2026 - 5-Step Guide & Templates | ResumeForge');
+    if (ogTitle) ogTitle.setAttribute('content', 'Resume After Layoff 2026 - 5-Step Guide & Templates | ResumeBuildz');
   }, []);
 
   const schema = combineSchemas(

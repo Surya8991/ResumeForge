@@ -109,7 +109,7 @@ export default function NaukriResumeTipsPage() {
   const { openGateway } = useLoginGateway();
 
   useEffect(() => {
-    document.title = 'Naukri.com Resume Tips 2026 - Get 3x More Recruiter Views | ResumeForge';
+    document.title = 'Naukri.com Resume Tips 2026 - Get 3x More Recruiter Views | ResumeBuildz';
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
       metaDesc.setAttribute(
@@ -125,7 +125,7 @@ export default function NaukriResumeTipsPage() {
       );
     }
     const ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) ogTitle.setAttribute('content', 'Naukri.com Resume Tips 2026 - Get 3x More Recruiter Views | ResumeForge');
+    if (ogTitle) ogTitle.setAttribute('content', 'Naukri.com Resume Tips 2026 - Get 3x More Recruiter Views | ResumeBuildz');
   }, []);
 
   const schema = combineSchemas(

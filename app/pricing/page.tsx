@@ -113,7 +113,7 @@ const PLANS = [
 
 const FAQS = [
   {
-    q: 'Is ResumeForge really free?',
+    q: 'Is ResumeBuildz really free?',
     a: 'Yes. The free plan gives you access to all 20 templates, 12 ATS tools, DOCX/HTML export, and more, with no account required. AI rewrites and PDF exports have daily limits on the free plan.',
   },
   {
@@ -122,7 +122,7 @@ const FAQS = [
   },
   {
     q: 'Do I need to create an account?',
-    a: 'No. ResumeForge works entirely in your browser with no sign-up. Your data stays on your device. Pro billing (when available) will require an account.',
+    a: 'No. ResumeBuildz works entirely in your browser with no sign-up. Your data stays on your device. Pro billing (when available) will require an account.',
   },
   {
     q: 'When will Pro be available?',
@@ -134,18 +134,18 @@ const FAQS = [
   },
   {
     q: 'Is my data safe?',
-    a: 'Absolutely. ResumeForge is 100% client-side. Your resume data never leaves your browser. It is stored in localStorage, not on any server.',
+    a: 'Absolutely. ResumeBuildz is 100% client-side. Your resume data never leaves your browser. It is stored in localStorage, not on any server.',
   },
 ];
 
 export default function PricingPage() {
   const { openGateway } = useLoginGateway();
   useEffect(() => {
-    document.title = 'Pricing - ResumeForge';
+    document.title = 'Pricing - ResumeBuildz';
     const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) metaDesc.setAttribute('content', 'ResumeForge pricing plans. Build your resume for free or upgrade to Pro for unlimited AI rewrites and PDF exports.');
+    if (metaDesc) metaDesc.setAttribute('content', 'ResumeBuildz pricing plans. Build your resume for free or upgrade to Pro for unlimited AI rewrites and PDF exports.');
     const ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) ogTitle.setAttribute('content', 'Pricing - ResumeForge');
+    if (ogTitle) ogTitle.setAttribute('content', 'Pricing - ResumeBuildz');
   }, []);
 
   return (

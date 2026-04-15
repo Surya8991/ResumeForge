@@ -142,7 +142,7 @@ export default function FresherResumePage() {
   const { openGateway } = useLoginGateway();
 
   useEffect(() => {
-    document.title = 'Fresher Resume Format 2026 - Free ATS Template & Tips | ResumeForge';
+    document.title = 'Fresher Resume Format 2026 - Free ATS Template & Tips | ResumeBuildz';
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
       metaDesc.setAttribute(
@@ -158,7 +158,7 @@ export default function FresherResumePage() {
       );
     }
     const ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) ogTitle.setAttribute('content', 'Fresher Resume Format 2026 - Free ATS Template & Tips | ResumeForge');
+    if (ogTitle) ogTitle.setAttribute('content', 'Fresher Resume Format 2026 - Free ATS Template & Tips | ResumeBuildz');
   }, []);
 
   const schema = combineSchemas(

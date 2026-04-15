@@ -12,7 +12,7 @@ export default function ResumeForHubPage() {
   const { openGateway } = useLoginGateway();
 
   useEffect(() => {
-    document.title = 'Company Resume Guides 2026 - 22 Top Employers | ResumeForge';
+    document.title = 'Company Resume Guides 2026 - 22 Top Employers | ResumeBuildz';
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
       metaDesc.setAttribute(
@@ -28,7 +28,7 @@ export default function ResumeForHubPage() {
       );
     }
     const ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) ogTitle.setAttribute('content', 'Company Resume Guides 2026 - 22 Top Employers | ResumeForge');
+    if (ogTitle) ogTitle.setAttribute('content', 'Company Resume Guides 2026 - 22 Top Employers | ResumeBuildz');
   }, []);
 
   const globalCompanies = getCompaniesByTier('Global');

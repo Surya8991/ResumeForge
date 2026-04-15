@@ -54,7 +54,7 @@ export default function CookieBanner() {
           <div className="flex-1 min-w-0">
             <p className="text-sm font-medium mb-1">We respect your privacy</p>
             <p className="text-xs text-gray-400 leading-relaxed">
-              ResumeForge stores your resume data in your browser&apos;s localStorage only. We don&apos;t use tracking cookies or third-party analytics. By using this site, you agree to our{' '}
+              ResumeBuildz stores your resume data in your browser&apos;s localStorage only. We don&apos;t use tracking cookies or third-party analytics. By using this site, you agree to our{' '}
               <Link href="/privacy" className="text-blue-400 hover:underline">
                 Privacy Policy
               </Link>

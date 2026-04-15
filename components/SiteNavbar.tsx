@@ -64,7 +64,7 @@ export default function SiteNavbar() {
               <FileText className="h-4 w-4 text-white" />
             </div>
             <span className="text-white font-bold text-lg">
-              Resume<span className="text-blue-400">Forge</span>
+              Resume<span className="text-blue-400">Buildz</span>
             </span>
           </Link>
 

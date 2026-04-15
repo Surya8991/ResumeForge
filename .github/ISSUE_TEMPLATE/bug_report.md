@@ -1,6 +1,6 @@
 ---
 name: Bug Report
-about: Report a bug to help us improve ResumeForge
+about: Report a bug to help us improve ResumeBuildz
 title: '[Bug] '
 labels: bug
 assignees: ''

@@ -105,7 +105,7 @@ export default function CampusPlacementResumePage() {
   const { openGateway } = useLoginGateway();
 
   useEffect(() => {
-    document.title = 'Campus Placement Resume 2026 - Format, Tips & Checklist | ResumeForge';
+    document.title = 'Campus Placement Resume 2026 - Format, Tips & Checklist | ResumeBuildz';
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
       metaDesc.setAttribute(
@@ -121,7 +121,7 @@ export default function CampusPlacementResumePage() {
       );
     }
     const ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) ogTitle.setAttribute('content', 'Campus Placement Resume 2026 - Format, Tips & Checklist | ResumeForge');
+    if (ogTitle) ogTitle.setAttribute('content', 'Campus Placement Resume 2026 - Format, Tips & Checklist | ResumeBuildz');
   }, []);
 
   const schema = combineSchemas(

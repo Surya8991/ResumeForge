@@ -12,7 +12,7 @@ export default function ForgotPasswordPage() {
   const supabase = createClient();
 
   useEffect(() => {
-    document.title = 'Reset Password - ResumeForge';
+    document.title = 'Reset Password - ResumeBuildz';
   }, []);
 
   async function handleSubmit(e: React.FormEvent) {

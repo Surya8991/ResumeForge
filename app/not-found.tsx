@@ -15,7 +15,7 @@ export default function NotFound() {
             <FileText className="h-5 w-5 text-white" />
           </div>
           <span className="text-xl font-bold">
-            Resume<span className="text-blue-400">Forge</span>
+            Resume<span className="text-blue-400">Buildz</span>
           </span>
         </Link>
 

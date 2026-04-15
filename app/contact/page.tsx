@@ -7,13 +7,13 @@ import SiteFooter from '@/components/SiteFooter';
 
 export default function ContactPage() {
   useEffect(() => {
-    document.title = 'Contact Us - ResumeForge';
+    document.title = 'Contact Us - ResumeBuildz';
     const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) metaDesc.setAttribute('content', 'Get in touch with the ResumeForge team. Report bugs, request features, or inquire about commercial licensing.');
+    if (metaDesc) metaDesc.setAttribute('content', 'Get in touch with the ResumeBuildz team. Report bugs, request features, or inquire about commercial licensing.');
     const ogDesc = document.querySelector('meta[property="og:description"]');
-    if (ogDesc) ogDesc.setAttribute('content', 'Get in touch with the ResumeForge team. Report bugs, request features, or inquire about commercial licensing.');
+    if (ogDesc) ogDesc.setAttribute('content', 'Get in touch with the ResumeBuildz team. Report bugs, request features, or inquire about commercial licensing.');
     const ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) ogTitle.setAttribute('content', 'Contact Us - ResumeForge');
+    if (ogTitle) ogTitle.setAttribute('content', 'Contact Us - ResumeBuildz');
   }, []);
   const [formData, setFormData] = useState({
     name: '',
@@ -26,7 +26,7 @@ export default function ContactPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Open user's email client with a pre-filled message (no backend yet)
-    const subject = encodeURIComponent(`[ResumeForge ${formData.subject}] from ${formData.name}`);
+    const subject = encodeURIComponent(`[ResumeBuildz ${formData.subject}] from ${formData.name}`);
     const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`);
     window.location.href = `mailto:Suryaraj8147@gmail.com?subject=${subject}&body=${body}`;
     setSubmitted(true);

@@ -1,8 +1,25 @@
 # Changelog
 
-All notable changes to ResumeForge are documented in this file.
+All notable changes to ResumeBuildz are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/), and this project adheres to [Semantic Versioning](https://semver.org/).
+
+---
+
+## [1.11.0] - 2026-04-15
+
+### Changed
+
+- **Project renamed** from ResumeForge to **ResumeBuildz**. Every user-facing string ("ResumeForge") has been replaced with "ResumeBuildz" across 43 files: site metadata (titles, descriptions, OG/Twitter tags), JSON-LD publisher name, brand logo text in navbar/footer/login/builder/not-found, all in-page copy, testimonials, manifest.json, llms.txt, README, CONTRIBUTING, SECURITY, LICENSE, .env.example, and all blog/resources/situation/company pages.
+- **package.json** name changed from `resumeforge` to `resumebuildz`.
+- **Historical CHANGELOG entries** rewritten to say "ResumeBuildz" so brand consistency is preserved for anyone reading the file top-to-bottom (no historical inaccuracy — the product is the same, only the name changed).
+
+### Not changed (technical identifiers — intentional)
+
+- **localStorage keys** (`resumeforge-storage`, `resumeforge-usage-ai`, `resumeforge-usage-pdf`, `resumeforge-last-visit`, `resumeforge-waitlist`, `resumeforge-cookie-consent`, `resumeforge-saved-jds`, `resumeforge-onboarding-done`, `resumeforge-version`) — renaming these would orphan every existing user's saved resume data silently. Kept as-is; the keys are internal and never shown to users.
+- **Vercel deployment URL** (`resume-forge-orcin.vercel.app`) — the URL still points to the old Vercel project name. Rename the Vercel project via the dashboard to update the URL; JSON-LD canonical URLs, sitemap.ts, and schema helpers all read from this string and will pick up the new URL once changed.
+- **GitHub repo URL** (`github.com/Surya8991/resumeforge`) — rename the repository in GitHub settings to update. References in footer, contributing, security, and meta tags point here and will continue working via GitHub's automatic redirect.
+- **Git history** — preserved.
 
 ---
 
@@ -280,7 +297,7 @@ A full top-to-bottom code + live preview review of all 16 pages. Found and fixed
 
 ### Added
 
-- Initial release of ResumeForge.
+- Initial release of ResumeBuildz.
 - 20 professionally designed resume templates, each ATS-optimized.
 - AI writing assistant powered by Groq for generating summaries, bullet points, and cover letters.
 - Cover letter builder with customizable templates.
