@@ -6,6 +6,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 ---
 
+## [1.10.0] - 2026-04-15
+
+### Added
+
+- **Blog section** at `/blog` with topic-cluster discovery layer over existing long-form content:
+  - `/blog` hub page with featured strip, topic-cluster cards, and filterable post grid.
+  - `/blog/category/[category]` dynamic route with 6 statically generated category pages.
+  - `lib/blogCategories.ts` with 6 topic clusters (Resume Writing, ATS & Keywords, Career Transitions, India Hiring, Company Deep Dives, AI Resume Tools) — each with slug, name, description, long description, icon, color, and SEO keywords.
+  - `lib/blogPosts.ts` with 8 blog post entries + 1 virtual post (company guides hub link). Each post references its existing page URL — no URL moves, no SEO breakage.
+- **Ultimate hero** (`Fill7_Ultimate`) — the most complete hero possible. Mouse-tracked 3D parallax tilt with score chip + suggestion popups floating at different translateZ depths, resume filling in section by section, 4 coaching chips resolving to green checks, ATS score climbing 0% → 94% in lock-step, "ATS-READY" badge at the end, plus a cursor-tracked blue highlight sweep. Applied to the homepage hero.
+- **Combined hero** (`Fill6_Combined`) — intermediate version without the tilt. Kept in the preview gallery as option 11.
+- Sitemap updated with `/blog` and 6 blog category URLs.
+
+### Changed
+
+- **Resources dropdown in navbar** restructured to point to blog categories instead of flat page links. Now shows: All Articles, Resume Writing, ATS & Keywords, Career Transitions, India Hiring, Company Guides.
+- **Homepage hero** replaced with `Fill7_Ultimate` (was `Fill6_Combined`, was static `/templates/modern.png` before that).
+
+---
+
 ## [1.9.0] - 2026-04-15
 
 ### Added

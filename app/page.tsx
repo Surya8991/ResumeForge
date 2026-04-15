@@ -17,7 +17,7 @@ import {
 import SiteNavbar from '@/components/SiteNavbar';
 import SiteFooter from '@/components/SiteFooter';
 import { useLoginGateway } from '@/components/LoginGateway';
-import { Fill6_Combined } from '@/components/HeroOptions';
+import { Fill7_Ultimate } from '@/components/HeroOptions';
 
 const FEATURES = [
   { icon: Layout, title: '20 Templates', desc: 'Pick from 20 resume designs built to pass ATS filters and look great in print. Classic, modern, creative. Every style covered.' },
@@ -112,7 +112,7 @@ export default function HomePage() {
               </div>
             </div>
             <div className="hidden md:flex justify-center items-center animate-scale-in delay-300">
-              <Fill6_Combined />
+              <Fill7_Ultimate />
             </div>
           </div>
         </div>

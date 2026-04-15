@@ -17,6 +17,7 @@ import {
   Fill4_HighlightSweep,
   Fill5_SuggestionPopups,
   Fill6_Combined,
+  Fill7_Ultimate,
 } from '@/components/HeroOptions';
 
 type Family = 'tilt' | 'fill' | 'combined';
@@ -35,7 +36,22 @@ interface OptionMeta {
 }
 
 const OPTIONS: OptionMeta[] = [
-  // COMBINED (featured)
+  // ULTIMATE (featured) — Parallax Tilt + Fill6_Combined
+  {
+    id: 12,
+    name: 'Ultimate: Parallax Tilt + Score + Suggestions',
+    family: 'combined',
+    component: Fill7_Ultimate,
+    inspiration: 'Stripe + Grammarly + Duolingo + Apple product pages',
+    description:
+      'The most complete hero possible. Mouse-tracked 3D parallax tilt — the card rotates with the cursor, and the ATS score chip + suggestion popups live at different translateZ depths so they float above the card with true 3D depth. On top of that: the resume fills in section by section, 4 coaching chips pop in (amber) then resolve to green ✓, the ATS score climbs from 0% to 94% in lock-step, and an "ATS-READY" badge appears at the end. A cursor-tracked blue highlight also sweeps across the card surface.',
+    innovation:
+      'Combines every interactive and narrative technique into a single hero: 3D depth, parallax, mouse response, content fill, AI coaching loop, gamified score progression, and cursor-tracked highlights. Nothing in the resume category comes close.',
+    complexity: 'High',
+    vibe: ['Ultimate', '3D + narrative', 'Featured'],
+    featured: true,
+  },
+  // COMBINED (was featured, now secondary)
   {
     id: 11,
     name: 'Combined: Score Climb + Suggestions',

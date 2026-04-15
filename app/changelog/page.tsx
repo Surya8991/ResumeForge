@@ -15,6 +15,23 @@ interface ChangelogEntry {
 
 const CHANGELOG: ChangelogEntry[] = [
   {
+    version: 'v1.10.0',
+    date: 'April 15, 2026',
+    title: 'Blog Section with Topic Clusters + Ultimate Hero',
+    added: [
+      'Blog hub at /blog with featured strip, topic-cluster cards, and filterable post grid.',
+      'Dynamic /blog/category/[category] route with 6 topic clusters: Resume Writing, ATS & Keywords, Career Transitions, India Hiring, Company Deep Dives, AI Resume Tools.',
+      'lib/blogCategories.ts and lib/blogPosts.ts — central registries for the blog. Existing situation pages retain their URLs and appear as blog posts in the right cluster.',
+      'Ultimate hero on the homepage (Fill7_Ultimate): mouse-tracked 3D parallax tilt with the resume card, ATS score chip, and suggestion popups all at different translateZ depths. Filling animation + score climb + suggestion resolve + ATS-READY badge + cursor highlight sweep.',
+      'Combined hero (Fill6_Combined) kept as option 11 in the preview gallery.',
+      'Sitemap expanded with /blog + 6 category URLs.',
+    ],
+    improved: [
+      'Resources dropdown in navbar now points to blog categories instead of flat page links.',
+      'Homepage hero upgraded from static PNG → Fill6_Combined → Fill7_Ultimate.',
+    ],
+  },
+  {
     version: 'v1.9.0',
     date: 'April 15, 2026',
     title: 'Article Scaffolding, Deep Content & Hero Preview Gallery',

@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { COMPANIES } from '@/lib/resumeCompanyData';
+import { BLOG_CATEGORIES } from '@/lib/blogCategories';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = 'https://resume-forge-orcin.vercel.app';
@@ -28,7 +29,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/resume-after-layoff`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${base}/resume-after-career-gap`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${base}/resume-for-career-change`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
+
+    // Blog hub
+    { url: `${base}/blog`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
   ];
+
+  // Blog category pages
+  const blogCategoryEntries: MetadataRoute.Sitemap = BLOG_CATEGORIES.map((c) => ({
+    url: `${base}/blog/category/${c.slug}`,
+    lastModified: now,
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+  }));
 
   // PART 2: dynamic company pages (22 entries)
   const companyEntries: MetadataRoute.Sitemap = COMPANIES.map((c) => ({
@@ -38,5 +50,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticEntries, ...companyEntries];
+  return [...staticEntries, ...companyEntries, ...blogCategoryEntries];
 }

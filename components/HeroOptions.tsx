@@ -556,6 +556,191 @@ export function Fill4_HighlightSweep() {
 }
 
 // ───────────────────────────────────────────────────────────
+// Option 12 — ULTIMATE: Parallax Tilt + Score Climb + Suggestions
+// Everything at once. The card tilts in 3D based on cursor position.
+// Floating score chip + suggestion chips live at different translateZ
+// depths so they parallax independently as the card tilts. The resume
+// still fills in on a loop, suggestions still resolve, score still climbs.
+// ───────────────────────────────────────────────────────────
+export function Fill7_Ultimate() {
+  // Animation state (same loop as Fill6_Combined)
+  const [step, setStep] = useState(0);
+  const [score, setScore] = useState(0);
+
+  // Tilt state
+  const tiltRef = useRef<HTMLDivElement>(null);
+  const [tilt, setTilt] = useState({ rx: 0, ry: 0, x: 50, y: 50 });
+
+  // Animation loop
+  useEffect(() => {
+    const timer = setInterval(() => setStep((s) => (s + 1) % 14), 600);
+    return () => clearInterval(timer);
+  }, []);
+
+  // Score tween
+  useEffect(() => {
+    const target =
+      step >= 13 ? 94 :
+      step >= 12 ? 82 :
+      step >= 11 ? 68 :
+      step >= 10 ? 52 :
+      step >= 9 ? 36 :
+      step >= 7 ? 22 :
+      step >= 5 ? 12 :
+      step >= 3 ? 6 : 0;
+    const id = setInterval(() => {
+      setScore((s) => {
+        if (s === target) return s;
+        return s < target ? s + 1 : s - 1;
+      });
+    }, 14);
+    return () => clearInterval(id);
+  }, [step]);
+
+  // Mouse tilt handlers
+  const onMouseMove = (e: React.MouseEvent) => {
+    const el = tiltRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const xPct = ((e.clientX - rect.left) / rect.width) * 100;
+    const yPct = ((e.clientY - rect.top) / rect.height) * 100;
+    setTilt({
+      rx: -((yPct - 50) / 5),
+      ry: (xPct - 50) / 5,
+      x: xPct,
+      y: yPct,
+    });
+  };
+  const onMouseLeave = () => setTilt({ rx: 0, ry: 0, x: 50, y: 50 });
+
+  const suggestions = [
+    { top: '10%', side: 'right' as const, initial: 'Strong headline', resolved: 'Strong headline', appearAt: 6, resolveAt: 10, depth: 70 },
+    { top: '32%', side: 'left' as const, initial: '+ metric', resolved: 'Metric added', appearAt: 7, resolveAt: 11, depth: 90 },
+    { top: '52%', side: 'right' as const, initial: 'Use action verb', resolved: 'Strong verb', appearAt: 8, resolveAt: 12, depth: 75 },
+    { top: '74%', side: 'left' as const, initial: 'Quantify this', resolved: 'Quantified', appearAt: 9, resolveAt: 13, depth: 95 },
+  ];
+
+  return (
+    <div className="relative w-[440px] h-[540px] mx-auto" style={{ perspective: '1600px' }}>
+      <div
+        ref={tiltRef}
+        onMouseMove={onMouseMove}
+        onMouseLeave={onMouseLeave}
+        className="relative w-full h-full transition-transform duration-200 ease-out"
+        style={{
+          transform: `rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg)`,
+          transformStyle: 'preserve-3d',
+        }}
+      >
+        {/* Resume card — base layer */}
+        <div
+          className="absolute top-6 left-1/2 -translate-x-1/2 w-[360px] h-[480px] rounded-2xl overflow-hidden bg-white border border-gray-200 shadow-2xl shadow-blue-500/40 p-8"
+          style={{ transform: 'translateZ(0px) translateX(-50%)' }}
+        >
+          {/* Header */}
+          <div className="space-y-2 mb-6">
+            <div className={`h-6 bg-gray-900 rounded transition-all duration-500 ${step >= 1 ? 'w-40 opacity-100' : 'w-0 opacity-0'}`} />
+            <div className={`h-3 bg-gray-400 rounded transition-all duration-500 ${step >= 2 ? 'w-56 opacity-100' : 'w-0 opacity-0'}`} />
+          </div>
+          {/* Summary */}
+          <div className="space-y-1.5 mb-6">
+            <div className={`h-3 bg-gray-300 rounded transition-all duration-500 ${step >= 3 ? 'w-full opacity-100' : 'w-0 opacity-0'}`} />
+            <div className={`h-3 bg-gray-300 rounded transition-all duration-500 ${step >= 3 ? 'w-[88%] opacity-100' : 'w-0 opacity-0'}`} />
+            <div className={`h-3 bg-gray-300 rounded transition-all duration-500 ${step >= 3 ? 'w-[72%] opacity-100' : 'w-0 opacity-0'}`} />
+          </div>
+          {/* Experience header */}
+          <div className={`h-4 bg-blue-500 rounded mb-3 transition-all duration-500 ${step >= 4 ? 'w-32 opacity-100' : 'w-0 opacity-0'}`} />
+          {/* Experience items */}
+          <div className="space-y-4 mb-6">
+            {[0, 1].map((i) => (
+              <div key={i} className="space-y-1.5">
+                <div className={`h-3 bg-gray-800 rounded transition-all duration-500 ${step >= 5 ? 'w-48 opacity-100' : 'w-0 opacity-0'}`} />
+                <div className={`h-2.5 bg-gray-300 rounded transition-all duration-500 ${step >= 5 ? 'w-full opacity-100' : 'w-0 opacity-0'}`} />
+                <div className={`h-2.5 bg-gray-300 rounded transition-all duration-500 ${step >= 5 ? 'w-[85%] opacity-100' : 'w-0 opacity-0'}`} />
+              </div>
+            ))}
+          </div>
+          {/* Skills header */}
+          <div className={`h-4 bg-blue-500 rounded mb-3 transition-all duration-500 ${step >= 6 ? 'w-24 opacity-100' : 'w-0 opacity-0'}`} />
+          <div className="flex flex-wrap gap-1.5">
+            {[0, 1, 2, 3, 4].map((i) => (
+              <div
+                key={i}
+                className={`h-6 bg-blue-100 rounded-full transition-all duration-500 ${step >= 6 ? 'w-14 opacity-100' : 'w-0 opacity-0'}`}
+                style={{ transitionDelay: `${i * 60}ms` }}
+              />
+            ))}
+          </div>
+
+          {/* Cursor-tracked highlight sweep on the card itself */}
+          <div
+            className="absolute inset-0 pointer-events-none rounded-2xl"
+            style={{
+              background: `radial-gradient(circle at ${tilt.x}% ${tilt.y}%, rgba(59, 130, 246, 0.12), transparent 55%)`,
+            }}
+          />
+        </div>
+
+        {/* ATS Score chip — floating at depth */}
+        <div
+          className="absolute -top-2 right-0 bg-white rounded-2xl shadow-2xl border border-gray-200 p-4 w-36 z-30"
+          style={{ transform: 'translateZ(100px)' }}
+        >
+          <div className="flex items-center gap-1.5 mb-1">
+            <div className={`h-1.5 w-1.5 rounded-full ${score >= 80 ? 'bg-green-500' : score >= 50 ? 'bg-amber-500' : 'bg-blue-500'} animate-pulse`} />
+            <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider">ATS Score</p>
+          </div>
+          <div className="flex items-end gap-1 mb-2">
+            <span className={`text-4xl font-black tabular-nums transition-colors ${score >= 80 ? 'text-green-500' : score >= 50 ? 'text-amber-500' : 'text-blue-500'}`}>
+              {score}
+            </span>
+            <span className="text-sm text-gray-400 mb-1">%</span>
+          </div>
+          <div className="h-1.5 bg-gray-100 rounded-full overflow-hidden">
+            <div
+              className={`h-full rounded-full transition-all duration-300 ${score >= 80 ? 'bg-green-500' : score >= 50 ? 'bg-amber-500' : 'bg-blue-500'}`}
+              style={{ width: `${score}%` }}
+            />
+          </div>
+          {score >= 90 && (
+            <div className="mt-2 flex items-center gap-1 text-[9px] font-bold text-green-600 animate-fade-in">
+              <CheckCircle2 className="h-3 w-3" />
+              ATS-READY
+            </div>
+          )}
+        </div>
+
+        {/* Suggestion popups — each at its own depth */}
+        {suggestions.map((s, i) => {
+          const appeared = step >= s.appearAt;
+          const resolved = step >= s.resolveAt;
+          const colorClasses = resolved
+            ? 'bg-green-500 text-white'
+            : 'bg-amber-400 text-gray-900';
+          return (
+            <div
+              key={i}
+              className={`absolute text-[10px] font-bold px-2.5 py-1 rounded-full shadow-xl flex items-center gap-1 transition-all duration-500 z-20 ${colorClasses}`}
+              style={{
+                top: `calc(${s.top} + 24px)`,
+                [s.side]: '0',
+                transform: `translateZ(${s.depth}px) ${
+                  appeared ? 'translateX(0) scale(1)' : s.side === 'right' ? 'translateX(20px) scale(0.8)' : 'translateX(-20px) scale(0.8)'
+                }`,
+                opacity: appeared ? 1 : 0,
+              }}
+            >
+              {resolved && <CheckCircle2 className="h-3 w-3" />}
+              <span>{resolved ? s.resolved : s.initial}</span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+// ───────────────────────────────────────────────────────────
 // Option 11 — COMBINED: Score Climb + Suggestion Popups
 // The resume fills in, suggestion chips appear beside each section,
 // each suggestion then "resolves" to a green ✓, and the ATS score chip

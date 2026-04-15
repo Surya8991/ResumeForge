@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { FileText, Menu, X, ArrowRight, LogOut, User, ChevronDown, Settings, KeyRound, Crown, Download, Trash2, BookOpen, Building2, GraduationCap, Briefcase, Lightbulb } from 'lucide-react';
+// Note: FileText is reused for both the brand logo and the "Resume Writing" dropdown icon.
 import { useAuthContext as useAuth } from '@/components/Providers';
 import { useLoginGateway } from '@/components/LoginGateway';
 
@@ -15,15 +16,12 @@ const NAV_LINKS = [
 ];
 
 const RESOURCE_LINKS = [
+  { href: '/blog', label: 'All Articles', desc: 'The full blog', icon: BookOpen },
+  { href: '/blog/category/resume-writing', label: 'Resume Writing', desc: 'Format, bullets, sections', icon: FileText },
+  { href: '/blog/category/ats-keywords', label: 'ATS & Keywords', desc: 'Beat the resume scanners', icon: Lightbulb },
+  { href: '/blog/category/career-transitions', label: 'Career Transitions', desc: 'Layoffs, gaps, pivots', icon: Briefcase },
+  { href: '/blog/category/india-hiring', label: 'India Hiring', desc: 'Naukri, campus, TCS, Infosys', icon: GraduationCap },
   { href: '/resume-for', label: 'Company Guides', desc: '22 top employers', icon: Building2 },
-  { href: '/ats-guide', label: 'ATS Guide', desc: 'Beat the resume scanners', icon: BookOpen },
-  { href: '/resume-tips', label: 'Resume Tips', desc: 'What actually works', icon: Lightbulb },
-  { href: '/fresher-resume', label: 'Fresher Resume', desc: 'Entry-level format', icon: GraduationCap },
-  { href: '/campus-placement-resume', label: 'Campus Placement', desc: 'TCS, Infosys, Wipro', icon: GraduationCap },
-  { href: '/resume-after-layoff', label: 'After Layoff', desc: 'Recover and apply', icon: Briefcase },
-  { href: '/resume-after-career-gap', label: 'After Career Gap', desc: 'Explain and win', icon: Briefcase },
-  { href: '/resume-for-career-change', label: 'Career Change', desc: '5-step pivot guide', icon: Briefcase },
-  { href: '/naukri-resume-tips', label: 'Naukri.com Tips', desc: '3x recruiter views', icon: Lightbulb },
 ];
 
 export default function SiteNavbar() {
