@@ -1,77 +1,64 @@
 'use client';
 
-// Global page-transition loading indicator.
+// Global page-transition loading indicator — Option 4 from /loader-preview.
 //
-// Two visual elements:
-//   1. Thin blue progress bar fixed to the top of the viewport
-//   2. Small floating "resume building" card in the bottom-right corner
-//      that mirrors the homepage hero animation (skeletal bars filling)
+// Visual: a centered skeletal "resume building" card on top of an 85% white
+// backdrop. Mirrors the homepage Fill7_Ultimate hero aesthetic so every
+// page transition reinforces the resume-building brand metaphor.
 //
-// Triggers on every <Link> click and on browser back/forward navigation.
-// Hides automatically when the new route mounts (Next.js renders the new
-// page, which causes pathname to change and our effect to fire the hide).
-//
-// Implementation notes:
-// - Uses Next.js `usePathname` to detect when navigation completes.
-// - Uses a global click listener on `<a>` elements to detect navigation
-//   start. This avoids needing per-link wiring.
-// - Same-pathname clicks (anchor links, query-only changes) are ignored.
+// Behavior:
+// - Triggers on every internal <a> click and on browser back/forward.
+// - 150ms grace period before showing — quick navigations that complete in
+//   under 150ms never flash the loader.
+// - Hides when usePathname() reports the new route mounted.
+// - Filters: external links, mailto/tel, anchor jumps, modifier-key clicks,
+//   target=_blank, downloads, same-pathname clicks.
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 
+const SHOW_DELAY_MS = 150;
+
 export default function PageLoader() {
   const pathname = usePathname();
-  const [loading, setLoading] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const trickleRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const completeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [visible, setVisible] = useState(false);
+  const showTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const lastPathnameRef = useRef(pathname);
 
   const startLoading = useCallback(() => {
-    if (trickleRef.current) clearInterval(trickleRef.current);
-    if (completeTimerRef.current) clearTimeout(completeTimerRef.current);
-    setLoading(true);
-    setProgress(8);
-    // Trickle progress up to ~85% over time (never reaches 100 until complete)
-    trickleRef.current = setInterval(() => {
-      setProgress((p) => {
-        if (p >= 85) return p;
-        // Faster early, slower later — feels like real loading
-        const inc = p < 30 ? 8 : p < 60 ? 4 : 1.5;
-        return Math.min(85, p + inc);
-      });
-    }, 180);
+    if (showTimerRef.current) clearTimeout(showTimerRef.current);
+    // Wait SHOW_DELAY_MS before actually rendering, so a fast same-route
+    // recompile or instant client-side nav never causes the loader to flash.
+    showTimerRef.current = setTimeout(() => {
+      setVisible(true);
+    }, SHOW_DELAY_MS);
   }, []);
 
-  const completeLoading = useCallback(() => {
-    if (trickleRef.current) {
-      clearInterval(trickleRef.current);
-      trickleRef.current = null;
+  const stopLoading = useCallback(() => {
+    if (showTimerRef.current) {
+      clearTimeout(showTimerRef.current);
+      showTimerRef.current = null;
     }
-    setProgress(100);
-    completeTimerRef.current = setTimeout(() => {
-      setLoading(false);
-      setProgress(0);
-    }, 300);
+    setVisible(false);
   }, []);
 
   // Detect navigation start by intercepting <a> clicks anywhere in the page.
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
-      // Ignore clicks with modifier keys (open in new tab, etc.)
+      // Modifier keys = open in new tab, ignore.
       if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || e.button !== 0) return;
 
-      const target = (e.target as HTMLElement | null)?.closest('a');
-      if (!target) return;
-      const anchor = target as HTMLAnchorElement;
+      const anchor = (e.target as HTMLElement | null)?.closest('a');
+      if (!anchor) return;
       if (anchor.target === '_blank' || anchor.hasAttribute('download')) return;
       if (anchor.getAttribute('rel')?.includes('external')) return;
 
       const href = anchor.getAttribute('href');
       if (!href) return;
+      if (href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
 
-      // Only intercept internal navigations
+      // Cross-origin? Skip — the browser will navigate away and our loader
+      // would be stuck on screen.
       if (href.startsWith('http://') || href.startsWith('https://')) {
         try {
           const url = new URL(href);
@@ -80,9 +67,8 @@ export default function PageLoader() {
           return;
         }
       }
-      if (href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
 
-      // Same path? Ignore (anchor jumps within page)
+      // Same path = anchor jump or no-op, ignore.
       const targetPath = href.startsWith('/') ? href.split('?')[0].split('#')[0] : href;
       if (targetPath === window.location.pathname) return;
 
@@ -92,16 +78,6 @@ export default function PageLoader() {
     return () => document.removeEventListener('click', onClick, true);
   }, [startLoading]);
 
-  // When the pathname actually changes, complete the loader.
-  // queueMicrotask defers completeLoading() out of the effect body so the
-  // setState calls inside it don't trigger the cascading-renders warning.
-  useEffect(() => {
-    if (lastPathnameRef.current !== pathname) {
-      lastPathnameRef.current = pathname;
-      queueMicrotask(completeLoading);
-    }
-  }, [pathname, completeLoading]);
-
   // Browser back/forward
   useEffect(() => {
     const onPopState = () => startLoading();
@@ -109,64 +85,65 @@ export default function PageLoader() {
     return () => window.removeEventListener('popstate', onPopState);
   }, [startLoading]);
 
+  // When the pathname actually changes, hide the loader. queueMicrotask
+  // defers the setState out of the effect body to avoid the cascading-
+  // renders lint warning.
+  useEffect(() => {
+    if (lastPathnameRef.current !== pathname) {
+      lastPathnameRef.current = pathname;
+      queueMicrotask(stopLoading);
+    }
+  }, [pathname, stopLoading]);
+
   // Cleanup on unmount
   useEffect(() => {
     return () => {
-      if (trickleRef.current) clearInterval(trickleRef.current);
-      if (completeTimerRef.current) clearTimeout(completeTimerRef.current);
+      if (showTimerRef.current) clearTimeout(showTimerRef.current);
     };
   }, []);
 
-  if (!loading && progress === 0) return null;
+  if (!visible) return null;
 
   return (
-    <>
-      {/* Top progress bar */}
-      <div
-        aria-hidden
-        className="fixed top-0 left-0 right-0 z-[100] h-[3px] pointer-events-none"
-      >
-        <div
-          className="h-full bg-gradient-to-r from-blue-500 via-blue-400 to-indigo-500 shadow-[0_0_8px_rgba(59,130,246,0.6)] transition-[width] ease-out"
-          style={{
-            width: `${progress}%`,
-            transitionDuration: progress === 100 ? '200ms' : '180ms',
-            opacity: loading ? 1 : 0,
-          }}
-        />
-      </div>
-
-      {/* Floating mini-card — only shows after a brief delay so quick navs
-          don't flash it. Uses the same skeletal-fill aesthetic as the
-          homepage Fill7_Ultimate hero. */}
-      {loading && progress > 25 && (
-        <div
-          aria-hidden
-          className="fixed bottom-6 right-6 z-[99] w-48 bg-white rounded-xl shadow-2xl shadow-blue-500/30 border border-gray-200 p-4 animate-fade-in pointer-events-none"
-        >
-          <div className="flex items-center gap-2 mb-3">
-            <div className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
-            <p className="text-[10px] font-bold text-gray-500 uppercase tracking-wider">
-              Loading page
-            </p>
-          </div>
-          <div className="space-y-1.5 mb-2">
-            <div className="h-2 bg-gray-900 rounded animate-pulse" style={{ width: '60%' }} />
-            <div className="h-1.5 bg-gray-300 rounded animate-pulse" style={{ width: '90%', animationDelay: '100ms' }} />
-            <div className="h-1.5 bg-gray-300 rounded animate-pulse" style={{ width: '75%', animationDelay: '200ms' }} />
-          </div>
-          <div className="h-2 bg-blue-500 rounded mb-1.5 animate-pulse" style={{ width: '40%' }} />
-          <div className="space-y-1">
-            <div className="h-1.5 bg-gray-300 rounded animate-pulse" style={{ width: '100%', animationDelay: '300ms' }} />
-            <div className="h-1.5 bg-gray-300 rounded animate-pulse" style={{ width: '85%', animationDelay: '400ms' }} />
-          </div>
-          <div className="flex gap-1 mt-2">
-            <div className="h-3 w-8 bg-blue-100 rounded-full animate-pulse" style={{ animationDelay: '500ms' }} />
-            <div className="h-3 w-10 bg-blue-100 rounded-full animate-pulse" style={{ animationDelay: '600ms' }} />
-            <div className="h-3 w-6 bg-blue-100 rounded-full animate-pulse" style={{ animationDelay: '700ms' }} />
-          </div>
+    <div
+      aria-hidden
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-white/85 backdrop-blur-sm pointer-events-none animate-fade-in"
+    >
+      <div className="w-64 rounded-2xl bg-white border border-gray-200 shadow-2xl shadow-blue-500/20 p-5">
+        <div className="flex items-center gap-2 mb-4">
+          <div className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
+          <p className="text-[10px] font-bold uppercase tracking-wider text-gray-500">
+            Loading page
+          </p>
         </div>
-      )}
-    </>
+
+        {/* Header skeleton */}
+        <div className="space-y-2 mb-3">
+          <div className="h-3 bg-gray-900 rounded animate-pulse" style={{ width: '60%' }} />
+          <div className="h-2 bg-gray-300 rounded animate-pulse" style={{ width: '90%', animationDelay: '100ms' }} />
+          <div className="h-2 bg-gray-300 rounded animate-pulse" style={{ width: '75%', animationDelay: '200ms' }} />
+        </div>
+
+        {/* Section heading */}
+        <div className="h-2.5 bg-blue-500 rounded mb-2 animate-pulse" style={{ width: '40%' }} />
+
+        {/* Body lines */}
+        <div className="space-y-1.5 mb-3">
+          <div className="h-2 bg-gray-300 rounded animate-pulse" style={{ width: '100%', animationDelay: '300ms' }} />
+          <div className="h-2 bg-gray-300 rounded animate-pulse" style={{ width: '85%', animationDelay: '400ms' }} />
+        </div>
+
+        {/* Skill pills */}
+        <div className="flex gap-1">
+          {[0, 1, 2].map((i) => (
+            <div
+              key={i}
+              className="h-3 bg-blue-100 rounded-full animate-pulse"
+              style={{ width: `${24 + i * 8}px`, animationDelay: `${500 + i * 100}ms` }}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }

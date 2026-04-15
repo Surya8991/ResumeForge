@@ -6,6 +6,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 ---
 
+## [1.14.0] - 2026-04-15
+
+### Changed
+
+- **Page loader replaced** with the centered-skeleton-card design (Option 4 from `/loader-preview`). The previous top progress bar + bottom-right floating card design is gone. The new loader is a centered card on a soft white backdrop with skeletal resume bars filling in — mirrors the homepage Fill7_Ultimate hero aesthetic so every page transition reinforces the resume-building brand metaphor.
+- **Loader has a 150ms grace period** before showing. Quick navigations that complete in under 150ms never flash the loader at all.
+- **`/loader-preview` gallery** added with 10 loader options (Stripe, Vercel, Spotify, Apple, GitHub, Linear, Notion, Material Design inspirations) for selecting between alternative designs.
+
+### Fixed
+
+- `components/PageLoaderOptions.tsx` Loader10_SparkleCursor: moved initial `setPos` out of the effect body into a `queueMicrotask` callback to satisfy the cascading-renders lint rule.
+
+---
+
 ## [1.13.0] - 2026-04-15
 
 ### Added

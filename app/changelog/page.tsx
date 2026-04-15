@@ -15,6 +15,19 @@ interface ChangelogEntry {
 
 const CHANGELOG: ChangelogEntry[] = [
   {
+    version: 'v1.14.0',
+    date: 'April 15, 2026',
+    title: 'Centered Skeleton Card Page Loader + Loader Preview',
+    added: [
+      '/loader-preview gallery with 10 page-loader animation options (Stripe, Vercel, Spotify, Apple, GitHub, Linear, Notion, Material Design inspirations).',
+    ],
+    improved: [
+      'Page loader replaced with the centered skeleton card design (Option 4). Mirrors the homepage Fill7_Ultimate hero aesthetic so every page transition reinforces the resume-building brand metaphor.',
+      'Top progress bar removed entirely. The new loader is a centered card on a soft white backdrop with skeletal resume bars filling in.',
+      '150ms grace period before the loader shows — quick navigations that complete in under 150ms never flash the loader.',
+    ],
+  },
+  {
     version: 'v1.13.0',
     date: 'April 15, 2026',
     title: 'Page Loader + Codereview Cleanup',
