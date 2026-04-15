@@ -47,7 +47,7 @@ export default function OGImage() {
           </div>
           <span style={{ color: 'white', fontSize: '48px', fontWeight: 'bold' }}>
             Resume
-            <span style={{ color: '#60a5fa' }}>Forge</span>
+            <span style={{ color: '#60a5fa' }}>Buildz</span>
           </span>
         </div>
 

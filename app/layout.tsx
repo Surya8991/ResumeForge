@@ -132,7 +132,7 @@ export default function RootLayout({
                     name: "Surya L",
                   },
                   sameAs: [
-                    "https://github.com/Surya8991/resumeforge",
+                    "https://github.com/Surya8991/resumebuildz",
                   ],
                 },
               ],

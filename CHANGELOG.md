@@ -10,6 +10,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 ### Changed
 
+- **Navbar "Resources" dropdown** now contains two nested sections: a **"Blog — topic clusters"** group with all 6 clusters (Resume Writing, ATS & Keywords, Career Transitions, India Hiring, Company Deep Dives, AI Resume Tools), and a **"Help"** group with FAQ + Company Guides Hub. FAQ moved out of the top-level nav.
+- **Main nav items**: Templates, Resources (dropdown), About, Pricing, Contact.
+- **Footer Blog column** (replacing the old Resources column) with links to All Articles, 4 cluster pages, and FAQ. GitHub link updated to `Surya8991/resumebuildz`.
+- **OG image** brand text changed from "ResumeForge" to "ResumeBuildz" in `app/opengraph-image.tsx`.
+- **JSON-LD Organization** `sameAs` in `app/layout.tsx` updated to the new repo URL.
+- **README.md / README.html** clone commands updated to `resumebuildz.git`.
 - **Project renamed** from ResumeForge to **ResumeBuildz**. Every user-facing string ("ResumeForge") has been replaced with "ResumeBuildz" across 43 files: site metadata (titles, descriptions, OG/Twitter tags), JSON-LD publisher name, brand logo text in navbar/footer/login/builder/not-found, all in-page copy, testimonials, manifest.json, llms.txt, README, CONTRIBUTING, SECURITY, LICENSE, .env.example, and all blog/resources/situation/company pages.
 - **package.json** name changed from `resumeforge` to `resumebuildz`.
 - **Historical CHANGELOG entries** rewritten to say "ResumeBuildz" so brand consistency is preserved for anyone reading the file top-to-bottom (no historical inaccuracy — the product is the same, only the name changed).

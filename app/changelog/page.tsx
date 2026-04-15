@@ -17,9 +17,13 @@ const CHANGELOG: ChangelogEntry[] = [
   {
     version: 'v1.11.0',
     date: 'April 15, 2026',
-    title: 'Project Renamed to ResumeBuildz',
-    added: [],
+    title: 'Project Renamed to ResumeBuildz + Navbar Restructure',
+    added: [
+      'Navbar Resources dropdown restructured with two nested sections: "Blog — topic clusters" (6 clusters) and "Help" (FAQ + Company Guides Hub).',
+      'Blog column added to the footer (All Articles + 4 cluster pages + FAQ).',
+    ],
     improved: [
+      'Main nav simplified: Templates, Resources, About, Pricing, Contact. FAQ moved out of top-level nav into the Resources dropdown and the footer.',
       'Brand renamed from ResumeForge to ResumeBuildz across 43 files: metadata (titles, descriptions, OG/Twitter tags), JSON-LD publisher, brand logo in navbar/footer/login/builder/404, all in-page copy, testimonials, manifest.json, llms.txt, README, CONTRIBUTING, SECURITY, LICENSE, .env.example, and every blog/resources/situation/company page.',
       'package.json name changed from "resumeforge" to "resumebuildz".',
       'Historical CHANGELOG entries rewritten for brand consistency (no historical inaccuracy — same product, new name).',

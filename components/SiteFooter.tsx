@@ -21,12 +21,14 @@ export default function SiteFooter() {
             </div>
           </div>
           <div>
-            <h4 className="text-white font-semibold text-sm mb-3">Resources</h4>
+            <h4 className="text-white font-semibold text-sm mb-3">Blog</h4>
             <div className="space-y-2 text-sm">
-              <Link href="/ats-guide" className="block hover:text-white transition-colors">ATS Guide</Link>
-              <Link href="/resume-tips" className="block hover:text-white transition-colors">Resume Tips</Link>
+              <Link href="/blog" className="block hover:text-white transition-colors">All Articles</Link>
+              <Link href="/blog/category/resume-writing" className="block hover:text-white transition-colors">Resume Writing</Link>
+              <Link href="/blog/category/ats-keywords" className="block hover:text-white transition-colors">ATS &amp; Keywords</Link>
+              <Link href="/blog/category/career-transitions" className="block hover:text-white transition-colors">Career Transitions</Link>
+              <Link href="/blog/category/india-hiring" className="block hover:text-white transition-colors">India Hiring</Link>
               <Link href="/faq" className="block hover:text-white transition-colors">FAQ</Link>
-              <Link href="/login" className="block hover:text-white transition-colors">Sign In</Link>
             </div>
           </div>
           <div>
@@ -34,7 +36,7 @@ export default function SiteFooter() {
             <div className="space-y-2 text-sm">
               <Link href="/about" className="block hover:text-white transition-colors">About</Link>
               <Link href="/contact" className="block hover:text-white transition-colors">Contact</Link>
-              <a href="https://github.com/Surya8991/resumeforge" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-white transition-colors">
+              <a href="https://github.com/Surya8991/resumebuildz" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-white transition-colors">
                 GitHub <ExternalLink className="h-3 w-3" />
               </a>
               <a href="https://linkedin.com/in/surya-l" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-white transition-colors">

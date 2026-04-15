@@ -159,8 +159,8 @@ ResumeBuildz runs in your browser with optional Supabase auth for Pro features. 
 
 ```bash
 # Clone the repository
-git clone https://github.com/Surya8991/resumeforge.git
-cd resumeforge
+git clone https://github.com/Surya8991/resumebuildz.git
+cd resumebuildz
 
 # Install dependencies
 npm install
@@ -246,7 +246,7 @@ The app requires a Node.js runtime for proxy (auth refresh) and server component
 ## Project Structure
 
 ```
-resumeforge/
+resumebuildz/
 ├── app/
 │   ├── layout.tsx                  # Root layout with JSON-LD schema
 │   ├── page.tsx                    # Homepage
@@ -374,7 +374,7 @@ Contributions are welcome and appreciated. Whether it is fixing a bug, adding a 
 
 ### Reporting Issues
 
-Found a bug or have a suggestion? [Open an issue](https://github.com/Surya8991/resumeforge/issues) with details about the problem or your idea.
+Found a bug or have a suggestion? [Open an issue](https://github.com/Surya8991/resumebuildz/issues) with details about the problem or your idea.
 
 ## Designed By
 
