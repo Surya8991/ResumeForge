@@ -107,7 +107,8 @@ export default function OnboardingGuide() {
 
   useEffect(() => {
     const id = requestAnimationFrame(() => setMounted(true));
-    const done = localStorage.getItem(STORAGE_KEY);
+    let done: string | null = null;
+    try { done = localStorage.getItem(STORAGE_KEY); } catch { /* localStorage unavailable */ }
     if (!done) {
       // Small delay so the app renders first
       const timer = setTimeout(() => setShow(true), 1500);

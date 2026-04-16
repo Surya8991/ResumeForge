@@ -127,7 +127,7 @@ export async function downloadDocx(data: ResumeData, primaryColor: string) {
           children: [
             new TextRun({ text: exp.position, bold: true, size: 22 }),
             new TextRun({ text: '\t', size: 22 }),
-            new TextRun({ text: `${exp.startDate} - ${exp.current ? 'Present' : exp.endDate}`, size: 18, color: '666666' }),
+            new TextRun({ text: `${exp.startDate} - ${exp.current ? 'Present' : (exp.endDate || 'Present')}`, size: 18, color: '666666' }),
           ],
         })
       );
@@ -164,7 +164,7 @@ export async function downloadDocx(data: ResumeData, primaryColor: string) {
           children: [
             new TextRun({ text: `${edu.degree}${edu.field ? ` in ${edu.field}` : ''}`, bold: true, size: 22 }),
             new TextRun({ text: '\t', size: 22 }),
-            new TextRun({ text: `${edu.startDate} - ${edu.endDate}`, size: 18, color: '666666' }),
+            new TextRun({ text: (edu.startDate || edu.endDate) ? `${edu.startDate} - ${edu.endDate}` : '', size: 18, color: '666666' }),
           ],
         })
       );

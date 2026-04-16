@@ -146,7 +146,7 @@ export default function InfographicTemplate({ data, primaryColor }: TemplateProp
                             className="h-full rounded-full"
                             style={{
                               backgroundColor: primaryColor,
-                              width: `${85 - (i * 8) + Math.random() * 5}%`,
+                              width: `${85 - (i * 8) + ((i * 7 + 3) % 5)}%`,
                               opacity: 0.7 + (0.3 * (1 - i / skill.items.length)),
                             }}
                           />

@@ -93,15 +93,20 @@ export default function ATSScoreChecker() {
       setAiGapLoading(false);
       return;
     }
-    const result = await callGroqAI(
-      'You are an ATS optimization expert. Give concise, actionable advice in 3-5 bullet points. No preamble.',
-      `Resume summary: ${resumeData.summary}\n\nJob description keywords missing from resume: ${missing.join(', ')}\n\nSuggest how to naturally incorporate these missing keywords into the resume. Be specific about which section to add them to.`,
-      400,
-      0.7
-    );
-    if (result.success && result.content) setAiGapAnalysis(result.content);
-    else setAiGapAnalysis(result.error || 'Failed to generate analysis');
-    setAiGapLoading(false);
+    try {
+      const result = await callGroqAI(
+        'You are an ATS optimization expert. Give concise, actionable advice in 3-5 bullet points. No preamble.',
+        `Resume summary: ${resumeData.summary}\n\nJob description keywords missing from resume: ${missing.join(', ')}\n\nSuggest how to naturally incorporate these missing keywords into the resume. Be specific about which section to add them to.`,
+        400,
+        0.7
+      );
+      if (result.success && result.content) setAiGapAnalysis(result.content);
+      else setAiGapAnalysis(result.error || 'Failed to generate analysis');
+    } catch {
+      setAiGapAnalysis('Failed to connect to AI service.');
+    } finally {
+      setAiGapLoading(false);
+    }
   };
 
   return (

@@ -49,8 +49,21 @@ export function formatBullet(text: string): string {
  * Otherwise prepend https://.
  */
 export function ensureUrl(url: string): string {
+  if (/^(javascript|data|vbscript):/i.test(url)) return '#';
   if (/^https?:\/\//i.test(url)) return url;
   return `https://${url}`;
+}
+
+/** Only allow data-URL photos. Remote URLs leak user IP / enable SSRF. */
+export function safePhotoSrc(src: string): string {
+  if (!src) return '';
+  if (src.startsWith('data:image/')) return src;
+  return '';
+}
+
+/** Validate hex color to prevent CSS injection via primaryColor. */
+export function safePrimaryColor(color: string): string {
+  return /^#[0-9a-fA-F]{6}$/.test(color) ? color : '#2563eb';
 }
 
 export function ContactSeparator({ color }: { color: string }) {

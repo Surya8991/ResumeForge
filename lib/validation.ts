@@ -7,6 +7,7 @@ export type Validator = (value: string) => string | null;
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PHONE_RE = /^[+\d][\d\s\-().]{6,}$/;
+const PHONE_DIGIT_RE = /\d/g;
 const URL_RE = /^https?:\/\/[^\s]+$/;
 const URL_RELAXED_RE = /^(https?:\/\/)?[\w.-]+\.[a-z]{2,}([/?#].*)?$/i;
 
@@ -21,7 +22,9 @@ export const validators = {
 
   phone: (value: string): string | null => {
     if (!value) return null;
-    return PHONE_RE.test(value) ? null : 'Enter a valid phone number';
+    if (!PHONE_RE.test(value)) return 'Enter a valid phone number';
+    const digitCount = (value.match(PHONE_DIGIT_RE) || []).length;
+    return digitCount >= 7 ? null : 'Phone number must have at least 7 digits';
   },
 
   url: (value: string): string | null => {

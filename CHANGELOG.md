@@ -6,6 +6,55 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 ---
 
+## [1.16.0] - 2026-04-16
+
+### Fixed (full-project codereview — 40+ findings across 31 files)
+
+#### Security
+- **High:** `ensureUrl()` now blocks `javascript:`, `data:`, and `vbscript:` URI schemes.
+- **High:** `safePhotoSrc()` rejects remote photo URLs — only `data:image/*` allowed. Wired into `ResumePreview` so all 20 templates are protected.
+- **High:** `safePrimaryColor()` validates hex format before interpolation into CSS. Wired into `ResumePreview`.
+- **High:** `callGroqAI` calls wrapped in try/catch/finally in `ATSScoreChecker`, `AISuggestions`, and `CoverLetterForm` — no more permanent loading states on network failure.
+- **Medium:** `fetchProfile` now uses explicit `select(...)` instead of `select('*')`, logs errors instead of swallowing them.
+- **Medium:** `exportUserData` now picks only safe fields from profile instead of dumping the raw object.
+- **Medium:** `canUseAI` limit aligned to `FREE_LIMITS.ai = 1` (was hardcoded `< 3`).
+
+#### Bugs
+- **High:** `SectionReorder` `indexOf` can return -1 — guard added to prevent array corruption.
+- **High:** Legacy `.doc` import now returns clear error instead of opaque mammoth crash.
+- **High:** AI-parsed JSON validated: arrays checked with `Array.isArray`, malformed objects rejected.
+- **Medium:** `DateConsistency` non-null assertion replaced with proper null check.
+- **Medium:** `InfographicTemplate` skill bars use deterministic formula instead of `Math.random()`.
+- **Medium:** `ModernTemplate` two-column layout now includes custom sections (were silently dropped).
+- **Medium:** `exportDocx`/`exportHtml` handle empty `endDate` — no more trailing " - " with nothing.
+- **Medium:** `PasteImportModal` 100k char limit now enforced on the Import button.
+- **Medium:** `MultiJDMatching` ID collision risk fixed with random suffix.
+- **Medium:** `BoldTemplate` certifications: "to" → "-".
+- **Medium:** `MonochromeTemplate` empty proficiency no longer renders `()`.
+- **Low:** `builder/page.tsx` custom section IDs use `crypto.randomUUID()` instead of `Math.random()`.
+- **Low:** Blob URL revoke deferred 60s in builder export and useAuth export (prevents download cancellation).
+
+#### UX / Accessibility
+- **Medium:** `deleteProfile` now requires `confirm()` before deletion.
+- **Medium:** `ErrorBoundary` "Reset & Reload" now requires `confirm()` before nuking localStorage.
+- **Medium:** Toast container has `role="status" aria-live="polite"` for screen readers.
+- **Medium:** Contact form success changed from "Message Sent!" to "Email Client Opened!" with fallback text.
+- **Medium:** `SummaryForm` removed misleading "/500" counter (no maxLength was enforced).
+- **Low:** `PersonalInfoForm` LinkedIn/GitHub regex now checks URL starts with the domain.
+- **Low:** Phone validation requires >= 7 actual digits.
+- **Low:** `textAnalysis.ts` bigram extraction skips stop-word pairs.
+
+#### Cleanup
+- **Medium:** Removed redundant `<link rel="preconnect">` for Google Fonts (next/font handles this).
+- **Medium:** `SiteNavbar` mobile menu removed dead `/builder` branch (NAV_LINKS never contained it).
+- **Low:** `WhatsNew` + `OnboardingGuide` localStorage access wrapped in try/catch (Safari private browsing).
+- **Low:** `ReadingProgress` resize listener now passive.
+- **Low:** `siteConfig.ts` fallback URL updated from old `resume-forge-orcin` to `resumebuildz`.
+
+Lint: 0 errors. Build clean. 31 files changed.
+
+---
+
 ## [1.15.1] - 2026-04-16
 
 ### Fixed (codereview pass #2 — 13 findings)

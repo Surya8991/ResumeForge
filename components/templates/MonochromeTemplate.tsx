@@ -167,9 +167,9 @@ export default function MonochromeTemplate({ data }: TemplateProps) {
               {languages.map((lang) => (
                 <div key={lang.id}>
                   <span className="text-[10px] font-bold text-black">{lang.name}</span>
-                  <span className="text-[9px] text-gray-500 italic ml-1.5" style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}>
+                  {lang.proficiency && <span className="text-[9px] text-gray-500 italic ml-1.5" style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}>
                     ({lang.proficiency})
-                  </span>
+                  </span>}
                 </div>
               ))}
             </div>

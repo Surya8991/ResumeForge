@@ -141,7 +141,7 @@ export default function BoldTemplate({ data, primaryColor }: TemplateProps) {
                 <div key={cert.id} className="mb-1 flex justify-between">
                   <div>
                     <span className="text-[11px] font-extrabold">{cert.name}</span>
-                    <span className="text-[11px] text-gray-600 font-bold"> to {cert.issuer}</span>
+                    {cert.issuer && <span className="text-[11px] text-gray-600 font-bold"> - {cert.issuer}</span>}
                   </div>
                   <span className="text-[10px] font-bold text-gray-500">{cert.date}</span>
                 </div>

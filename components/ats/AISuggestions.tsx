@@ -91,12 +91,19 @@ export default function AISuggestions() {
     setError('');
     setResult('');
 
-    const res = await callGroqAI(
-      'You are a professional resume writer and ATS optimization expert. Give concise, actionable suggestions. Do not include any preamble or explanation - just the requested content.',
-      `Here is the resume:\n\n${resumeContext}\n\n${prompt}`,
-      500,
-      0.7,
-    );
+    let res: Awaited<ReturnType<typeof callGroqAI>>;
+    try {
+      res = await callGroqAI(
+        'You are a professional resume writer and ATS optimization expert. Give concise, actionable suggestions. Do not include any preamble or explanation - just the requested content.',
+        `Here is the resume:\n\n${resumeContext}\n\n${prompt}`,
+        500,
+        0.7,
+      );
+    } catch {
+      setError('Failed to connect to AI service. Check your internet connection.');
+      setLoading(false);
+      return;
+    }
     setLoading(false);
 
     if (!res.success) {

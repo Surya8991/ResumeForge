@@ -21,10 +21,12 @@ export default function WhatsNew() {
 
   useEffect(() => {
     const id = requestAnimationFrame(() => {
-      const savedVersion = localStorage.getItem('resumeforge-version');
-      if (savedVersion !== APP_VERSION) {
-        setShow(true);
-      }
+      try {
+        const savedVersion = localStorage.getItem('resumeforge-version');
+        if (savedVersion !== APP_VERSION) {
+          setShow(true);
+        }
+      } catch { /* localStorage unavailable (e.g. Safari private browsing) */ }
     });
     return () => cancelAnimationFrame(id);
   }, []);

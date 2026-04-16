@@ -31,7 +31,7 @@ export default class ErrorBoundary extends Component<Props, State> {
               <Button onClick={() => this.setState({ hasError: false })} className="gap-2">
                 <RotateCcw className="h-4 w-4" /> Try Again
               </Button>
-              <Button variant="outline" onClick={() => { localStorage.removeItem('resumeforge-storage'); window.location.reload(); }}>
+              <Button variant="outline" onClick={() => { if (confirm('This will erase your resume data. Continue?')) { localStorage.removeItem('resumeforge-storage'); window.location.reload(); } }}>
                 Reset & Reload
               </Button>
             </div>

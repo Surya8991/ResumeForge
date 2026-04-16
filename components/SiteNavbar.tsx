@@ -355,16 +355,7 @@ export default function SiteNavbar() {
         {/* Mobile menu */}
         {mobileOpen && (
           <div className="md:hidden border-t border-gray-800 py-3 space-y-1 animate-fade-in-up">
-            {NAV_LINKS.map((link) =>
-              link.href === '/builder' ? (
-                <button
-                  key={link.href}
-                  onClick={() => { setMobileOpen(false); openGateway('/builder'); }}
-                  className="block w-full text-left text-gray-300 hover:text-white text-sm px-3 py-2 rounded-md hover:bg-gray-800 transition-colors"
-                >
-                  {link.label}
-                </button>
-              ) : (
+            {NAV_LINKS.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
@@ -373,8 +364,7 @@ export default function SiteNavbar() {
                 >
                   {link.label}
                 </Link>
-              )
-            )}
+            ))}
             {/* Resources mega-dropdown on mobile — grouped by parent */}
             <div className="pt-2 mt-2 border-t border-gray-800">
               <p className="text-xs text-gray-500 uppercase tracking-wide px-3 mb-1.5 flex items-center gap-1.5">

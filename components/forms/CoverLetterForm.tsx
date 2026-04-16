@@ -40,15 +40,20 @@ export default function CoverLetterForm() {
     ].filter(Boolean).join('\n');
 
     setLoading(true);
-    const res = await callGroqAI(
-      'Write a professional cover letter. Be concise (250-350 words). No placeholders  -  use the provided details. Return only the letter text.',
-      `Write a cover letter for ${jobTitle || 'a role'} at ${company || 'a company'}.\n\nCandidate info:\n${context}`,
-      800,
-      0.7,
-    );
-    setLoading(false);
-    if (!res.success) { alert(res.error || 'AI generation failed.'); return; }
-    if (res.content) updateCoverLetter(res.content);
+    try {
+      const res = await callGroqAI(
+        'Write a professional cover letter. Be concise (250-350 words). No placeholders  -  use the provided details. Return only the letter text.',
+        `Write a cover letter for ${jobTitle || 'a role'} at ${company || 'a company'}.\n\nCandidate info:\n${context}`,
+        800,
+        0.7,
+      );
+      if (!res.success) { alert(res.error || 'AI generation failed.'); return; }
+      if (res.content) updateCoverLetter(res.content);
+    } catch {
+      alert('Failed to connect to AI service.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const copyToClipboard = async () => {

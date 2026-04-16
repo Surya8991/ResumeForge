@@ -165,7 +165,7 @@ export default function ModernTemplate({ data, primaryColor }: TemplateProps) {
 
       {/* Main Content */}
       <div className="flex-1 p-6">
-        {sectionOrder.filter((s) => leftSections.includes(s)).map((section) => renderSection(section))}
+        {sectionOrder.filter((s) => leftSections.includes(s) || s.startsWith('custom-')).map((section) => renderSection(section))}
       </div>
     </div>
   );

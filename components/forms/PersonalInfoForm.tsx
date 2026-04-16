@@ -13,9 +13,9 @@ function getValidationError(key: string, value: string): string | null {
     case 'phone':
       return !/^[+\d][\d\s\-().]{6,}$/.test(value) ? 'Enter a valid phone number' : null;
     case 'linkedin':
-      return value.length > 5 && !/linkedin\.com/i.test(value) ? 'Should contain linkedin.com' : null;
+      return value.length > 5 && !/^(https?:\/\/)?(www\.)?linkedin\.com\//i.test(value) ? 'Should be a linkedin.com URL' : null;
     case 'github':
-      return value.length > 5 && !/github\.com/i.test(value) ? 'Should contain github.com' : null;
+      return value.length > 5 && !/^(https?:\/\/)?(www\.)?github\.com\//i.test(value) ? 'Should be a github.com URL' : null;
     default:
       return null;
   }

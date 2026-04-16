@@ -462,9 +462,16 @@ Extract ALL bullet points completely. Keep exact text. Use unique IDs. Set curre
     const jsonMatch = res.content.match(/```(?:json)?\s*([\s\S]*?)```/);
     if (jsonMatch) jsonStr = jsonMatch[1].trim();
     const parsed = JSON.parse(jsonStr);
-    if (!parsed?.personalInfo) return null;
-    if (!parsed.sectionOrder) parsed.sectionOrder = ['summary', 'experience', 'education', 'skills', 'projects', 'certifications', 'languages'];
-    if (!parsed.customSections) parsed.customSections = [];
+    if (!parsed?.personalInfo || typeof parsed.personalInfo !== 'object') return null;
+    // Validate arrays to prevent downstream crashes from malformed AI output
+    if (parsed.experience && !Array.isArray(parsed.experience)) parsed.experience = [];
+    if (parsed.education && !Array.isArray(parsed.education)) parsed.education = [];
+    if (parsed.skills && !Array.isArray(parsed.skills)) parsed.skills = [];
+    if (parsed.projects && !Array.isArray(parsed.projects)) parsed.projects = [];
+    if (parsed.certifications && !Array.isArray(parsed.certifications)) parsed.certifications = [];
+    if (parsed.languages && !Array.isArray(parsed.languages)) parsed.languages = [];
+    if (!parsed.sectionOrder || !Array.isArray(parsed.sectionOrder)) parsed.sectionOrder = ['summary', 'experience', 'education', 'skills', 'projects', 'certifications', 'languages'];
+    if (!parsed.customSections || !Array.isArray(parsed.customSections)) parsed.customSections = [];
     if (!parsed.coverLetter) parsed.coverLetter = '';
     if (!parsed.personalInfo.photo) parsed.personalInfo.photo = '';
     return parsed as ResumeData;
@@ -486,7 +493,8 @@ export async function importResumeFromFile(file: File): Promise<ImportResult> {
   try {
     let rawText: string;
     if (ext === 'pdf') rawText = await extractTextFromPdf(file);
-    else if (ext === 'docx' || ext === 'doc') rawText = await extractTextFromDocx(file);
+    else if (ext === 'doc') return { success: false, error: 'Legacy .doc format is not supported. Please save as .docx and try again.' };
+    else if (ext === 'docx') rawText = await extractTextFromDocx(file);
     else if (ext === 'html' || ext === 'htm') rawText = await extractTextFromHtml(file);
     else rawText = await extractTextFromPlain(file); // txt and md
 
@@ -504,7 +512,7 @@ export async function importResumeFromFile(file: File): Promise<ImportResult> {
   }
 }
 
-export const SUPPORTED_IMPORT_FORMATS = '.pdf,.docx,.doc,.txt,.html,.htm,.md';
+export const SUPPORTED_IMPORT_FORMATS = '.pdf,.docx,.txt,.html,.htm,.md';
 
 /**
  * Import resume from raw text (paste workflow).

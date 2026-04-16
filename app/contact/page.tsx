@@ -29,7 +29,7 @@ export default function ContactPage() {
     const subject = encodeURIComponent(`[ResumeBuildz ${formData.subject}] from ${formData.name}`);
     const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`);
     window.location.href = `mailto:Suryaraj8147@gmail.com?subject=${subject}&body=${body}`;
-    setSubmitted(true);
+    setSubmitted(true); // Note: mailto is fire-and-forget; we show a softer message below
   };
 
   return (
@@ -86,8 +86,8 @@ export default function ContactPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">Message Sent!</h3>
-                <p className="text-gray-600 mb-4">Thank you for reaching out. We&apos;ll get back to you soon.</p>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">Email Client Opened!</h3>
+                <p className="text-gray-600 mb-4">Your email client should have opened with the message. If it didn&apos;t, email us directly at Suryaraj8147@gmail.com.</p>
                 <button onClick={() => { setSubmitted(false); setFormData({ name: '', email: '', subject: 'General', message: '' }); }} className="text-blue-400 hover:underline text-sm">
                   Send another message
                 </button>

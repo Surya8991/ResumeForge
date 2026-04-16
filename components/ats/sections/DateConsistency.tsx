@@ -103,7 +103,8 @@ export default function DateConsistency() {
         const nextEnd = sortedExp[i + 1].endDate
           ? parseDate(sortedExp[i + 1].endDate)
           : new Date();
-        if (nextEnd && nextEnd > parseDate(sortedExp[i].startDate)!) {
+        const currentStart = parseDate(sortedExp[i].startDate);
+        if (nextEnd && currentStart && nextEnd > currentStart) {
           // Overlap detected
           overlapPass = false;
           break;

@@ -3,7 +3,7 @@
 import { createElement, forwardRef, memo, useId, useMemo, useState, useCallback } from 'react';
 import { useResumeStore } from '@/store/useResumeStore';
 import { getTemplateComponent } from '@/components/templates';
-import { DEFAULT_STYLE_OPTIONS, FONT_OPTIONS } from '@/components/templates/TemplateWrapper';
+import { DEFAULT_STYLE_OPTIONS, FONT_OPTIONS, safePhotoSrc, safePrimaryColor } from '@/components/templates/TemplateWrapper';
 
 // Whitelist of allowed font families to prevent CSS injection
 const ALLOWED_FONTS = new Set(FONT_OPTIONS.map(f => f.value));
@@ -101,7 +101,11 @@ const ResumePreview = forwardRef<HTMLDivElement>((_, ref) => {
       }}
     >
       {overrideCSS && <style dangerouslySetInnerHTML={{ __html: sanitizeCSS(overrideCSS) }} />}
-      {createElement(TemplateComponent, { data: resumeData, primaryColor, styleOptions })}
+      {createElement(TemplateComponent, {
+        data: { ...resumeData, personalInfo: { ...resumeData.personalInfo, photo: safePhotoSrc(resumeData.personalInfo.photo) } },
+        primaryColor: safePrimaryColor(primaryColor),
+        styleOptions,
+      })}
       {pageBreaks.map((y, i) => (
         <div key={i}>
           <div className="page-break-line" style={{ top: y }} />

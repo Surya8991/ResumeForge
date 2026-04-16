@@ -36,9 +36,12 @@ export function extractKeywords(text: string): string[] {
     }
   }
 
-  // Also extract multi-word phrases (bigrams) for tech terms
+  // Also extract multi-word phrases (bigrams) for tech terms — skip stop-word pairs
   for (let i = 0; i < words.length - 1; i++) {
-    const bigram = `${words[i]} ${words[i + 1]}`.replace(/[^a-z0-9\s\-+#.]/g, '').trim();
+    const w1 = words[i].replace(/^[^a-z0-9]+|[^a-z0-9]+$/g, '');
+    const w2 = words[i + 1].replace(/^[^a-z0-9]+|[^a-z0-9]+$/g, '');
+    if (STOP_WORDS.has(w1) || STOP_WORDS.has(w2)) continue;
+    const bigram = `${w1} ${w2}`.trim();
     if (bigram.length >= 5 && /[a-z]/.test(bigram)) {
       keywords.add(bigram);
     }

@@ -58,6 +58,7 @@ export default function SectionReorder() {
     if (over && active.id !== over.id) {
       const oldIndex = sectionOrder.indexOf(active.id as string);
       const newIndex = sectionOrder.indexOf(over.id as string);
+      if (oldIndex < 0 || newIndex < 0) return;
       updateSectionOrder(arrayMove(sectionOrder, oldIndex, newIndex));
     }
   };

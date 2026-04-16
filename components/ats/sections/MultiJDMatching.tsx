@@ -59,7 +59,7 @@ export default function MultiJDMatching({ jobDescription, onLoadJD }: MultiJDMat
     if (!jobDescription.trim()) return;
 
     const newJD: SavedJD = {
-      id: Date.now().toString(36),
+      id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
       label: jobDescription.trim().slice(0, 40).replace(/\s+/g, ' ') + (jobDescription.length > 40 ? '...' : ''),
       text: jobDescription.trim(),
       savedAt: Date.now(),

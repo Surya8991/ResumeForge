@@ -112,7 +112,7 @@ export default function PasteImportModal({ open, onClose }: PasteImportModalProp
           <Button variant="outline" onClick={onClose} disabled={loading}>
             Cancel
           </Button>
-          <Button onClick={handleImport} disabled={loading || !text.trim()} className="bg-blue-500 hover:bg-blue-600 text-white">
+          <Button onClick={handleImport} disabled={loading || !text.trim() || text.length > 100000} className="bg-blue-500 hover:bg-blue-600 text-white">
             {loading ? (
               <>
                 <Loader2 className="h-4 w-4 mr-1 animate-spin" /> Parsing...

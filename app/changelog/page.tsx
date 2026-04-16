@@ -15,6 +15,26 @@ interface ChangelogEntry {
 
 const CHANGELOG: ChangelogEntry[] = [
   {
+    version: 'v1.16.0',
+    date: 'April 16, 2026',
+    title: 'Full-Project Codereview — 40+ Findings Fixed',
+    added: [
+      'safePhotoSrc(): rejects remote photo URLs — only data:image/* allowed. Wired into ResumePreview for all 20 templates.',
+      'safePrimaryColor(): validates hex format before CSS interpolation. Wired into ResumePreview.',
+      'ensureUrl() blocks javascript:, data:, and vbscript: URI schemes.',
+    ],
+    improved: [
+      'Security: callGroqAI wrapped in try/catch/finally in ATSScoreChecker, AISuggestions, and CoverLetterForm. No more permanent loading on network failure.',
+      'Security: fetchProfile uses explicit select() instead of select(*), logs errors. exportUserData picks only safe fields.',
+      'Bugs: SectionReorder indexOf guard, .doc import clear error, AI JSON schema validation, DateConsistency null check.',
+      'Bugs: InfographicTemplate deterministic skill bars, ModernTemplate custom sections, exportDocx/Html empty date handling.',
+      'Bugs: PasteImportModal 100k limit enforced, MultiJDMatching collision-safe IDs, BoldTemplate "to" → "-", MonochromeTemplate empty proficiency.',
+      'UX: deleteProfile + ErrorBoundary require confirm(). Toast ARIA live region. Contact form honest success text.',
+      'Cleanup: Removed dead SiteNavbar branch, redundant preconnect links. localStorage try/catch in WhatsNew + OnboardingGuide.',
+      'siteConfig.ts fallback URL updated to resumebuildz.vercel.app.',
+    ],
+  },
+  {
     version: 'v1.15.1',
     date: 'April 16, 2026',
     title: 'Codereview Pass #2 — 13 Findings Fixed',

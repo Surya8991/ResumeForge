@@ -68,7 +68,7 @@ ${personalInfo.jobTitle ? `<div class="job-title">${escapeHtml(personalInfo.jobT
       html += `<div class="entry">
   <div class="entry-header">
     <h3>${escapeHtml(exp.position)}</h3>
-    <span class="meta">${escapeHtml(exp.startDate)} - ${exp.current ? 'Present' : escapeHtml(exp.endDate)}</span>
+    <span class="meta">${escapeHtml(exp.startDate)} - ${exp.current ? 'Present' : escapeHtml(exp.endDate || 'Present')}</span>
   </div>
   <div class="meta">${escapeHtml(exp.company)}${exp.location ? `, ${escapeHtml(exp.location)}` : ''}</div>
   ${exp.highlights.length > 0 ? `<ul>${exp.highlights.map(h => `<li>${formatBullet(h)}</li>`).join('\n')}</ul>` : ''}
@@ -82,7 +82,7 @@ ${personalInfo.jobTitle ? `<div class="job-title">${escapeHtml(personalInfo.jobT
       html += `<div class="entry">
   <div class="entry-header">
     <h3>${escapeHtml(edu.degree)}${edu.field ? ` in ${escapeHtml(edu.field)}` : ''}</h3>
-    <span class="meta">${escapeHtml(edu.startDate)} - ${escapeHtml(edu.endDate)}</span>
+    <span class="meta">${(edu.startDate || edu.endDate) ? `${escapeHtml(edu.startDate)} - ${escapeHtml(edu.endDate)}` : ''}</span>
   </div>
   <div class="meta">${escapeHtml(edu.institution)}${edu.location ? `, ${escapeHtml(edu.location)}` : ''}${edu.gpa ? ` | GPA: ${escapeHtml(edu.gpa)}` : ''}</div>
   ${edu.highlights.length > 0 ? `<ul>${edu.highlights.map(h => `<li>${formatBullet(h)}</li>`).join('\n')}</ul>` : ''}

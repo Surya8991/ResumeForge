@@ -21,7 +21,7 @@ export default function SummaryForm() {
           rows={5}
         />
         <p className="text-xs text-muted-foreground mt-1">
-          {resumeData.summary.length}/500 characters
+          {resumeData.summary.length} characters
         </p>
       </div>
     </div>

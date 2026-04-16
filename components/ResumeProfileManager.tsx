@@ -207,7 +207,7 @@ export default function ResumeProfileManager() {
                           variant="ghost"
                           size="icon"
                           className="h-7 w-7 text-destructive hover:text-destructive"
-                          onClick={() => deleteProfile(profile.id)}
+                          onClick={() => { if (confirm('Delete this profile? This cannot be undone.')) deleteProfile(profile.id); }}
                           title="Delete"
                         >
                           <Trash2 className="h-3.5 w-3.5" />

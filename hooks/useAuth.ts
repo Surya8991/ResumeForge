@@ -23,14 +23,15 @@ export function useAuth() {
   const fetchProfile = useCallback(
     async (userId: string) => {
       try {
-        const { data } = await supabase
+        const { data, error } = await supabase
           .from('profiles')
-          .select('*')
+          .select('id, email, full_name, avatar_url, plan, ai_rewrites_used, ai_rewrites_reset_date')
           .eq('id', userId)
           .single();
+        if (error) console.warn('Profile fetch failed:', error.message);
         if (data) setProfile(data);
-      } catch {
-        // Profile fetch failed — user may not have a profile yet
+      } catch (err) {
+        console.warn('Profile fetch error:', err);
       }
     },
     [supabase]
@@ -92,7 +93,7 @@ export function useAuth() {
     if (!profile) return false;
     const today = new Date().toISOString().split('T')[0];
     if (profile.ai_rewrites_reset_date !== today) return true;
-    return profile.ai_rewrites_used < 3;
+    return profile.ai_rewrites_used < 1;
   }, [isPro, profile]);
 
   const signInWithGoogle = useCallback(
@@ -130,13 +131,19 @@ export function useAuth() {
 
   const exportUserData = useCallback(() => {
     if (!user || !profile) return;
+    const safeProfile = profile ? {
+      id: profile.id,
+      email: profile.email,
+      full_name: profile.full_name,
+      plan: profile.plan,
+    } : null;
     const data = {
       account: {
         id: user.id,
         email: user.email,
         created_at: user.created_at,
       },
-      profile,
+      profile: safeProfile,
       localStorage: {
         resume: typeof window !== 'undefined' ? localStorage.getItem('resumeforge-storage') : null,
         usage_ai: typeof window !== 'undefined' ? localStorage.getItem('resumeforge-usage-ai') : null,
@@ -150,7 +157,7 @@ export function useAuth() {
     a.href = url;
     a.download = `resumeforge-data-${new Date().toISOString().split('T')[0]}.json`;
     a.click();
-    URL.revokeObjectURL(url);
+    setTimeout(() => URL.revokeObjectURL(url), 60_000);
   }, [user, profile]);
 
   const deleteAccount = useCallback(async () => {

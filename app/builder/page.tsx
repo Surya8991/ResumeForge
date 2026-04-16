@@ -269,7 +269,7 @@ export default function HomePage() {
     a.href = url;
     a.download = 'resume-data.json';
     a.click();
-    URL.revokeObjectURL(url);
+    setTimeout(() => URL.revokeObjectURL(url), 60_000);
   };
 
   const [isImporting, setIsImporting] = useState(false);
@@ -437,7 +437,7 @@ export default function HomePage() {
   }, []);
 
   const handleAddCustomSection = () => {
-    const id = Math.random().toString(36).substring(2, 9);
+    const id = crypto.randomUUID().slice(0, 8);
     addCustomSection({ id, title: 'New Section', items: [] });
     setActiveSection(`custom-${id}`);
   };
