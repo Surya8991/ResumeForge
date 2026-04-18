@@ -165,17 +165,10 @@ export default function SiteFooter() {
 
       {/* Bottom bar */}
       <div className="border-t border-white/10 px-6 md:px-10 py-6">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
-          <p className="text-xs text-gray-500 flex items-center gap-1.5">
+        <div className="max-w-6xl mx-auto text-center">
+          <p className="text-xs text-gray-500 inline-flex items-center gap-1.5">
             Designed with <Heart className="h-3 w-3 text-red-500 fill-red-500" /> by Surya L · &copy; {new Date().getFullYear()} ResumeBuildz
           </p>
-          <div className="flex items-center gap-5 text-xs text-gray-500">
-            <Link href="/privacy" className="hover:text-gray-300 transition-colors">Privacy</Link>
-            <Link href="/terms" className="hover:text-gray-300 transition-colors">Terms</Link>
-            <Link href="/refund" className="hover:text-gray-300 transition-colors">Refund</Link>
-            <Link href="/sitemap.xml" className="hover:text-gray-300 transition-colors">Sitemap</Link>
-            <Link href="/contact" className="hover:text-gray-300 transition-colors">Contact</Link>
-          </div>
         </div>
       </div>
     </footer>
