@@ -2,275 +2,174 @@
 
 import { useEffect } from 'react';
 import Link from 'next/link';
-import SiteNavbar from '@/components/SiteNavbar';
-import SiteFooter from '@/components/SiteFooter';
+import BlogPostLayout from '@/components/BlogPostLayout';
 import { useLoginGateway } from '@/components/LoginGateway';
 
 const structureParts = [
-  {
-    step: '1',
-    title: 'Opening Paragraph',
-    desc: 'Hook the reader immediately. State the position you are applying for, how you found it, and one compelling reason you are the right fit. If you have a referral, mention it here.',
-    example: 'As a senior full-stack engineer with 7 years of experience building scalable SaaS platforms, I was excited to see your opening for a Lead Engineer...',
-  },
-  {
-    step: '2',
-    title: 'Why This Company',
-    desc: 'Show you have researched the company. Reference their mission, recent news, products, or values. Explain why this company specifically appeals to you and how your goals align.',
-    example: 'Your commitment to democratizing financial literacy through technology resonates deeply with my own passion for building tools that make complex systems accessible...',
-  },
-  {
-    step: '3',
-    title: 'Your Value Proposition',
-    desc: 'This is the core of your letter. Highlight 2-3 specific achievements with metrics that directly relate to the job requirements. Draw a clear line from your experience to their needs.',
-    example: 'At my current role, I led the migration of a monolithic Rails app to microservices, reducing deployment time by 80% and improving system reliability to 99.99% uptime...',
-  },
-  {
-    step: '4',
-    title: 'Closing Statement',
-    desc: 'Reiterate your enthusiasm, include a clear call to action, and thank the reader. Keep it confident but not presumptuous. Mention your availability for an interview.',
-    example: 'I would welcome the opportunity to discuss how my experience in scaling engineering teams could contribute to your growth goals. I am available for a conversation at your convenience.',
-  },
+  { step: '1', title: 'Opening Paragraph', desc: 'Hook the reader immediately. State the position you are applying for, how you found it, and one compelling reason you are the right fit. If you have a referral, mention it here.', example: 'As a senior full-stack engineer with 7 years of experience building scalable SaaS platforms, I was excited to see your opening for a Lead Engineer...' },
+  { step: '2', title: 'Why This Company', desc: 'Show you have researched the company. Reference their mission, recent news, products, or values. Explain why this company specifically appeals to you and how your goals align.', example: 'Your commitment to democratising financial literacy through technology resonates deeply with my own passion for building tools that make complex systems accessible...' },
+  { step: '3', title: 'Your Value Proposition', desc: 'This is the core of your letter. Highlight 2-3 specific achievements with metrics that directly relate to the job requirements. Draw a clear line from your experience to their needs.', example: 'At my current role, I led the migration of a monolithic Rails app to microservices, reducing deployment time by 80% and improving system reliability to 99.99% uptime...' },
+  { step: '4', title: 'Closing Statement', desc: 'Reiterate your enthusiasm, include a clear call to action, and thank the reader. Keep it confident but not presumptuous. Mention your availability for an interview.', example: 'I would welcome the opportunity to discuss how my experience in scaling engineering teams could contribute to your growth goals. I am available for a conversation at your convenience.' },
 ];
 
 const industryTemplates = [
-  {
-    industry: 'Software Engineering',
-    icon: '💻',
-    opening: 'With 5+ years building production-grade applications in React and Node.js, and a track record of reducing load times by 60%, I am eager to bring my full-stack expertise to...',
-  },
-  {
-    industry: 'Product Management',
-    icon: '📋',
-    opening: 'Having launched 3 B2B products from zero to $5M ARR, I understand the intersection of user needs, business goals, and technical constraints that defines great product management at...',
-  },
-  {
-    industry: 'Data Science',
-    icon: '📊',
-    opening: 'As a data scientist who has built ML pipelines processing 10M+ daily predictions with 94% accuracy, I am excited about the opportunity to drive data-informed decisions at...',
-  },
-  {
-    industry: 'Marketing',
-    icon: '📣',
-    opening: 'With a proven record of growing organic traffic by 300% and managing $2M+ annual ad budgets with 4.5x ROAS, I am excited to bring my growth marketing expertise to...',
-  },
-  {
-    industry: 'Finance',
-    icon: '📈',
-    opening: 'As a CFA charterholder with 8 years of experience in equity research covering the technology sector, managing coverage of 15+ companies with a combined market cap of $500B, I am drawn to...',
-  },
-  {
-    industry: 'Healthcare',
-    icon: '🏥',
-    opening: 'With 6 years of clinical experience and a passion for improving patient outcomes through evidence-based practice, I am enthusiastic about joining your team to advance...',
-  },
+  { industry: 'Software Engineering', icon: '💻', opening: 'With 5+ years building production-grade applications in React and Node.js, and a track record of reducing load times by 60%, I am eager to bring my full-stack expertise to...' },
+  { industry: 'Product Management', icon: '📋', opening: 'Having launched 3 B2B products from zero to $5M ARR, I understand the intersection of user needs, business goals, and technical constraints that defines great product management at...' },
+  { industry: 'Data Science', icon: '📊', opening: 'As a data scientist who has built ML pipelines processing 10M+ daily predictions with 94% accuracy, I am excited about the opportunity to drive data-informed decisions at...' },
+  { industry: 'Marketing', icon: '📣', opening: 'With a proven record of growing organic traffic by 300% and managing $2M+ annual ad budgets with 4.5x ROAS, I am excited to bring my growth marketing expertise to...' },
+  { industry: 'Finance', icon: '📈', opening: 'As a CFA charterholder with 8 years of experience in equity research covering the technology sector, managing coverage of 15+ companies with a combined market cap of $500B, I am drawn to...' },
+  { industry: 'Healthcare', icon: '🏥', opening: 'With 6 years of clinical experience and a passion for improving patient outcomes through evidence-based practice, I am enthusiastic about joining your team to advance...' },
+];
+
+const TOC = [
+  { id: 'intro', label: 'Introduction' },
+  { id: 'why', label: 'Why cover letters matter' },
+  { id: 'structure', label: 'The 4-part structure' },
+  { id: 'dos-donts', label: 'Do\'s and don\'ts' },
+  { id: 'templates', label: 'Templates by industry' },
+  { id: 'ai', label: 'AI-powered cover letters' },
+];
+
+const RELATED = [
+  { title: 'Resume Writing Tips That Actually Work', slug: 'resume-tips', excerpt: '40 action verbs, 5 before-and-after bullet rewrites, and 8 mistakes that sink your resume.', read: 9 },
+  { title: 'How to Beat ATS: The Complete Guide', slug: 'ats-guide', excerpt: '75% of resumes never reach a human. Here is how ATS works and how to fix yours.', read: 12 },
+  { title: 'Fresher Resume Format 2026', slug: 'fresher-resume', excerpt: 'The exact 7-section format that beats Indian and global ATS for freshers.', read: 11 },
+  { title: 'Resume for Career Change: The 5-Step Pivot Guide', slug: 'resume-for-career-change', excerpt: 'Transferable-skills rewriting, hybrid format, and 6 common pivot examples.', read: 11 },
+  { title: 'Resume After a Layoff', slug: 'resume-after-layoff', excerpt: 'A 5-step guide for 2026 with 3 email templates and a 60-day planner.', read: 12 },
 ];
 
 export default function CoverLetterGuidePage() {
   const { openGateway } = useLoginGateway();
+
   useEffect(() => {
     document.title = 'Cover Letter Guide & Templates | ResumeBuildz';
     const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) metaDesc.setAttribute('content', 'Learn how to write compelling cover letters with our complete guide. Structure, do\'s and don\'ts, and industry templates.');
+    if (metaDesc) metaDesc.setAttribute('content', 'Learn how to write compelling cover letters with our complete guide. Structure, dos and donts, and industry templates.');
     const ogDesc = document.querySelector('meta[property="og:description"]');
-    if (ogDesc) ogDesc.setAttribute('content', 'Learn how to write compelling cover letters with our complete guide. Structure, do\'s and don\'ts, and industry templates.');
+    if (ogDesc) ogDesc.setAttribute('content', 'Learn how to write compelling cover letters with our complete guide. Structure, dos and donts, and industry templates.');
     const ogTitle = document.querySelector('meta[property="og:title"]');
     if (ogTitle) ogTitle.setAttribute('content', 'Cover Letter Guide & Templates | ResumeBuildz');
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <SiteNavbar />
+    <BlogPostLayout
+      category="Interviews & Cover Letters"
+      breadcrumbCurrent="Cover letter guide"
+      title="How to Write a Cover Letter That Gets Read"
+      subtitle="83% of hiring managers read cover letters. Here is a practical structure, real examples, and the mistakes that get applications rejected."
+      dateModified="2026-04-15"
+      readingTime={8}
+      toc={TOC}
+      related={RELATED}
+    >
+      <section id="intro" className="scroll-mt-6">
+        <p>Your resume shows what you have done. Your cover letter explains why you are the right person for this specific job. Even when companies say cover letters are optional, a strong one puts you ahead of everyone who skipped it. This guide covers the 4-part structure, the do and don&apos;t list every recruiter wishes more candidates followed, and industry-specific opening lines you can copy.</p>
+      </section>
 
-      <main className="flex-1">
-        {/* Hero */}
-        <section className="bg-gradient-to-br from-gray-900 via-slate-900 to-black py-20 md:py-28">
-          <div className="max-w-4xl mx-auto px-4 text-center">
-            <span className="inline-block bg-blue-500/10 text-blue-400 text-sm font-medium px-4 py-1.5 rounded-full mb-6 animate-fade-in">
-              Cover Letter Guide
-            </span>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 animate-fade-in-up delay-100">
-              How to Write a Cover Letter That Gets Read
-            </h1>
-            <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto animate-fade-in-up delay-200">
-              83% of hiring managers read cover letters. Here&apos;s a practical structure, real examples, and the mistakes that get applications rejected.
-            </p>
-          </div>
-        </section>
-
-        {/* Why Cover Letters Matter */}
-        <section className="bg-white py-16 md:py-20">
-          <div className="max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-12 animate-fade-in-up">Why Cover Letters Matter</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
-              {[
-                { stat: '83%', label: 'of hiring managers read cover letters (ResumeLab, 2023)' },
-                { stat: '49%', label: 'say cover letters are their second most valued document (ResumeGo, 2023)' },
-                { stat: '2x', label: 'more likely to land interviews with a strong cover letter (CareerBuilder, 2023)' },
-              ].map((item, i) => (
-                <div key={i} className={`bg-white rounded-xl shadow-sm border border-gray-100 p-6 text-center animate-fade-in-up delay-${(i + 1) * 100}`}>
-                  <div className="text-3xl font-bold text-blue-500 mb-2">{item.stat}</div>
-                  <p className="text-sm text-gray-600">{item.label}</p>
-                </div>
-              ))}
+      <section id="why" className="mt-10 scroll-mt-6">
+        <h2 className="text-2xl font-bold text-gray-900 mb-5">Why cover letters matter</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
+          {[
+            { stat: '83%', label: 'of hiring managers read cover letters (ResumeLab, 2023)' },
+            { stat: '49%', label: 'say cover letters are their second most valued document (ResumeGo, 2023)' },
+            { stat: '2x', label: 'more likely to land interviews with a strong cover letter (CareerBuilder, 2023)' },
+          ].map((item) => (
+            <div key={item.stat} className="bg-gray-50 rounded-lg border border-gray-200 p-5 text-center">
+              <div className="text-3xl font-bold text-indigo-600 mb-2">{item.stat}</div>
+              <p className="text-sm text-gray-600">{item.label}</p>
             </div>
-            <p className="text-gray-600 leading-relaxed text-center max-w-2xl mx-auto">
-              Your resume shows what you&apos;ve done. Your cover letter explains why you&apos;re the right person for <em>this</em> job. Even when companies say it&apos;s &quot;optional,&quot; a strong cover letter puts you ahead of everyone who skipped it. Pair it with a well-built <button onClick={() => openGateway('/builder')} className="text-blue-500 hover:underline inline">ATS-optimized resume</button> and you&apos;re in a strong position.
-            </p>
-          </div>
-        </section>
+          ))}
+        </div>
+        <p>Pair your cover letter with a well-built{' '}
+          <button onClick={() => openGateway('/builder')} className="text-indigo-600 hover:underline inline">ATS-optimised resume</button>
+          {' '}and you are in a strong position.
+        </p>
+      </section>
 
-        {/* Structure */}
-        <section className="bg-gray-50 py-16 md:py-20">
-          <div className="max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-4 animate-fade-in-up">The 4-Part Structure</h2>
-            <p className="text-gray-500 text-center mb-12 max-w-2xl mx-auto">
-              Follow this proven structure for a cover letter that is clear, compelling, and professional.
-            </p>
-            <div className="space-y-6">
-              {structureParts.map((part, i) => (
-                <div key={part.step} className={`bg-white rounded-xl shadow-sm border border-gray-100 p-6 animate-fade-in-up delay-${(i + 1) * 100}`}>
-                  <div className="flex items-start gap-4">
-                    <span className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white text-sm font-bold rounded-full flex items-center justify-center">
-                      {part.step}
-                    </span>
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-gray-900 mb-2 text-lg">{part.title}</h3>
-                      <p className="text-sm text-gray-600 mb-3">{part.desc}</p>
-                      <div className="bg-gray-50 rounded-lg p-4 border-l-4 border-blue-500">
-                        <p className="text-sm text-gray-500 italic">&ldquo;{part.example}&rdquo;</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Do's and Don'ts */}
-        <section className="bg-white py-16 md:py-20">
-          <div className="max-w-4xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-12 animate-fade-in-up">Do&apos;s and Don&apos;ts</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 animate-fade-in-up delay-100">
-                <div className="flex items-center gap-2 mb-5">
-                  <span className="w-7 h-7 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-sm font-bold">&#10003;</span>
-                  <h3 className="font-semibold text-green-700 text-lg">Do</h3>
-                </div>
-                <ul className="space-y-3">
-                  {[
-                    'Address the hiring manager by name when possible',
-                    'Research the company and reference specific details',
-                    'Quantify your achievements with numbers',
-                    'Match your tone to the company culture',
-                    'Keep it to one page (250-400 words)',
-                    'Proofread multiple times for errors',
-                    'Include a clear call to action in closing',
-                    'Explain employment gaps honestly if relevant',
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
-                      <span className="text-green-500 mt-0.5 flex-shrink-0">&#10003;</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 animate-fade-in-up delay-200">
-                <div className="flex items-center gap-2 mb-5">
-                  <span className="w-7 h-7 bg-red-100 text-red-500 rounded-full flex items-center justify-center text-lg font-bold">&times;</span>
-                  <h3 className="font-semibold text-red-600 text-lg">Don&apos;t</h3>
-                </div>
-                <ul className="space-y-3">
-                  {[
-                    'Repeat your resume word for word',
-                    'Use "To Whom It May Concern"',
-                    'Focus only on what you want from the job',
-                    'Write more than one page',
-                    'Use a generic template without customization',
-                    'Include salary requirements unless asked',
-                    'Apologize for lack of experience',
-                    'Send the same letter to every application',
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-2 text-sm text-gray-600">
-                      <span className="text-red-500 mt-0.5 flex-shrink-0">&times;</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Templates by Industry */}
-        <section className="bg-gray-50 py-16 md:py-20">
-          <div className="max-w-6xl mx-auto px-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-4">Templates by Industry</h2>
-            <p className="text-gray-500 text-center mb-12 max-w-2xl mx-auto">
-              Sample opening lines tailored to different industries. Use these as inspiration for your own cover letter.
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {industryTemplates.map((tmpl, i) => (
-                <div key={tmpl.industry} className={`bg-white rounded-xl shadow-sm border border-gray-100 p-6 animate-scale-in delay-${Math.min((i + 1) * 100, 500)}`}>
-                  <div className="text-3xl mb-3">{tmpl.icon}</div>
-                  <h3 className="font-semibold text-gray-900 mb-3">{tmpl.industry}</h3>
-                  <p className="text-sm text-gray-500 italic leading-relaxed">&ldquo;{tmpl.opening}&rdquo;</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* AI Generation */}
-        <section className="bg-white py-16 md:py-20">
-          <div className="max-w-4xl mx-auto px-4">
-            <div className="bg-gradient-to-br from-gray-900 via-slate-900 to-black rounded-2xl p-8 md:p-12">
-              <div className="flex flex-col md:flex-row items-center gap-8">
-                <div className="flex-shrink-0 w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center">
-                  <svg className="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                </div>
-                <div className="flex-1 text-center md:text-left">
-                  <h2 className="text-2xl md:text-3xl font-bold text-white mb-3">
-                    AI-Powered Cover Letters
-                  </h2>
-                  <p className="text-gray-400 mb-6 leading-relaxed">
-                    Don&apos;t want to start from scratch? ResumeBuildz&apos;s AI takes your resume data and the job description, then writes a tailored cover letter in seconds. It pulls your most relevant experience, matches the company&apos;s tone, and follows the 4-part structure above. You can edit every word before exporting.
-                  </p>
-                  <div className="flex flex-wrap gap-3 justify-center md:justify-start">
-                    <span className="text-sm bg-blue-500/10 text-blue-400 px-3 py-1 rounded-full">Groq AI Powered</span>
-                    <span className="text-sm bg-blue-500/10 text-blue-400 px-3 py-1 rounded-full">Job-Specific</span>
-                    <span className="text-sm bg-blue-500/10 text-blue-400 px-3 py-1 rounded-full">Instant Generation</span>
-                    <span className="text-sm bg-blue-500/10 text-blue-400 px-3 py-1 rounded-full">Editable Output</span>
+      <section id="structure" className="mt-10 scroll-mt-6">
+        <h2 className="text-2xl font-bold text-gray-900 mb-3">The 4-part structure</h2>
+        <p className="text-gray-600 mb-5">Follow this proven structure for a cover letter that is clear, compelling, and professional.</p>
+        <div className="space-y-4">
+          {structureParts.map((part) => (
+            <div key={part.step} className="bg-white rounded-lg border border-gray-200 p-5">
+              <div className="flex items-start gap-3">
+                <span className="flex-shrink-0 w-7 h-7 bg-indigo-600 text-white text-xs font-bold rounded-full flex items-center justify-center">{part.step}</span>
+                <div className="flex-1">
+                  <h3 className="font-semibold text-gray-900 mb-1.5">{part.title}</h3>
+                  <p className="text-sm text-gray-700 mb-3">{part.desc}</p>
+                  <div className="bg-gray-50 rounded-md p-3 border-l-4 border-indigo-600">
+                    <p className="text-sm text-gray-600 italic">&ldquo;{part.example}&rdquo;</p>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          ))}
+        </div>
+      </section>
 
-        {/* CTA */}
-        <section className="bg-gradient-to-br from-gray-900 via-slate-900 to-black py-16 md:py-20">
-          <div className="max-w-3xl mx-auto px-4 text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4 animate-fade-in-up">
-              Generate Your Cover Letter
-            </h2>
-            <p className="text-gray-400 mb-8 max-w-xl mx-auto">
-              Our AI writes a tailored cover letter based on your resume and the job description. Need help with your resume first? Check out our <Link href="/resume-tips" className="text-blue-400 hover:underline">resume writing tips</Link> and <Link href="/templates" className="text-blue-400 hover:underline">ATS-friendly templates</Link>.
-            </p>
-            <button
-              onClick={() => openGateway('/builder')}
-              className="inline-block bg-blue-500 hover:bg-blue-600 text-white font-semibold px-8 py-3.5 rounded-lg transition-colors text-lg"
-            >
-              Generate Your Cover Letter
-            </button>
+      <section id="dos-donts" className="mt-10 scroll-mt-6">
+        <h2 className="text-2xl font-bold text-gray-900 mb-5">Do&apos;s and don&apos;ts</h2>
+        <div className="grid sm:grid-cols-2 gap-4">
+          <div className="bg-green-50 border border-green-100 rounded-lg p-5">
+            <div className="flex items-center gap-2 mb-4">
+              <span className="w-6 h-6 bg-green-100 text-green-700 rounded-full flex items-center justify-center text-sm font-bold">✓</span>
+              <h3 className="font-semibold text-green-800">Do</h3>
+            </div>
+            <ul className="space-y-2">
+              {['Address the hiring manager by name when possible', 'Research the company and reference specific details', 'Quantify your achievements with numbers', 'Match your tone to the company culture', 'Keep it to one page (250-400 words)', 'Proofread multiple times for errors', 'Include a clear call to action in closing', 'Explain employment gaps honestly if relevant'].map((item) => (
+                <li key={item} className="flex items-start gap-2 text-sm text-gray-800"><span className="text-green-600 mt-0.5 flex-shrink-0">✓</span>{item}</li>
+              ))}
+            </ul>
           </div>
-        </section>
-      </main>
+          <div className="bg-red-50 border border-red-100 rounded-lg p-5">
+            <div className="flex items-center gap-2 mb-4">
+              <span className="w-6 h-6 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-sm font-bold">×</span>
+              <h3 className="font-semibold text-red-700">Don&apos;t</h3>
+            </div>
+            <ul className="space-y-2">
+              {['Repeat your resume word for word', 'Use "To Whom It May Concern"', 'Focus only on what you want from the job', 'Write more than one page', 'Use a generic template without customisation', 'Include salary requirements unless asked', 'Apologise for lack of experience', 'Send the same letter to every application'].map((item) => (
+                <li key={item} className="flex items-start gap-2 text-sm text-gray-800"><span className="text-red-600 mt-0.5 flex-shrink-0">×</span>{item}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
 
-      <SiteFooter />
-    </div>
+      <section id="templates" className="mt-10 scroll-mt-6">
+        <h2 className="text-2xl font-bold text-gray-900 mb-3">Templates by industry</h2>
+        <p className="text-gray-600 mb-5">Sample opening lines tailored to different industries. Use these as inspiration for your own cover letter.</p>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {industryTemplates.map((tmpl) => (
+            <div key={tmpl.industry} className="bg-white rounded-lg border border-gray-200 p-5">
+              <div className="text-2xl mb-2">{tmpl.icon}</div>
+              <h3 className="font-semibold text-gray-900 mb-2">{tmpl.industry}</h3>
+              <p className="text-sm text-gray-600 italic leading-relaxed">&ldquo;{tmpl.opening}&rdquo;</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section id="ai" className="mt-10 scroll-mt-6 bg-gray-900 text-white rounded-2xl p-8">
+        <h2 className="text-2xl font-bold text-white mb-3">AI-powered cover letters</h2>
+        <p className="text-white/70 mb-5 leading-relaxed">
+          Don&apos;t want to start from scratch? ResumeBuildz AI takes your resume data and the job description, then writes a tailored cover letter in seconds. It pulls your most relevant experience, matches the company tone, and follows the 4-part structure above. You can edit every word before exporting.
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {['Groq AI Powered', 'Job-Specific', 'Instant Generation', 'Editable Output'].map((t) => (
+            <span key={t} className="text-xs bg-white/10 text-indigo-300 px-2.5 py-1 rounded-full">{t}</span>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-12 text-center">
+        <h2 className="text-2xl font-bold text-gray-900 mb-3">Generate your cover letter</h2>
+        <p className="text-gray-600 mb-6 max-w-xl mx-auto text-sm">
+          Our AI writes a tailored cover letter based on your resume and the job description. Need help with your resume first? Check out our <Link href="/resume-tips" className="text-indigo-600 hover:underline">resume writing tips</Link> and <Link href="/templates" className="text-indigo-600 hover:underline">ATS-friendly templates</Link>.
+        </p>
+        <button onClick={() => openGateway('/builder')} className="inline-block bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors shadow-sm">
+          Generate your cover letter
+        </button>
+      </section>
+    </BlogPostLayout>
   );
 }

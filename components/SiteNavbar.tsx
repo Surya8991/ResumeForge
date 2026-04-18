@@ -18,7 +18,7 @@ const NAV_LINKS = [
 ];
 
 // Mega-dropdown: 4 parent columns (Ahrefs-style nested 2-tier).
-// Each child is an existing /blog/category/[slug] page.
+// Each child is a preset filter on /blog (e.g. /blog?cat=resume-writing).
 interface MegaItem {
   href: string;
   label: string;
@@ -38,9 +38,9 @@ const MEGA_COLUMNS: MegaColumn[] = [
     parentDesc: 'Write a resume that gets past the scanners.',
     parentColor: 'text-blue-600',
     items: [
-      { href: '/blog/category/resume-writing', label: 'Resume Writing', desc: 'Format, bullets, sections', icon: FileText },
-      { href: '/blog/category/ats-keywords', label: 'ATS & Keywords', desc: 'Beat the scanners', icon: Target },
-      { href: '/blog/category/ai-resume', label: 'AI Resume Tools', desc: 'AI writing + prompts', icon: Sparkles },
+      { href: '/blog?cat=resume-writing', label: 'Resume Writing', desc: 'Format, bullets, sections', icon: FileText },
+      { href: '/blog?cat=ats-keywords', label: 'ATS & Keywords', desc: 'Beat the scanners', icon: Target },
+      { href: '/blog?cat=ai-resume', label: 'AI Resume Tools', desc: 'AI writing + prompts', icon: Sparkles },
     ],
   },
   {
@@ -48,8 +48,8 @@ const MEGA_COLUMNS: MegaColumn[] = [
     parentDesc: 'From application to offer.',
     parentColor: 'text-purple-600',
     items: [
-      { href: '/blog/category/interviews-cover-letters', label: 'Interviews & Cover Letters', desc: 'Templates + STAR prep', icon: MessageSquare },
-      { href: '/blog/category/career-transitions', label: 'Career Transitions', desc: 'Layoffs, gaps, pivots', icon: Compass },
+      { href: '/blog?cat=interviews-cover-letters', label: 'Interviews & Cover Letters', desc: 'Templates + STAR prep', icon: MessageSquare },
+      { href: '/blog?cat=career-transitions', label: 'Career Transitions', desc: 'Layoffs, gaps, pivots', icon: Compass },
     ],
   },
   {
@@ -57,7 +57,7 @@ const MEGA_COLUMNS: MegaColumn[] = [
     parentDesc: 'Naukri, campus, NQT, InfyTQ.',
     parentColor: 'text-orange-600',
     items: [
-      { href: '/blog/category/india-hiring', label: 'Naukri & Campus', desc: 'TCS, Infosys, Wipro', icon: GraduationCap },
+      { href: '/blog?cat=india-hiring', label: 'Naukri & Campus', desc: 'TCS, Infosys, Wipro', icon: GraduationCap },
     ],
   },
   {
@@ -65,7 +65,7 @@ const MEGA_COLUMNS: MegaColumn[] = [
     parentDesc: '22 top employers.',
     parentColor: 'text-indigo-600',
     items: [
-      { href: '/blog/category/company-guides', label: 'Company Deep Dives', desc: 'FAANG, consulting, IT', icon: Building2 },
+      { href: '/blog?cat=company-guides', label: 'Company Deep Dives', desc: 'FAANG, consulting, IT', icon: Building2 },
       { href: '/resume-for', label: '22 Companies Hub', desc: 'Direct index', icon: Briefcase },
     ],
   },

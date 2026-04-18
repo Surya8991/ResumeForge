@@ -1,21 +1,40 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
+import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowUpRight, Clock } from 'lucide-react';
 import SiteNavbar from '@/components/SiteNavbar';
 import SiteFooter from '@/components/SiteFooter';
-import { BLOG_CATEGORIES, getCategoriesByParent, PARENT_GROUPS } from '@/lib/blogCategories';
-import { BLOG_POSTS, VIRTUAL_POSTS, getAllPosts, getFeaturedPosts } from '@/lib/blogPosts';
+import { BLOG_CATEGORIES, getCategoriesByParent, PARENT_GROUPS, getCategoryBySlug } from '@/lib/blogCategories';
+import { VIRTUAL_POSTS, getAllPosts, getFeaturedPosts, getPostCountByCategory } from '@/lib/blogPosts';
 
 // Blog hub. Vercel/Linear tech-blog structure (featured hero + 3-col grid +
 // filter chips) in the ResumeBuildz light theme: paper background, ink text,
 // indigo accent, hairline borders.
 
+// Filter types:
+//  'all'               -> show everything
+//  parent-group slug   -> show all posts whose child-category belongs to that group
+//  child-category slug -> show only posts in that category
 type FilterValue = 'all' | string;
 
+function isParentGroup(slug: string): slug is 'resume-ats' | 'job-search' | 'india-hiring' | 'company-guides' {
+  return PARENT_GROUPS.some((g) => g.slug === slug);
+}
+
 export default function BlogHubPage() {
-  const [filter, setFilter] = useState<FilterValue>('all');
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+  const initialCat = searchParams.get('cat') || 'all';
+  const [filter, setFilter] = useState<FilterValue>(initialCat);
+
+  // Sync local state if the URL changes (e.g. from the navbar dropdown).
+  useEffect(() => {
+    const cat = searchParams.get('cat') || 'all';
+    setFilter(cat);
+  }, [searchParams]);
 
   useEffect(() => {
     document.title = 'Blog . Updates, guides, and research . ResumeBuildz';
@@ -32,21 +51,53 @@ export default function BlogHubPage() {
   const featured = getFeaturedPosts();
   const hero = featured[0] || allPosts[0];
 
-  const filterChips = useMemo(
+  // Chips grouped by parent group, each followed by its child categories.
+  // User sees "All", then parent groups, then child filters under each.
+  const parentChips = useMemo(
     () => [
-      { value: 'all' as const, label: 'All' },
-      ...PARENT_GROUPS.map((g) => ({ value: g.slug, label: g.name })),
+      { value: 'all' as const, label: 'All', kind: 'all' as const, count: allPosts.length },
+      ...PARENT_GROUPS.flatMap((g) => {
+        const children = getCategoriesByParent(g.slug);
+        const parentCount = children.reduce((sum, c) => sum + getPostCountByCategory(c.slug), 0);
+        return [{ value: g.slug, label: g.name, kind: 'parent' as const, count: parentCount }];
+      }),
     ],
-    [],
+    [allPosts],
   );
+
+  const childChips = useMemo(() => {
+    return BLOG_CATEGORIES.map((c) => ({
+      value: c.slug,
+      label: c.name,
+      parent: c.parentGroup,
+      count: getPostCountByCategory(c.slug),
+    })).filter((c) => c.count > 0);
+  }, []);
+
+  const setFilterAndUrl = (value: FilterValue) => {
+    setFilter(value);
+    const params = new URLSearchParams(searchParams.toString());
+    if (value === 'all') params.delete('cat');
+    else params.set('cat', value);
+    const qs = params.toString();
+    router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
+  };
 
   const visiblePosts = useMemo(() => {
     if (filter === 'all') return allPosts.filter((p) => p.slug !== hero?.slug);
-    const childSlugs = getCategoriesByParent(
-      filter as 'resume-ats' | 'job-search' | 'india-hiring' | 'company-guides',
-    ).map((c) => c.slug);
-    return allPosts.filter((p) => childSlugs.includes(p.category) && p.slug !== hero?.slug);
+    if (isParentGroup(filter)) {
+      const childSlugs = getCategoriesByParent(filter).map((c) => c.slug);
+      return allPosts.filter((p) => childSlugs.includes(p.category) && p.slug !== hero?.slug);
+    }
+    // Child category slug
+    return allPosts.filter((p) => p.category === filter && p.slug !== hero?.slug);
   }, [filter, allPosts, hero]);
+
+  const activeLabel = useMemo(() => {
+    if (filter === 'all') return null;
+    if (isParentGroup(filter)) return PARENT_GROUPS.find((g) => g.slug === filter)?.name;
+    return getCategoryBySlug(filter)?.name;
+  }, [filter]);
 
   return (
     <div className="min-h-screen flex flex-col bg-white text-gray-900">
@@ -63,12 +114,12 @@ export default function BlogHubPage() {
             What we are learning about resumes, ATS, and the mechanics of getting hired in 2026. Research-backed, updated quarterly, written by someone who has read 10,000+ resumes.
           </p>
 
-          {/* Filter chips */}
+          {/* Parent filter chips */}
           <div className="flex flex-wrap gap-2 mt-8">
-            {filterChips.map((chip) => (
+            {parentChips.map((chip) => (
               <button
                 key={chip.value}
-                onClick={() => setFilter(chip.value)}
+                onClick={() => setFilterAndUrl(chip.value)}
                 className={`px-4 py-1.5 text-sm rounded-full border transition ${
                   filter === chip.value
                     ? 'bg-gray-900 text-white border-gray-900 font-medium'
@@ -76,9 +127,40 @@ export default function BlogHubPage() {
                 }`}
               >
                 {chip.label}
+                <span className={`ml-1.5 text-xs ${filter === chip.value ? 'text-white/70' : 'text-gray-500'}`}>
+                  {chip.count}
+                </span>
               </button>
             ))}
           </div>
+
+          {/* Secondary child-category chips (rendered only when a parent is active or always on lg) */}
+          <div className="flex flex-wrap gap-1.5 mt-3">
+            {childChips
+              .filter((c) => filter === 'all' || c.value === filter || c.parent === filter || (isParentGroup(filter) && c.parent === filter))
+              .map((chip) => (
+                <button
+                  key={chip.value}
+                  onClick={() => setFilterAndUrl(chip.value)}
+                  className={`px-3 py-1 text-xs rounded-full border transition ${
+                    filter === chip.value
+                      ? 'bg-indigo-600 text-white border-indigo-600 font-medium'
+                      : 'border-gray-200 text-gray-600 hover:bg-indigo-50 hover:border-indigo-200 hover:text-indigo-700'
+                  }`}
+                >
+                  {chip.label}
+                  <span className={`ml-1 ${filter === chip.value ? 'text-white/70' : 'text-gray-400'}`}>
+                    {chip.count}
+                  </span>
+                </button>
+              ))}
+          </div>
+
+          {activeLabel && (
+            <p className="text-sm text-gray-500 mt-4">
+              Showing: <strong className="text-gray-900">{activeLabel}</strong> ({visiblePosts.length} post{visiblePosts.length === 1 ? '' : 's'})
+            </p>
+          )}
         </div>
       </section>
 
