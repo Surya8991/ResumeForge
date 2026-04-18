@@ -24,6 +24,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/roadmap`, lastModified: now, changeFrequency: 'weekly', priority: 0.4 },
     { url: `${base}/status`, lastModified: now, changeFrequency: 'daily', priority: 0.3 },
     { url: `${base}/privacy`, lastModified: now, changeFrequency: 'yearly', priority: 0.2 },
+    { url: `${base}/refund`, lastModified: now, changeFrequency: 'yearly', priority: 0.2 },
+    { url: `${base}/shipping`, lastModified: now, changeFrequency: 'yearly', priority: 0.2 },
 
     // Resources hub + situation pages (PART 3 + 4)
     { url: `${base}/resume-for`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },

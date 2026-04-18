@@ -50,6 +50,8 @@ const COLUMNS: FooterColumn[] = [
     links: [
       { kind: 'link', label: 'Privacy Policy', href: '/privacy' },
       { kind: 'link', label: 'Terms of Use', href: '/terms' },
+      { kind: 'link', label: 'Refund Policy', href: '/refund' },
+      { kind: 'link', label: 'Shipping Policy', href: '/shipping' },
       { kind: 'link', label: 'Sitemap', href: '/sitemap.xml' },
     ],
   },
@@ -173,6 +175,7 @@ export default function SiteFooter() {
           <div className="flex items-center gap-5 text-xs text-gray-500">
             <Link href="/privacy" className="hover:text-gray-300 transition-colors">Privacy</Link>
             <Link href="/terms" className="hover:text-gray-300 transition-colors">Terms</Link>
+            <Link href="/refund" className="hover:text-gray-300 transition-colors">Refund</Link>
             <Link href="/sitemap.xml" className="hover:text-gray-300 transition-colors">Sitemap</Link>
             <Link href="/contact" className="hover:text-gray-300 transition-colors">Contact</Link>
           </div>
