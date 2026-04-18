@@ -257,6 +257,71 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* FAQ */}
+      <section className="bg-white py-20">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-gray-900 mb-3 text-center">Questions, answered.</h2>
+          <p className="text-gray-600 text-center mb-10">
+            What people ask before they start.
+          </p>
+          <div className="space-y-3">
+            {[
+              {
+                q: 'Is ResumeBuildz really free?',
+                a: 'Yes. The free plan gives you all 20 templates, 12 ATS checks, DOCX and HTML export, and guest mode. No credit card, no sign-up required. We rate-limit AI rewrites and PDF exports on Free to keep infra costs sane.',
+              },
+              {
+                q: 'Do I need to create an account?',
+                a: 'No. ResumeBuildz works entirely in your browser with no sign-up. Your resume data stays in localStorage on your device. Sign in optionally to sync across devices when Pro launches.',
+              },
+              {
+                q: 'Will my data be sold?',
+                a: 'No. Your resume content lives in your browser and never leaves it unless you explicitly use the AI feature (which goes directly to Groq with your own API key). Analytics are cookieless and aggregated. No ads, no data brokers, no retargeting.',
+              },
+              {
+                q: 'How does ResumeBuildz compare to Zety or Canva?',
+                a: 'Zety and Canva both lock you into a paid subscription after building. Canva\'s multi-column templates also break most ATS parsers. ResumeBuildz is free to build, free to download, open source, and every template is tested against real ATS parsers (Workday, Greenhouse, Lever).',
+              },
+              {
+                q: 'What makes a resume ATS-friendly?',
+                a: 'Single-column layout, standard section headings (Experience, Education, Skills), no images or graphics, PDF or DOCX format, and keyword density matching the job description. Our 12-point ATS check flags every violation. See the complete ATS guide for the deep dive.',
+              },
+              {
+                q: 'Can I edit my resume later?',
+                a: 'Yes. Your resume auto-saves to your browser as you type. Come back anytime from any device (with sign-in) or the same device (without sign-in) and keep editing.',
+              },
+            ].map((item, i) => (
+              <details key={i} className="group bg-gray-50 rounded-lg border border-gray-200 p-5 open:shadow-sm">
+                <summary className="flex items-center justify-between cursor-pointer font-semibold text-gray-900 list-none">
+                  <span>{item.q}</span>
+                  <span className="text-indigo-600 transition-transform group-open:rotate-45 text-2xl leading-none">+</span>
+                </summary>
+                <p className="mt-3 text-gray-700 text-sm leading-relaxed">{item.a}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQPage schema for SEO / AI Overview capture */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'FAQPage',
+            mainEntity: [
+              { '@type': 'Question', name: 'Is ResumeBuildz really free?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. The free plan gives you all 20 templates, 12 ATS checks, DOCX and HTML export, and guest mode. No credit card, no sign-up required.' } },
+              { '@type': 'Question', name: 'Do I need to create an account?', acceptedAnswer: { '@type': 'Answer', text: 'No. ResumeBuildz works entirely in your browser with no sign-up. Your resume data stays in localStorage on your device.' } },
+              { '@type': 'Question', name: 'Will my data be sold?', acceptedAnswer: { '@type': 'Answer', text: 'No. Your resume content lives in your browser and never leaves it unless you explicitly use the AI feature. Analytics are cookieless and aggregated. No ads, no data brokers.' } },
+              { '@type': 'Question', name: 'How does ResumeBuildz compare to Zety or Canva?', acceptedAnswer: { '@type': 'Answer', text: 'ResumeBuildz is free to build, free to download, open source, and every template is tested against real ATS parsers (Workday, Greenhouse, Lever). Canva multi-column templates break most ATS parsers.' } },
+              { '@type': 'Question', name: 'What makes a resume ATS-friendly?', acceptedAnswer: { '@type': 'Answer', text: 'Single-column layout, standard section headings, no images, PDF or DOCX format, and keyword density matching the job description. Our 12-point ATS check flags every violation.' } },
+              { '@type': 'Question', name: 'Can I edit my resume later?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Your resume auto-saves to your browser as you type. Come back anytime and keep editing.' } },
+            ],
+          }),
+        }}
+      />
+
       {/* CTA */}
       <section className="bg-gradient-to-br from-gray-900 via-slate-900 to-black py-20">
         <div className="max-w-3xl mx-auto px-4 text-center">

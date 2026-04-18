@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import SiteNavbar from '@/components/SiteNavbar';
 import SiteFooter from '@/components/SiteFooter';
+import { joinWaitlist } from '@/lib/leads';
 
 type Billing = 'monthly' | 'annual';
 type Currency = 'USD' | 'INR';
@@ -431,19 +432,21 @@ export default function PricingPage() {
 function WaitlistSection() {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
-    // Store in localStorage for now. Replace with Supabase/email service later.
-    try {
-      const existing = JSON.parse(localStorage.getItem('resumeforge-waitlist') || '[]');
-      if (!existing.includes(email)) {
-        existing.push(email);
-        localStorage.setItem('resumeforge-waitlist', JSON.stringify(existing));
-      }
-    } catch { /* ignore */ }
-    setSubmitted(true);
+    if (!email || submitting) return;
+    setSubmitting(true);
+    setError(null);
+    const result = await joinWaitlist(email, 'pricing');
+    setSubmitting(false);
+    if (result.ok) {
+      setSubmitted(true);
+    } else {
+      setError(result.error || 'Something went wrong. Please try again.');
+    }
   };
 
   return (
@@ -463,22 +466,29 @@ function WaitlistSection() {
             </p>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="flex gap-2 max-w-md mx-auto">
-            <input
-              type="email"
-              placeholder="your@email.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="flex-1 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-600"
-            />
-            <button
-              type="submit"
-              className="px-6 py-3 bg-indigo-600 text-white rounded-xl text-sm font-semibold hover:bg-indigo-700 transition-colors shrink-0 shadow-sm"
-            >
-              Join Waitlist
-            </button>
-          </form>
+          <>
+            <form onSubmit={handleSubmit} className="flex gap-2 max-w-md mx-auto">
+              <input
+                type="email"
+                placeholder="your@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                disabled={submitting}
+                className="flex-1 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-600 disabled:opacity-60"
+              />
+              <button
+                type="submit"
+                disabled={submitting}
+                className="px-6 py-3 bg-indigo-600 text-white rounded-xl text-sm font-semibold hover:bg-indigo-700 transition-colors shrink-0 shadow-sm disabled:opacity-60 disabled:cursor-not-allowed"
+              >
+                {submitting ? 'Joining...' : 'Join Waitlist'}
+              </button>
+            </form>
+            {error && (
+              <p className="text-sm text-red-600 mt-3">{error}</p>
+            )}
+          </>
         )}
       </div>
     </section>

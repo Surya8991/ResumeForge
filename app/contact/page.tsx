@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import SiteNavbar from '@/components/SiteNavbar';
 import SiteFooter from '@/components/SiteFooter';
+import { submitContactMessage } from '@/lib/leads';
 
 export default function ContactPage() {
   useEffect(() => {
@@ -22,14 +23,28 @@ export default function ContactPage() {
     message: '',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Open user's email client with a pre-filled message (no backend yet)
-    const subject = encodeURIComponent(`[ResumeBuildz ${formData.subject}] from ${formData.name}`);
-    const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`);
-    window.location.href = `mailto:Suryaraj8147@gmail.com?subject=${subject}&body=${body}`;
-    setSubmitted(true); // Note: mailto is fire-and-forget; we show a softer message below
+    if (submitting) return;
+    setSubmitting(true);
+    setError(null);
+
+    const result = await submitContactMessage({
+      name: formData.name,
+      email: formData.email,
+      subject: formData.subject,
+      message: formData.message,
+    });
+
+    setSubmitting(false);
+    if (result.ok) {
+      setSubmitted(true);
+    } else {
+      setError(result.error || 'Something went wrong. Please try again or email us directly.');
+    }
   };
 
   return (
@@ -86,9 +101,9 @@ export default function ContactPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">Email Client Opened!</h3>
-                <p className="text-gray-600 mb-4">Your email client should have opened with the message. If it didn&apos;t, email us directly at Suryaraj8147@gmail.com.</p>
-                <button onClick={() => { setSubmitted(false); setFormData({ name: '', email: '', subject: 'General', message: '' }); }} className="text-blue-400 hover:underline text-sm">
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">Message sent.</h3>
+                <p className="text-gray-600 mb-4">Thanks. We read every message, usually within a day. If you need a faster response, email us at Suryaraj8147@gmail.com.</p>
+                <button onClick={() => { setSubmitted(false); setFormData({ name: '', email: '', subject: 'General', message: '' }); }} className="text-indigo-600 hover:underline text-sm">
                   Send another message
                 </button>
               </div>
@@ -96,15 +111,15 @@ export default function ContactPage() {
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Name</label>
-                  <input id="name" type="text" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="w-full border border-gray-300 rounded-lg px-4 py-2 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none" placeholder="Your name" />
+                  <input id="name" type="text" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} disabled={submitting} className="w-full border border-gray-300 rounded-lg px-4 py-2 text-gray-900 focus:ring-2 focus:ring-indigo-600 focus:border-transparent outline-none disabled:opacity-60" placeholder="Your name" />
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                  <input id="email" type="email" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="w-full border border-gray-300 rounded-lg px-4 py-2 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none" placeholder="you@example.com" />
+                  <input id="email" type="email" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} disabled={submitting} className="w-full border border-gray-300 rounded-lg px-4 py-2 text-gray-900 focus:ring-2 focus:ring-indigo-600 focus:border-transparent outline-none disabled:opacity-60" placeholder="you@example.com" />
                 </div>
                 <div>
                   <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">Subject</label>
-                  <select id="subject" value={formData.subject} onChange={(e) => setFormData({ ...formData, subject: e.target.value })} className="w-full border border-gray-300 rounded-lg px-4 py-2 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none bg-white">
+                  <select id="subject" value={formData.subject} onChange={(e) => setFormData({ ...formData, subject: e.target.value })} disabled={submitting} className="w-full border border-gray-300 rounded-lg px-4 py-2 text-gray-900 focus:ring-2 focus:ring-indigo-600 focus:border-transparent outline-none bg-white disabled:opacity-60">
                     <option value="General">General</option>
                     <option value="Bug Report">Bug Report</option>
                     <option value="Feature Request">Feature Request</option>
@@ -113,11 +128,15 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Message</label>
-                  <textarea id="message" required rows={5} value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} className="w-full border border-gray-300 rounded-lg px-4 py-2 text-gray-900 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none resize-none" placeholder="Your message..." />
+                  <textarea id="message" required rows={5} value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} disabled={submitting} className="w-full border border-gray-300 rounded-lg px-4 py-2 text-gray-900 focus:ring-2 focus:ring-indigo-600 focus:border-transparent outline-none resize-none disabled:opacity-60" placeholder="Your message..." />
                 </div>
-                <button type="submit" className="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 rounded-lg transition-colors">
-                  Send Message
+                {error && (
+                  <p className="text-sm text-red-600">{error}</p>
+                )}
+                <button type="submit" disabled={submitting} className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-3 rounded-lg transition-colors shadow-sm disabled:opacity-60 disabled:cursor-not-allowed">
+                  {submitting ? 'Sending...' : 'Send Message'}
                 </button>
+                <p className="text-xs text-gray-500 text-center">We read every message, usually within a day.</p>
               </form>
             )}
           </div>
