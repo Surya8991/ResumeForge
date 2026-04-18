@@ -6,8 +6,10 @@
 // weak opener" chip row when applicable.
 
 import { useMemo, useState } from 'react';
-import { ChevronDown, ChevronRight, Info, AlertTriangle, AlertCircle, Wand2 } from 'lucide-react';
+import { ChevronDown, ChevronRight, Info, AlertTriangle, AlertCircle, Wand2, Sparkles, Check, X, Loader2 } from 'lucide-react';
 import { evaluateBullet, gradeBg, gradeColor } from '@/lib/bulletEvaluator';
+import { callGroqAI, getGroqApiKey } from '@/components/ats/utils/groqAI';
+import { canUse, incrementUsage } from '@/lib/usage';
 
 export interface BulletScoreListProps {
   bullets: string[];
@@ -75,6 +77,7 @@ export default function BulletScoreList({ bullets, onReplace }: BulletScoreListP
             issues={result.issues}
             suggestions={result.suggestions}
             onApplyOpener={(opener) => applyWeakRewrite(i, opener)}
+            onReplaceFull={(next) => onReplace(i, next)}
           />
         ))}
       </ul>
@@ -89,6 +92,7 @@ function BulletRow({
   issues,
   suggestions,
   onApplyOpener,
+  onReplaceFull,
 }: {
   index: number;
   bullet: string;
@@ -97,10 +101,41 @@ function BulletRow({
   issues: ReturnType<typeof evaluateBullet>['issues'];
   suggestions: string[];
   onApplyOpener: (opener: string) => void;
+  onReplaceFull: (next: string) => void;
 }) {
   const [open, setOpen] = useState(grade === 'red');
+  const [aiBusy, setAiBusy] = useState(false);
+  const [aiResult, setAiResult] = useState<string | null>(null);
+  const [aiError, setAiError] = useState<string | null>(null);
   const hasIssues = issues.length > 0;
   const weakOpenerSuggestions = suggestions.filter((s) => s && !s.startsWith('['));
+
+  async function runAiRewrite() {
+    setAiError(null);
+    setAiResult(null);
+    if (!getGroqApiKey()) {
+      setAiError('Add a Groq API key in AI settings first.');
+      return;
+    }
+    if (!canUse('ai')) {
+      setAiError('Daily free AI limit reached. Upgrade for unlimited.');
+      return;
+    }
+    setAiBusy(true);
+    const { success, content, error } = await callGroqAI(
+      'You are a resume coach. Rewrite a single resume bullet to be stronger: strong action verb start, one specific quantified metric, 14-22 words, no fluff. Return ONLY the rewritten bullet, no preamble, no quotes.',
+      `Original: ${bullet}`,
+      120,
+      0.5,
+    );
+    setAiBusy(false);
+    if (success && content) {
+      setAiResult(content.replace(/^["']|["']$/g, '').trim());
+      incrementUsage('ai');
+    } else {
+      setAiError(error || 'AI rewrite failed.');
+    }
+  }
 
   return (
     <li className="px-3 py-2 text-xs">
@@ -145,6 +180,39 @@ function BulletRow({
                   {opener}
                 </button>
               ))}
+            </div>
+          )}
+          <div className="pt-2 flex items-center gap-2">
+            <button
+              type="button"
+              onClick={runAiRewrite}
+              disabled={aiBusy}
+              className="inline-flex items-center gap-1 text-[11px] bg-gray-900 hover:bg-gray-800 disabled:bg-gray-400 text-white px-2 py-1 rounded transition"
+            >
+              {aiBusy ? <Loader2 className="h-3 w-3 animate-spin" /> : <Sparkles className="h-3 w-3" />}
+              {aiBusy ? 'Rewriting...' : 'Rewrite with AI'}
+            </button>
+            {aiError && <span className="text-[10px] text-red-600">{aiError}</span>}
+          </div>
+          {aiResult && (
+            <div className="mt-2 rounded-md border border-indigo-200 bg-indigo-50/60 p-2 text-[11px]">
+              <p className="text-gray-800 mb-2">{aiResult}</p>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => { onReplaceFull(aiResult); setAiResult(null); }}
+                  className="inline-flex items-center gap-1 text-[10px] bg-emerald-600 hover:bg-emerald-700 text-white px-2 py-1 rounded font-medium"
+                >
+                  <Check className="h-3 w-3" /> Replace
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setAiResult(null)}
+                  className="inline-flex items-center gap-1 text-[10px] border border-gray-300 text-gray-700 hover:bg-gray-100 px-2 py-1 rounded font-medium"
+                >
+                  <X className="h-3 w-3" /> Discard
+                </button>
+              </div>
             </div>
           )}
         </div>
