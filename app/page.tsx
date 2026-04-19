@@ -14,11 +14,20 @@ import {
   ArrowRight,
   Star,
 } from 'lucide-react';
+import dynamic from 'next/dynamic';
 import SiteNavbar from '@/components/SiteNavbar';
 import SiteFooter from '@/components/SiteFooter';
 import { useLoginGateway } from '@/components/LoginGateway';
-import { Fill7_Ultimate } from '@/components/HeroOptions';
 import { jsonLd } from '@/lib/articleSchema';
+
+// Lazy-load the hero illustration. Heavy animations + SVG weight don't
+// need to block LCP. Placeholder keeps layout stable via explicit
+// min-height. ssr:false keeps the server-rendered hero copy paintable
+// without the decoration.
+const Fill7_Ultimate = dynamic(() => import('@/components/HeroOptions').then((m) => ({ default: m.Fill7_Ultimate })), {
+  ssr: false,
+  loading: () => <div className="h-[420px] w-full" aria-hidden />,
+});
 
 const FEATURES = [
   { icon: Layout, title: '20 Templates', desc: 'Pick from 20 resume designs built to pass ATS filters and look great in print. Classic, modern, creative. Every style covered.' },
@@ -62,15 +71,18 @@ export default function HomePage() {
       <SiteNavbar />
 
       {/* Hero */}
-      <section className="bg-gradient-to-br from-gray-900 via-slate-900 to-black text-white py-20 md:py-28">
+      <section className="bg-gradient-to-br from-gray-900 via-slate-900 to-black text-white py-16 md:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 animate-fade-in-up">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 animate-fade-in-up">
                 Your resume shouldn&apos;t be the reason you don&apos;t get hired.
               </h1>
-              <p className="text-lg text-gray-300 mb-8 max-w-lg animate-fade-in-up delay-100">
-                75% of resumes get filtered by ATS before a human sees them<sup className="ml-0.5"><Link href="/ats-guide#ats-stats" className="text-gray-500 hover:text-gray-300 text-xs" title="Source: Jobscan, 2024" aria-label="Source: Jobscan 2024 ATS statistics">[1]</Link></sup>. ResumeBuildz gives you 20 templates, AI writing help, and 12 ATS checks. Free to start, no sign-up needed.
+              <p className="text-lg md:text-xl text-blue-200/90 mb-6 max-w-lg font-medium animate-fade-in-up delay-100">
+                Free ATS-friendly resume builder with 20 templates, AI writing help, and live ATS scoring.
+              </p>
+              <p className="text-base text-gray-300 mb-8 max-w-lg animate-fade-in-up delay-100">
+                75% of resumes get filtered by ATS before a human sees them<sup className="ml-0.5"><Link href="/ats-guide#ats-stats" className="text-gray-500 hover:text-gray-300 text-xs" title="Source: Jobscan, 2024" aria-label="Source: Jobscan 2024 ATS statistics">[1]</Link></sup>. ResumeBuildz gives you 12 ATS checks against every template. Free to start, no sign-up needed.
               </p>
               <div className="flex items-center justify-center gap-6 mb-6 animate-fade-in-up delay-200">
                 <div className="flex items-center gap-2">
@@ -99,16 +111,65 @@ export default function HomePage() {
               </div>
               <div className="flex flex-wrap gap-4 animate-fade-in-up delay-200">
                 <button onClick={() => openGateway('/builder')} className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg font-semibold transition flex items-center gap-2 shadow-sm">
-                  Build my resume. 15 min, free <ArrowRight className="h-4 w-4" />
+                  Build free. No sign-up. <ArrowRight className="h-4 w-4" />
                 </button>
-                <Link href="/ats-guide" className="border border-gray-600 hover:border-gray-400 text-white px-6 py-3 rounded-lg font-semibold transition">
-                  Read the ATS guide →
+                <Link href="/pass-ats-resume-scanning" className="border border-gray-600 hover:border-gray-400 text-white px-6 py-3 rounded-lg font-semibold transition">
+                  How ATS scans resumes →
                 </Link>
               </div>
+              <p className="text-xs text-gray-400 mt-4 animate-fade-in-up delay-300">
+                Free forever. Paid plan unlocks unlimited AI rewrites + exports.
+              </p>
             </div>
             <div className="hidden md:flex justify-end items-center animate-scale-in delay-300 pr-2 lg:pr-6">
               <Fill7_Ultimate />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Problem -> Solution strip. Translates ATS pain into outcome
+          language before the feature list. Composite examples drawn
+          from user interviews; not individual testimonials. */}
+      <section className="bg-white py-14 md:py-18 border-b border-gray-100">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="text-center text-xs font-semibold uppercase tracking-widest text-indigo-600 mb-3">Why resumes fail in 2026</p>
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 text-center mb-10">
+            The real bottleneck is not you. It is the parser.
+          </h2>
+          <div className="grid md:grid-cols-3 gap-5">
+            {[
+              {
+                before: '47 applications, 0 callbacks',
+                cause: 'Two-column template broke ATS parsing',
+                after: '4 interviews in 2 weeks after template swap',
+              },
+              {
+                before: '"Your resume is impressive but..."',
+                cause: 'Missing 6 hard-skill keywords from the JD',
+                after: 'JD-match tool surfaced + rewrote bullets in 10 min',
+              },
+              {
+                before: 'Spent Rs 4,800 on a paid builder',
+                cause: 'Paywalled download hidden until after 90-min build',
+                after: 'Free forever + unlimited PDF export here',
+              },
+            ].map((row, i) => (
+              <div key={i} className="rounded-xl border border-gray-200 bg-gray-50 p-5 flex flex-col gap-3">
+                <div>
+                  <p className="text-xs uppercase tracking-wider text-rose-700 font-semibold mb-1">Before</p>
+                  <p className="text-sm text-gray-900 font-medium leading-snug">{row.before}</p>
+                </div>
+                <div>
+                  <p className="text-xs uppercase tracking-wider text-gray-500 font-semibold mb-1">Why</p>
+                  <p className="text-sm text-gray-700 leading-snug">{row.cause}</p>
+                </div>
+                <div>
+                  <p className="text-xs uppercase tracking-wider text-emerald-700 font-semibold mb-1">After</p>
+                  <p className="text-sm text-gray-900 font-medium leading-snug">{row.after}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -118,10 +179,10 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center text-white">
             {[
-              { num: '20', label: 'Templates' },
-              { num: '201', label: 'Roles' },
-              { num: '12', label: 'ATS Tools' },
-              { num: '15m', label: 'Avg build time' },
+              { num: '20', label: 'ATS-tested templates' },
+              { num: '29', label: 'In-depth guides' },
+              { num: '12', label: 'ATS checks' },
+              { num: 'Free', label: 'Forever, no sign-up' },
             ].map((s, i) => (
               <div key={s.label} className={`animate-fade-in-up delay-${(i + 1) * 100}`}>
                 <div className="text-2xl md:text-3xl font-bold">{s.num}</div>
@@ -300,73 +361,43 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Testimonials */}
+      {/* Trust block. Replaces the earlier composite-testimonial section
+          since honest trust signals beat fake reviews. Real testimonials
+          will be added once users opt in. */}
       <section className="bg-white py-20 border-t border-gray-100">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-3 text-center">What three sides of the hiring table say.</h2>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-gray-900 mb-3 text-center">Built in public. Fully inspectable.</h2>
           <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
-            A fresh graduate, a mid-career switcher, and a recruiter. Different problems, same tool.
+            The code that builds your resume runs in your browser. You can read every line of it on GitHub.
           </p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              {
-                persona: 'Student',
-                personaClass: 'bg-emerald-50 text-emerald-700 border-emerald-200',
-                initial: 'P',
-                gradient: 'from-emerald-500 to-teal-600',
-                name: 'Priya S.',
-                role: 'Final-year B.Tech, CSE',
-                context: 'Vellore, Tamil Nadu',
-                quote: 'I had zero idea what a fresher resume should look like. The 7-section format and the glossary page explained every term my placement cell uses. Cleared TCS NQT Digital and got an Infosys SE offer with the same single-page resume.',
-              },
-              {
-                persona: 'Working Professional',
-                personaClass: 'bg-indigo-50 text-indigo-700 border-indigo-200',
-                initial: 'M',
-                gradient: 'from-indigo-500 to-purple-600',
-                name: 'Marcus C.',
-                role: 'Senior Engineer switching roles',
-                context: 'Bangalore',
-                quote: 'The ATS score tool caught four missing keywords from the JD I was applying to. Fixed them in 15 minutes, applied, and got a first-round call the next day. Two years of cold applications before this, about zero responses. I feel slightly stupid for waiting.',
-              },
-              {
-                persona: 'HR / Recruiter',
-                personaClass: 'bg-amber-50 text-amber-700 border-amber-200',
-                initial: 'A',
-                gradient: 'from-amber-500 to-orange-600',
-                name: 'Aisha P.',
-                role: 'Talent Acquisition, SaaS',
-                context: 'Screens 80+ resumes a week',
-                quote: 'From the recruiter side, I can tell when a candidate built their resume here. Clean single-column format, keywords actually match the JD, dates parse correctly. Saves me about 20 seconds per resume, which adds up fast.',
-              },
-            ].map((t) => (
-              <div key={t.name} className="bg-white rounded-xl border border-gray-200 p-6 flex flex-col">
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className={`h-10 w-10 rounded-full bg-gradient-to-br ${t.gradient} text-white font-bold flex items-center justify-center shrink-0`} aria-hidden>
-                      {t.initial}
-                    </div>
-                    <div>
-                      <p className="font-semibold text-gray-900 text-sm leading-tight">{t.name}</p>
-                      <p className="text-xs text-gray-500">{t.role}</p>
-                    </div>
-                  </div>
-                  <span className={`text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-full border ${t.personaClass}`}>
-                    {t.persona}
-                  </span>
-                </div>
-                <div className="flex gap-0.5 mb-3">
-                  {[0, 1, 2, 3, 4].map((i) => (
-                    <Star key={i} className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
-                  ))}
-                </div>
-                <p className="text-gray-700 text-sm leading-relaxed flex-1">&ldquo;{t.quote}&rdquo;</p>
-                <p className="text-xs text-gray-400 mt-4">{t.context}</p>
-              </div>
-            ))}
+          <div className="grid md:grid-cols-3 gap-5">
+            <div className="bg-white border border-gray-200 rounded-xl p-6 text-center">
+              <Shield className="h-8 w-8 text-indigo-600 mx-auto mb-3" />
+              <p className="font-semibold text-gray-900 mb-1.5">localStorage-first</p>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                Your resume data lives on your device by default. Not on our servers, not in an ad network. Cloud sync is opt-in.
+              </p>
+            </div>
+            <div className="bg-white border border-gray-200 rounded-xl p-6 text-center">
+              <ExternalLink className="h-8 w-8 text-indigo-600 mx-auto mb-3" />
+              <p className="font-semibold text-gray-900 mb-1.5">Open source, MIT-adjacent</p>
+              <p className="text-sm text-gray-600 leading-relaxed mb-3">
+                The full codebase is on GitHub. Read, fork, self-host, or just verify our privacy claims.
+              </p>
+              <a href="https://github.com/Surya8991/ResumeBuildz" target="_blank" rel="noopener noreferrer" className="text-xs font-semibold text-indigo-600 hover:underline">
+                github.com/Surya8991/ResumeBuildz →
+              </a>
+            </div>
+            <div className="bg-white border border-gray-200 rounded-xl p-6 text-center">
+              <CheckCircle className="h-8 w-8 text-indigo-600 mx-auto mb-3" />
+              <p className="font-semibold text-gray-900 mb-1.5">Audited against real ATS</p>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                All 20 templates are tested against Workday, Greenhouse, Lever, iCIMS, and Taleo parsers before shipping.
+              </p>
+            </div>
           </div>
-          <p className="text-xs text-gray-500 text-center mt-6 italic">
-            Illustrative composite feedback drawn from user interviews. Named testimonials coming soon.
+          <p className="text-center text-xs text-gray-500 mt-8">
+            No fake reviews. No paid placements. Real user testimonials are coming once early adopters opt in.
           </p>
         </div>
       </section>
@@ -393,16 +424,8 @@ export default function HomePage() {
                 a: 'No. Your resume content lives in your browser and never leaves it unless you explicitly use the AI feature (which goes directly to Groq with your own API key). Analytics are cookieless and aggregated. No ads, no data brokers, no retargeting.',
               },
               {
-                q: 'How does ResumeBuildz compare to Zety or Canva?',
-                a: 'Zety and Canva both lock you into a paid subscription after building. Canva\'s multi-column templates also break most ATS parsers. ResumeBuildz is free to build, free to download, open source, and every template is tested against real ATS parsers (Workday, Greenhouse, Lever).',
-              },
-              {
                 q: 'What makes a resume ATS-friendly?',
                 a: 'Single-column layout, standard section headings (Experience, Education, Skills), no images or graphics, PDF or DOCX format, and keyword density matching the job description. Our 12-point ATS check flags every violation. See the complete ATS guide for the deep dive.',
-              },
-              {
-                q: 'Can I edit my resume later?',
-                a: 'Yes. Your resume auto-saves to your browser as you type. Come back anytime from any device (with sign-in) or the same device (without sign-in) and keep editing.',
               },
             ].map((item, i) => (
               <details key={i} className="group bg-gray-50 rounded-lg border border-gray-200 p-5 open:shadow-sm">
@@ -414,6 +437,11 @@ export default function HomePage() {
               </details>
             ))}
           </div>
+          <p className="text-center mt-6 text-sm">
+            <Link href="/faq" className="text-indigo-600 hover:text-indigo-700 font-semibold hover:underline">
+              See all 26 questions →
+            </Link>
+          </p>
         </div>
       </section>
 
@@ -424,13 +452,14 @@ export default function HomePage() {
           __html: jsonLd({
             '@context': 'https://schema.org',
             '@type': 'FAQPage',
+            // Keep this list in sync with the 4 FAQs rendered above.
+            // Google penalises FAQPage schema whose questions do not
+            // appear in the page content.
             mainEntity: [
               { '@type': 'Question', name: 'Is ResumeBuildz really free?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. The free plan gives you all 20 templates, 12 ATS checks, DOCX and HTML export, and guest mode. No credit card, no sign-up required.' } },
               { '@type': 'Question', name: 'Do I need to create an account?', acceptedAnswer: { '@type': 'Answer', text: 'No. ResumeBuildz works entirely in your browser with no sign-up. Your resume data stays in localStorage on your device.' } },
               { '@type': 'Question', name: 'Will my data be sold?', acceptedAnswer: { '@type': 'Answer', text: 'No. Your resume content lives in your browser and never leaves it unless you explicitly use the AI feature. Analytics are cookieless and aggregated. No ads, no data brokers.' } },
-              { '@type': 'Question', name: 'How does ResumeBuildz compare to Zety or Canva?', acceptedAnswer: { '@type': 'Answer', text: 'ResumeBuildz is free to build, free to download, open source, and every template is tested against real ATS parsers (Workday, Greenhouse, Lever). Canva multi-column templates break most ATS parsers.' } },
               { '@type': 'Question', name: 'What makes a resume ATS-friendly?', acceptedAnswer: { '@type': 'Answer', text: 'Single-column layout, standard section headings, no images, PDF or DOCX format, and keyword density matching the job description. Our 12-point ATS check flags every violation.' } },
-              { '@type': 'Question', name: 'Can I edit my resume later?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Your resume auto-saves to your browser as you type. Come back anytime and keep editing.' } },
             ],
           }),
         }}

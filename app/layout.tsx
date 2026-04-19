@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/Providers";
 import PageLoader from "@/components/PageLoader";
+import StickyMobileCTA from "@/components/StickyMobileCTA";
 import { Analytics } from "@vercel/analytics/react";
 import { SITE_URL } from "@/lib/siteConfig";
 import { jsonLd } from "@/lib/articleSchema";
@@ -158,6 +159,7 @@ export default function RootLayout({
         <Providers>
           <PageLoader />
           {children}
+          <StickyMobileCTA />
         </Providers>
         <Analytics />
       </body>
