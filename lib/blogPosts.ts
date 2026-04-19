@@ -58,6 +58,19 @@ export const BLOG_POSTS: BlogPost[] = [
     readingTime: 12,
     featured: true,
   },
+  {
+    slug: 'pass-ats-resume-scanning',
+    title: 'How to Pass ATS Resume Scanning in 2026',
+    excerpt:
+      '98% of Fortune 500 use an ATS. 75% of resumes never reach a human. The practical 2026 playbook: 7 killers, 10 tactics, PDF vs DOCX truth, and the top 5 systems explained.',
+    category: 'ats-keywords',
+    tags: ['ATS', 'keywords', 'parsing', 'workday', 'greenhouse'],
+    author: 'Surya L',
+    datePublished: '2026-04-19',
+    dateModified: '2026-04-19',
+    readingTime: 11,
+    featured: true,
+  },
 
   // ─────────── Career Transitions ───────────
   {
