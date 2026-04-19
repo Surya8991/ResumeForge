@@ -89,16 +89,31 @@ export interface ContactResult {
   error?: string;
 }
 
+// Per-field length caps. Match the client <input maxLength> so a tampered
+// form POSTing the raw payload still gets truncated here before reaching
+// Supabase. Defence in depth — Supabase should also have column limits
+// or CHECK constraints; this is belt-and-braces.
+const LIMITS = { name: 100, email: 254, subject: 100, message: 5000 } as const;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export async function submitContactMessage(payload: ContactPayload): Promise<ContactResult> {
   const trimmed: ContactPayload = {
-    name: payload.name.trim(),
-    email: payload.email.trim().toLowerCase(),
-    subject: payload.subject?.trim() || undefined,
-    message: payload.message.trim(),
+    name: payload.name.trim().slice(0, LIMITS.name),
+    email: payload.email.trim().toLowerCase().slice(0, LIMITS.email),
+    subject: payload.subject?.trim().slice(0, LIMITS.subject) || undefined,
+    message: payload.message.trim().slice(0, LIMITS.message),
   };
 
   if (!trimmed.name || !trimmed.email || !trimmed.message) {
     return { ok: false, mode: 'local', error: 'Name, email, and message are required.' };
+  }
+  if (!EMAIL_RE.test(trimmed.email)) {
+    return { ok: false, mode: 'local', error: 'Please enter a valid email address.' };
+  }
+  // Minimum message length kills most low-effort spam without hurting
+  // legitimate short messages.
+  if (trimmed.message.length < 10) {
+    return { ok: false, mode: 'local', error: 'Please provide a few words so we can help.' };
   }
 
   // Safety-net local persistence so a pending submission is not lost if

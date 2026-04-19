@@ -3,6 +3,7 @@ import { PLANS, type PlanId, isStripeConfigured } from '@/lib/stripe';
 import { SITE_URL } from '@/lib/siteConfig';
 import { rateLimit, clientId } from '@/lib/rateLimit';
 import { serverEnv } from '@/lib/env';
+import { loadStripe } from '@/lib/lazyStripe';
 
 // Stripe checkout session creator.
 //
@@ -78,22 +79,10 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // Lazy import so the app builds without the Stripe SDK installed.
-  // `new Function('return import(...)')` bypasses static module resolution so
-  // Turbopack/webpack don't try to find `stripe` at build time. Once the
-  // SDK is installed (npm install stripe), swap this for a direct
-  // `await import('stripe')`. Tracked as audit item M3.
-  type StripeCtor = new (key: string) => {
-    checkout: { sessions: { create: (opts: Record<string, unknown>) => Promise<{ url: string | null }> } };
-  };
-  let stripeMod: { default: StripeCtor } | null = null;
-  try {
-    const dyn = new Function('m', 'return import(m)') as (m: string) => Promise<{ default: StripeCtor }>;
-    stripeMod = await dyn('stripe').catch(() => null);
-  } catch {
-    stripeMod = null;
-  }
-  if (!stripeMod) {
+  // Lazy-load Stripe SDK (see lib/lazyStripe.ts). Returns null if the
+  // package is not installed so the app still builds without it.
+  const Stripe = await loadStripe();
+  if (!Stripe) {
     return NextResponse.json(
       { error: 'Stripe SDK not installed. Run: npm install stripe', code: 'stripe_sdk_missing' },
       { status: 503 },
@@ -101,7 +90,6 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const Stripe = stripeMod.default;
     const stripe = new Stripe(serverEnv.STRIPE_SECRET_KEY);
 
     const session = await stripe.checkout.sessions.create({

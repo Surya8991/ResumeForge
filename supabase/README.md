@@ -80,9 +80,9 @@ if (!data.allowed) openUpgradeModal();
 
 | Function | Status | Purpose |
 | --- | --- | --- |
-| `delete-user` | Code complete, not deployed | Deletes `profiles` row + `auth.users` row atomically |
-| `increment-usage` | Code complete, not deployed | Enforces daily AI/PDF limits server-side |
-| `send-welcome` | Code complete, not deployed | Sends welcome email via Resend after email confirmation (triggered by Postgres on `auth.users`) |
+| `delete-user` | **Deployed + ACTIVE** | Deletes `profiles` row + `auth.users` row atomically |
+| `increment-usage` | **Deployed + ACTIVE** | Enforces daily AI/PDF limits server-side |
+| `send-welcome` | **Deployed + ACTIVE** | Sends welcome email via Resend after email confirmation (triggered by Postgres on `auth.users`). Dormant until `RESEND_API_KEY` + `WELCOME_HOOK_SECRET` secrets set and trigger SQL run. |
 
 Until these are deployed, the client-side fallback remains active
 (localStorage counter + client-only profile delete).

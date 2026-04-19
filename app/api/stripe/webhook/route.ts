@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { logger } from '@/lib/logger';
 import { serverEnv } from '@/lib/env';
+import { loadStripe } from '@/lib/lazyStripe';
 
 // Stripe webhook handler — signature verification + event routing.
 //
@@ -50,24 +51,11 @@ export async function POST(req: NextRequest) {
 
   const rawBody = await req.text();
 
-  // Lazy import so the app builds without the Stripe SDK installed.
-  // See M3 in audit — swap for a direct `await import('stripe')` once the
-  // SDK is a permanent dep.
-  type StripeCtor = new (key: string) => {
-    webhooks: { constructEvent: (body: string, sig: string, secret: string) => { type: string; data: { object: Record<string, unknown> } } };
-  };
-  let stripeMod: { default: StripeCtor } | null = null;
-  try {
-    const dyn = new Function('m', 'return import(m)') as (m: string) => Promise<{ default: StripeCtor }>;
-    stripeMod = await dyn('stripe').catch(() => null);
-  } catch {
-    stripeMod = null;
-  }
-  if (!stripeMod) {
+  // Lazy-load Stripe SDK (see lib/lazyStripe.ts).
+  const Stripe = await loadStripe();
+  if (!Stripe) {
     return new NextResponse('Stripe SDK not installed', { status: 503 });
   }
-
-  const Stripe = stripeMod.default;
   const stripe = new Stripe(serverEnv.STRIPE_SECRET_KEY);
 
   let event;

@@ -17,13 +17,33 @@ function clamp(val: number, min: number, max: number): number {
   return Math.max(min, Math.min(max, val));
 }
 
-/** Strip patterns that could escape a <style> tag or execute code. */
+/** Strip patterns that could escape a <style> tag or execute code.
+ *
+ * Defence-in-depth. Real untrusted CSS never reaches this fn today
+ * (overrideCSS is built from `styleOptions` whose values are whitelist-
+ * checked or clamped) — this is a safety net if that guarantee ever
+ * weakens. CSP `default-src 'self'` also blocks external fetches, so
+ * even `@import url(evil.com)` would fail at the network layer.
+ */
 function sanitizeCSS(css: string): string {
   return css
+    // <style>/<script> injection attempts
     .replace(/<\/?style/gi, '')
     .replace(/<\/?\s*script/gi, '')
+    // IE-era code-in-CSS (dead on modern browsers, strip anyway)
     .replace(/expression\s*\(/gi, '')
-    .replace(/url\s*\(\s*javascript:/gi, '');
+    // javascript: / vbscript: / data:text/html URLs inside url()
+    .replace(/url\s*\(\s*(?:['"])?\s*javascript:/gi, 'url(')
+    .replace(/url\s*\(\s*(?:['"])?\s*vbscript:/gi, 'url(')
+    .replace(/url\s*\(\s*(?:['"])?\s*data:\s*text\/html/gi, 'url(data:text/plain')
+    // External style loads via @import — drop the line
+    .replace(/@import[^;]*;/gi, '')
+    // @charset must be first-byte-of-file; stray ones do nothing useful
+    .replace(/@charset[^;]*;/gi, '')
+    // Firefox legacy binding (dead but cheap)
+    .replace(/-moz-binding\s*:/gi, 'x-moz-binding:')
+    // IE behavior: (deprecated)
+    .replace(/\bbehavior\s*:/gi, 'x-behavior:');
 }
 
 const ResumePreview = forwardRef<HTMLDivElement>((_, ref) => {

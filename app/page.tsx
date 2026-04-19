@@ -18,6 +18,7 @@ import SiteNavbar from '@/components/SiteNavbar';
 import SiteFooter from '@/components/SiteFooter';
 import { useLoginGateway } from '@/components/LoginGateway';
 import { Fill7_Ultimate } from '@/components/HeroOptions';
+import { jsonLd } from '@/lib/articleSchema';
 
 const FEATURES = [
   { icon: Layout, title: '20 Templates', desc: 'Pick from 20 resume designs built to pass ATS filters and look great in print. Classic, modern, creative. Every style covered.' },
@@ -378,7 +379,7 @@ export default function HomePage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+          __html: jsonLd({
             '@context': 'https://schema.org',
             '@type': 'FAQPage',
             mainEntity: [

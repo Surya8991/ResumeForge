@@ -6,6 +6,110 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/), and this
 
 ---
 
+## [1.22.0] - 2026-04-19
+
+### Added
+
+- **`lib/blogSeo.ts`** central SEO registry holding per-post title
+  (<=60 chars), 150-160 char description, category, slug, FAQs. One
+  source of truth for 19 blog posts.
+- **`/author/surya-l`** bio page with `Person` JSON-LD schema
+  (`sameAs` GitHub + LinkedIn). `DEFAULT_AUTHOR` in `articleSchema.ts`
+  now points at this page, lifting E-E-A-T across every Article
+  schema in one edit.
+- **`lib/lazyStripe.ts`** DRY helper for the lazy-loaded Stripe SDK.
+  Replaces 16 lines of duplicated bundler-dodge code across
+  `/api/checkout` and `/api/stripe/webhook`. Typed, documented,
+  one place to swap when Stripe becomes a permanent dep.
+- **`BLOG_PLAN_V2.html`** reference doc at repo root: 50 queued
+  blog topics organised into 6 clusters with per-post SEO fields
+  (primary keyword, volume, KD, secondary, intent, outline, unique
+  angle, target audience, internal links). Priority-ordered:
+  13 red, 23 amber, 14 green. Total search volume ~740k/month.
+
+### Changed
+
+- **SEO migration**: all 29 public pages now serve correct server-
+  side metadata to Googlebot. Pre-migration, every `'use client'`
+  page served the root layout title ("ResumeBuildz by Surya L...")
+  because `document.title = ...` in useEffect runs only after the
+  initial crawl. Fixed by splitting each page into:
+  - `page.tsx`: server component exporting `metadata` + JSON-LD
+  - `Content.tsx`: existing `'use client'` component, unchanged
+    except for stripped useEffect metadata block
+
+  Covers 19 blog posts + 10 non-blog pages (builder, pricing,
+  templates, about, faq, contact, blog hub, company-guides hub,
+  changelog, privacy).
+
+  Each page type gets appropriate JSON-LD:
+  - Blog posts: Article + FAQPage + BreadcrumbList
+  - `/builder`: SoftwareApplication with featureList
+  - `/pricing`: Product with 4 Offer entries
+  - `/templates`, `/blog`, `/blog/company-guides`: CollectionPage
+  - `/about`: Organization
+  - `/contact`: ContactPage
+  - `/faq`: FAQPage (auto-generated from full 26-item array)
+
+- **BlogPostLayout mobile fix**: collapsible mobile TOC at top of
+  every post (was `display: none` below `lg`, users lost nav).
+  Responsive H1 `text-2xl sm:text-3xl md:text-4xl`, responsive
+  padding, centred article column on mobile, `min-w-0` overflow
+  guard, Prev/Next stacks on narrow phones.
+
+- **Husky reconfig**: pre-commit is now a no-op; all checks
+  (lint + tsc + build) consolidated in pre-push. Fast commits,
+  single gate at push time.
+
+- **`robots.ts`** already covered `/account` and auth pages;
+  confirmed no updates needed.
+
+### Security
+
+- **Contact form hardening** (`app/contact/Content.tsx` +
+  `lib/leads.ts`):
+  - `maxLength` caps: name 100, email 254, subject 100, message
+    5000 chars
+  - Hidden honeypot `<input>` field — bots filling every input
+    auto-populate it; submissions with non-empty honeypot
+    silently succeed so the bot moves on
+  - Client-side sessionStorage rate limit: 3 submits per 5 min
+  - Server-side `slice()` caps in `submitContactMessage` (defence
+    in depth over the client caps)
+  - Email regex validation + 10-char minimum message
+- **XSS defence in depth**:
+  - Homepage FAQ JSON-LD swapped from raw `JSON.stringify` to
+    `jsonLd()` helper (escapes `<` to `\u003c` so a `</script>`
+    in content can never break out)
+  - `sanitizeCSS` in `ResumePreview.tsx` extended to strip
+    `@import`, `@charset`, `data:text/html` URLs, quoted
+    `javascript:` / `vbscript:` variants, `-moz-binding`,
+    legacy IE `behavior:`
+- **Supabase RLS verified**:
+  - `contact_messages`: RLS enabled, single INSERT policy for
+    public role, no SELECT/UPDATE/DELETE (default-deny protects
+    reads)
+  - `profiles`: RLS enabled, SELECT/INSERT/UPDATE policies each
+    gated on `auth.uid() = id`, no DELETE policy (only
+    `delete-user` Edge Function deletes via service role)
+
+### Infrastructure
+
+- **All 3 Supabase Edge Functions deployed and ACTIVE**:
+  `delete-user`, `increment-usage`, `send-welcome`. Previously-
+  deployed `resend-email` (mis-named) removed and redeployed
+  under the canonical `send-welcome` slug so the Postgres
+  welcome trigger SQL resolves correctly.
+
+### Docs
+
+- `.claude/SKILLS_CATALOG.md` (gitignored) — routing reference
+  mapping 38 top-level skills + 100+ sub-skills across 9 repos
+  to keyword triggers. Future commands route via this catalog
+  for token-efficient skill selection.
+
+---
+
 ## [1.21.0] - 2026-04-19
 
 ### Added

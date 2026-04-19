@@ -14,6 +14,28 @@ export interface ChangelogEntry {
 
 export const CHANGELOG: ChangelogEntry[] = [
   {
+    version: 'v1.22.0',
+    date: 'April 19, 2026',
+    isoDate: '2026-04-19',
+    title: 'Full SEO migration, mobile fixes, security hardening, Edge Functions live',
+    added: [
+      'lib/blogSeo.ts central SEO registry holding per-post title, description, category, FAQs. One source of truth for 19 blog posts.',
+      '/author/surya-l bio page with Person JSON-LD schema (sameAs GitHub + LinkedIn). DEFAULT_AUTHOR in articleSchema.ts now points at this page, lifting E-E-A-T across every Article schema in one edit.',
+      'lib/lazyStripe.ts DRY helper replacing 16 lines of duplicated lazy Stripe SDK loading in /api/checkout and /api/stripe/webhook.',
+      'BLOG_PLAN_V2.html reference doc: 50 queued blog topics in 6 clusters with per-post SEO fields, priority-ordered. Total search volume ~740k/month.',
+      '.claude/SKILLS_CATALOG.md routing reference (gitignored) mapping 38 top-level skills + 100+ sub-skills to keyword triggers.',
+    ],
+    improved: [
+      'SEO migration across all 29 public pages (19 blog + 10 non-blog). Pre-migration every use-client page served the root layout title to Google because document.title was set in useEffect. Each page split into server page.tsx (metadata + JSON-LD) + Content.tsx (use-client body). Per-page-type schemas: Article + FAQPage + BreadcrumbList for blog posts, SoftwareApplication for /builder, Product + Offer for /pricing, CollectionPage for /templates and hubs, Organization for /about, ContactPage for /contact.',
+      'BlogPostLayout mobile fix: collapsible mobile TOC (was display:none below lg), responsive H1 text-2xl sm:text-3xl md:text-4xl, centred article column on mobile, min-w-0 overflow guard, Prev/Next stacks on narrow phones.',
+      'Husky reconfig: pre-commit is now a no-op; lint + tsc + build consolidated in pre-push. Fast commits, single gate at push.',
+      'Contact form hardening: maxLength caps on every input, hidden honeypot, client-side sessionStorage rate limit (3 per 5 min), server-side slice caps, email regex, 10-char minimum message.',
+      'XSS defence in depth: homepage FAQ JSON-LD swapped from raw JSON.stringify to jsonLd() helper (escapes < to \\u003c). sanitizeCSS extended to strip @import, @charset, data:text/html, quoted javascript:/vbscript:, -moz-binding, behavior:',
+      'All 3 Supabase Edge Functions deployed and ACTIVE: delete-user, increment-usage, send-welcome. Mis-named resend-email removed and redeployed under canonical send-welcome slug so the welcome trigger SQL resolves correctly.',
+      'Supabase RLS verified on contact_messages (INSERT only, no SELECT/UPDATE/DELETE) and profiles (SELECT/INSERT/UPDATE gated on auth.uid() = id, no DELETE).',
+    ],
+  },
+  {
     version: 'v1.21.0',
     date: 'April 19, 2026',
     isoDate: '2026-04-19',
