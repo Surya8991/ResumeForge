@@ -67,6 +67,7 @@ const TOC = [
 ];
 
 const RELATED = [
+    { title: "How to Write a Resume Headline That Gets Clicks", slug: "resume-headline", excerpt: "4-part formula, 15 examples by role, and how it differs from a LinkedIn headline.", read: 9 },
   { title: 'TCS NQT 2026: Resume & Process Playbook', slug: 'tcs-nqt-resume-guide', excerpt: '5-round process + TCS iON-safe resume format.', read: 14 },
   { title: 'Campus Placement Resume 2026', slug: 'campus-placement-resume', excerpt: '10-point checklist + 5-round walkthrough for campus drives.', read: 10 },
   { title: 'Fresher Resume Format 2026', slug: 'fresher-resume', excerpt: '7-section template built for Indian + global ATS.', read: 11 },

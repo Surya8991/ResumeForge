@@ -34,6 +34,8 @@ const TOC = [
 ];
 
 const RELATED = [
+    { title: "How to Write a Resume Headline That Gets Clicks", slug: "resume-headline", excerpt: "4-part formula, 15 examples by role, and how it differs from a LinkedIn headline.", read: 9 },
+    { title: "STAR Method: 8 Full Examples", slug: "star-method-examples", excerpt: "90-second STAR formula with worked examples across 8 industries.", read: 15 },
   { title: 'Best Resume Fonts 2026', slug: 'best-resume-fonts', excerpt: '10 fonts tested across 4 ATS platforms.', read: 12 },
   { title: 'Best Resume Format 2026', slug: 'resume-format-guide', excerpt: 'Chronological vs functional vs hybrid.', read: 10 },
   { title: 'Resume Length 2026', slug: 'resume-length', excerpt: '1 page vs 2 pages by career stage.', read: 8 },

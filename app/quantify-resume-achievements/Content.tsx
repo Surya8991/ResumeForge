@@ -122,6 +122,8 @@ const TOC = [
 ];
 
 const RELATED = [
+    { title: "How to Write a Resume Headline That Gets Clicks", slug: "resume-headline", excerpt: "4-part formula, 15 examples by role, and how it differs from a LinkedIn headline.", read: 9 },
+    { title: "Resume Margins & Spacing: The Ideal Setup", slug: "resume-margins-spacing", excerpt: "8-point spec for margins, line height, and section spacing that parses cleanly.", read: 10 },
   { title: '200+ Resume Action Verbs', slug: 'resume-action-verbs', excerpt: 'Grouped by role with the weak-to-strong swap table.', read: 9 },
   { title: 'How to Write a Resume Summary', slug: 'resume-summary-examples', excerpt: '25 examples by stage and industry.', read: 14 },
   { title: 'How to Pass ATS Scanning', slug: 'pass-ats-resume-scanning', excerpt: 'The 7 killers and 10 tactics that clear any ATS.', read: 11 },

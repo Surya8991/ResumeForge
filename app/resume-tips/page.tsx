@@ -18,6 +18,7 @@ export const metadata: Metadata = {
     description: seo.description,
     type: 'article',
     url: absoluteUrl(`/${seo.slug}`),
+    images: [{ url: absoluteUrl(`/api/og?title=${encodeURIComponent(seo.title)}&badge=${encodeURIComponent((seo.category || '').toUpperCase())}`), width: 1200, height: 630, alt: seo.title }],
   },
 };
 

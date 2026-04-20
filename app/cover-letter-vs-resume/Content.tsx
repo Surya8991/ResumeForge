@@ -17,6 +17,8 @@ const TOC = [
 ];
 
 const RELATED = [
+    { title: "STAR Method: 8 Full Examples", slug: "star-method-examples", excerpt: "90-second STAR formula with worked examples across 8 industries.", read: 15 },
+    { title: "100 Common Interview Questions & Answers", slug: "interview-questions-and-answers", excerpt: "Behavioural, technical, tricky, closing categories.", read: 16 },
   { title: 'Cover Letter Guide & Templates', slug: 'cover-letter', excerpt: '4-part structure, 6 industry templates, hiring manager signals.', read: 8 },
   { title: 'How to Tailor Resume in 10 Minutes', slug: 'tailor-resume', excerpt: 'Minute-by-minute process, 3x more callbacks.', read: 10 },
   { title: 'How to Write a Resume Summary', slug: 'resume-summary-examples', excerpt: '25 examples by career stage and industry.', read: 14 },

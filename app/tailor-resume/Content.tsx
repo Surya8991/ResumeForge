@@ -24,6 +24,8 @@ const TOC = [
 ];
 
 const RELATED = [
+    { title: "Workday Resume Tips That Actually Pass", slug: "workday-resume-tips", excerpt: "8 tactical tips for Workday-powered ATS + Profile Sync gotcha.", read: 11 },
+    { title: "Greenhouse ATS: How to Stand Out in Startup Hiring", slug: "greenhouse-ats-tips", excerpt: "Greenhouse parsing rules, scorecard flow, and auto-reject logic.", read: 11 },
   { title: 'How to Pass ATS Scanning 2026', slug: 'pass-ats-resume-scanning', excerpt: '7 killers and 10 tactics that clear any ATS.', read: 11 },
   { title: '200+ Resume Action Verbs', slug: 'resume-action-verbs', excerpt: 'Grouped by role with the weak-to-strong swap table.', read: 9 },
   { title: 'How to Write a Resume Summary', slug: 'resume-summary-examples', excerpt: '25 examples by career stage and industry.', read: 14 },

@@ -67,6 +67,7 @@ const TOC = [
 ];
 
 const RELATED = [
+    { title: "How to Write a Resume Headline That Gets Clicks", slug: "resume-headline", excerpt: "4-part formula, 15 examples by role, and how it differs from a LinkedIn headline.", read: 9 },
   { title: '100 Common Interview Questions', slug: 'interview-questions-and-answers', excerpt: 'Behavioural, technical, tricky, closing categories.', read: 16 },
   { title: 'Tell Me About Yourself: 10 Examples', slug: 'tell-me-about-yourself', excerpt: '3-part present-past-future formula with weak / strong pairs.', read: 13 },
   { title: 'Cover Letter Guide & Templates', slug: 'cover-letter', excerpt: '4-part structure + 6 industry templates.', read: 8 },

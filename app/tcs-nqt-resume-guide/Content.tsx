@@ -72,6 +72,8 @@ const TOC = [
 ];
 
 const RELATED = [
+    { title: "Infosys InfyTQ Certification: Full Guide", slug: "infosys-infytq-guide", excerpt: "5-phase process, Foundation + Advanced syllabus, HackWithInfy.", read: 15 },
+    { title: "How to Write a Resume Headline That Gets Clicks", slug: "resume-headline", excerpt: "4-part formula, 15 examples by role, and how it differs from a LinkedIn headline.", read: 9 },
   { title: 'Fresher Resume Format 2026', slug: 'fresher-resume', excerpt: '7-section template built for Indian + global ATS.', read: 11 },
   { title: 'Campus Placement Resume 2026', slug: 'campus-placement-resume', excerpt: '10-point checklist + 5-round walkthrough for campus drives.', read: 10 },
   { title: '8 Naukri Resume Tips That 3x Views', slug: 'naukri-resume-tips', excerpt: 'Rank higher in Naukri recruiter search filters.', read: 9 },

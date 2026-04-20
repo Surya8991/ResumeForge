@@ -18,6 +18,8 @@ const TOC = [
 ];
 
 const RELATED = [
+    { title: "How to Write a Resume Headline That Gets Clicks", slug: "resume-headline", excerpt: "4-part formula, 15 examples by role, and how it differs from a LinkedIn headline.", read: 9 },
+    { title: "Resume Margins & Spacing: The Ideal Setup", slug: "resume-margins-spacing", excerpt: "8-point spec for margins, line height, and section spacing that parses cleanly.", read: 10 },
   { title: 'Best Resume Format 2026', slug: 'resume-format-guide', excerpt: 'Chronological vs functional vs hybrid, decided by your situation.', read: 10 },
   { title: 'How to Pass ATS Scanning 2026', slug: 'pass-ats-resume-scanning', excerpt: 'The 7 killers and 10 tactics that clear any ATS.', read: 11 },
   { title: 'How to Write a Resume Summary', slug: 'resume-summary-examples', excerpt: '15 summary examples by career stage, 10 by industry.', read: 14 },

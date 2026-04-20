@@ -28,6 +28,8 @@ const TOC = [
 ];
 
 const RELATED = [
+    { title: "50 ChatGPT Prompts for Resume Writing", slug: "chatgpt-prompts-resume", excerpt: "50 copy-paste prompts across 6 categories plus 5 tips for better output.", read: 14 },
+    { title: "How to Rewrite Resume Bullets with AI", slug: "ai-rewrite-bullets", excerpt: "20 before/after pairs across 6 roles plus the 6 hallucination patterns.", read: 13 },
   { title: 'AI Resume Builders 2026 Tested', slug: 'ai-resume-builders-tested', excerpt: 'We tested 8 AI resume tools. Which work, which hallucinate.', read: 13 },
   { title: 'How to Pass ATS Scanning 2026', slug: 'pass-ats-resume-scanning', excerpt: '7 killers + 10 tactics that clear any ATS.', read: 11 },
   { title: 'Best Resume Format 2026', slug: 'resume-format-guide', excerpt: 'Chronological vs functional vs hybrid.', read: 10 },

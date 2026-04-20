@@ -83,6 +83,8 @@ const TOC = [
 ];
 
 const RELATED = [
+    { title: "STAR Method: 8 Full Examples", slug: "star-method-examples", excerpt: "90-second STAR formula with worked examples across 8 industries.", read: 15 },
+    { title: "How to Write a Resume Headline That Gets Clicks", slug: "resume-headline", excerpt: "4-part formula, 15 examples by role, and how it differs from a LinkedIn headline.", read: 9 },
   { title: 'Cover Letter Guide & Templates', slug: 'cover-letter', excerpt: '4-part structure, 6 industry templates, and recruiter do/don\'t list.', read: 8 },
   { title: 'How to Tailor Your Resume in 10 Minutes', slug: 'tailor-resume', excerpt: '3x callback rate via JD-first tailoring. AI workflow included.', read: 10 },
   { title: 'Campus Placement Resume 2026', slug: 'campus-placement-resume', excerpt: '10-point checklist + 5-round walkthrough for Indian campus drives.', read: 10 },

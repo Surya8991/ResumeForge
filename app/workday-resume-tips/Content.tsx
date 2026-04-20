@@ -31,6 +31,8 @@ const TOC = [
 ];
 
 const RELATED = [
+    { title: "Greenhouse ATS: How to Stand Out in Startup Hiring", slug: "greenhouse-ats-tips", excerpt: "Greenhouse parsing rules, scorecard flow, and auto-reject logic.", read: 11 },
+    { title: "How to Write a Resume Headline That Gets Clicks", slug: "resume-headline", excerpt: "4-part formula, 15 examples by role, and how it differs from a LinkedIn headline.", read: 9 },
   { title: 'How to Pass ATS Scanning 2026', slug: 'pass-ats-resume-scanning', excerpt: '7 killers and 10 tactics that clear any ATS.', read: 11 },
   { title: 'How to Beat ATS: Complete Guide', slug: 'ats-guide', excerpt: 'ATS fundamentals and why 75 percent of resumes never reach humans.', read: 12 },
   { title: 'How to Tailor Your Resume', slug: 'tailor-resume', excerpt: '10-minute JD-first tailoring for 3x callbacks.', read: 10 },
